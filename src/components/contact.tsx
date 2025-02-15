@@ -48,7 +48,7 @@ const Contact = () => {
       email
     )}%0APhone: ${encodeURIComponent(phone)}`;
 
-    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ksnaveenkumar2k@gmail.com&su=${encodeURIComponent(
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=sanjay.n.ihub@snsgroups.com&su=${encodeURIComponent(
       subject
     )}&body=${mailBody}`;
     window.open(gmailComposeUrl, "_blank");
@@ -78,11 +78,11 @@ const Contact = () => {
               <div className="space-y-6">
                 <motion.div className="flex items-center space-x-4 bg-green-700/20 p-4 rounded-2xl">
                   <Mail className="w-6 h-6 text-green-400" />
-                  <p className="text-green-300">ksnaveenkumar2k@gmail.com</p>
+                  <p className="text-green-300">sanjay.n.ihub@snsgroups.com</p>
                 </motion.div>
                 <motion.div className="flex items-center space-x-4 bg-green-700/20 p-4 rounded-2xl">
                   <Phone className="w-6 h-6 text-green-400" />
-                  <p className="text-green-300">+91 9894521011</p>
+                  <p className="text-green-300">+91 93615 99018</p>
                 </motion.div>
               </div>
               <div className="mt-8">
