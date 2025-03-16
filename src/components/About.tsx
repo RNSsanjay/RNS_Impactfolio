@@ -36,12 +36,12 @@ const About = () => {
 
       {/* Floating Elements */}
       <motion.div
-        className="absolute top-20 left-1/4 w-56 h-56 bg-green-400 rounded-full opacity-30"
+        className="absolute top-20 left-1/4 w-56 h-56 bg-green-400 rounded-full opacity-30 hidden md:block"
         animate={{ x: [0, 60, -60, 0], y: [0, -40, 40, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-20 right-1/3 w-48 h-48 bg-green-500 rounded-full opacity-20"
+        className="absolute bottom-20 right-1/3 w-48 h-48 bg-green-500 rounded-full opacity-20 hidden md:block"
         animate={{ x: [0, -50, 50, 0], y: [0, 30, -30, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -69,41 +69,41 @@ const About = () => {
       )}
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8 relative z-10 flex flex-row items-center justify-center min-h-screen">
+      <div className="container mx-auto px-4 py-8 relative z-10 flex flex-col md:flex-row items-center justify-center min-h-screen">
         <Navbar />
         <motion.section
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-row items-center justify-center w-full"
+          className="flex flex-col md:flex-row items-center justify-center w-full"
         >
           <motion.div className="space-y-8 max-w-xl text-left">
-            <h1 className="text-6xl font-bold text-green-300">
+            <h1 className="text-4xl md:text-6xl font-bold text-green-300">
               Hi, I'm <span className="text-green-400">Sanjay N</span>
             </h1>
-            <h2 className="text-3xl text-green-200">Software Developer</h2>
+            <h2 className="text-2xl md:text-3xl text-green-200">Software Developer</h2>
             <p className="text-green-400 leading-relaxed">
               Passionate software developer with expertise in web technologies,
               creating innovative solutions that bridge design and functionality.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
               <button
-                className="bg-green-700 text-white px-10 py-4 rounded-full hover:bg-green-600 transition-colors"
+                className="bg-green-700 text-white px-8 py-3 md:px-10 md:py-4 rounded-full hover:bg-green-600 transition-colors"
                 onClick={() => navigate('/')}
               >
                 Learn More
               </button>
             </motion.div>
           </motion.div>
-          <motion.div className="relative ml-16">
-            <div className="relative w-[450px] h-[450px] mx-auto">
+          <motion.div className="relative mt-8 md:mt-0 md:ml-16">
+            <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] mx-auto">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full border-4 border-green-500/30"
               />
               <img
-                src="src/asserts/Cropped.jpg"
+                src="https://media.licdn.com/dms/image/v2/D5603AQEpbf00UxcUmw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701405522937?e=2147483647&v=beta&t=IE0df32Yv3NQSJ1MFXquFcC1_vurhF-ltKqDlhpzTEc"
                 alt="Profile"
                 className="rounded-full w-full h-full object-cover border-4 border-green-500 shadow-2xl shadow-green-700"
               />

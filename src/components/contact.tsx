@@ -57,7 +57,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-950 to-green-900 py-20 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-950 to-green-900 py-20 px-2 relative overflow-hidden">
       <Navbar />
 
       <motion.div className="max-w-6xl mx-auto relative z-10" initial="hidden" animate="visible" variants={{
