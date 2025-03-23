@@ -11,6 +11,7 @@ import Internship from './components/Internships';
 import Certificate from './components/Certificates';
 import About from './components/About';
 import Chatbot from './components/Chatbot';
+import Skillanime from './components/Skillsanime';
 import './index.css';
 
 const App = () => {
@@ -29,6 +30,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/certificate" element={<Certificate />} />
         <Route path="/internship" element={<Internship />} />
+        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/skillsanime" element={<Skillanime />} />
       </Routes>
       <Footer />
     </Router>
