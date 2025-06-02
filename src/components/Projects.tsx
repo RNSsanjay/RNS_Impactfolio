@@ -18,7 +18,7 @@ interface Project {
 
 const Projects: React.FC = () => {
   // Project data with additional fields
-  const projectData = [
+  const projectData: Project[] = [
     {
       title: 'PS-2',
       description: 'A project description for PS-2.',
@@ -26,7 +26,10 @@ const Projects: React.FC = () => {
       image: '/images/ps-2.png',
       githubUrl: 'https://github.com/RNSsanjay/PS-2',
       demoUrl: '',
-      details: 'This project involves advanced data analysis techniques to derive insights from complex datasets.'
+      details: 'This project involves advanced data analysis techniques to derive insights from complex datasets.',
+      date: '2023-01-01',
+      featured: true,
+      category: 'Data Analysis'
     },
     {
       title: 'Broken-Patterns-PS',
@@ -35,7 +38,10 @@ const Projects: React.FC = () => {
       image: '/images/broken-patterns-ps.png',
       githubUrl: 'https://github.com/RNSsanjay/Broken-Patterns-PS',
       demoUrl: '',
-      details: 'A creative web design project focusing on unique CSS patterns and animations.'
+      details: 'A creative web design project focusing on unique CSS patterns and animations.',
+      date: '2023-02-01',
+      featured: true,
+      category: 'Web Design'
     },
     {
       title: 'Linked-List-Addition-java',
@@ -44,7 +50,10 @@ const Projects: React.FC = () => {
       image: '/images/linked-list-addition-java.png',
       githubUrl: 'https://github.com/RNSsanjay/Linked-List-Addition-java',
       demoUrl: '',
-      details: 'Implements efficient algorithms for linked list operations in Java.'
+      details: 'Implements efficient algorithms for linked list operations in Java.',
+      date: '2023-03-01',
+      featured: false,
+      category: 'Algorithms'
     },
     {
       title: 'RNS-Voice-Notes-Taker',
@@ -53,7 +62,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-voice-notes-taker.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Voice-Notes-Taker',
       demoUrl: '',
-      details: 'Utilizes speech-to-text technology for seamless note-taking.'
+      details: 'Utilizes speech-to-text technology for seamless note-taking.',
+      date: '2023-04-01',
+      featured: true,
+      category: 'Voice Recognition'
     },
     {
       title: 'RNS_Impactfolio',
@@ -62,7 +74,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-impactfolio.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS_Impactfolio',
       demoUrl: '',
-      details: 'A visually stunning portfolio built with modern web technologies.'
+      details: 'A visually stunning portfolio built with modern web technologies.',
+      date: '2023-05-01',
+      featured: true,
+      category: 'Web Development'
     },
     {
       title: 'RNS-Text-Pack',
@@ -71,7 +86,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-text-pack.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Text-Pack',
       demoUrl: '',
-      details: 'A suite of NLP tools for text analysis and processing.'
+      details: 'A suite of NLP tools for text analysis and processing.',
+      date: '2023-06-01',
+      featured: false,
+      category: 'NLP'
     },
     {
       title: 'RNS-Voice-Web',
@@ -80,7 +98,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-voice-web.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Voice-Web',
       demoUrl: '',
-      details: 'Processes audio input in real-time using browser APIs.'
+      details: 'Processes audio input in real-time using browser APIs.',
+      date: '2023-07-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'RNS-Excel-Sheets',
@@ -89,7 +110,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-excel-sheets.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Excel-Sheets',
       demoUrl: '',
-      details: 'Automates Excel data manipulation with Pandas.'
+      details: 'Automates Excel data manipulation with Pandas.',
+      date: '2023-08-01',
+      featured: false,
+      category: 'Data Analysis'
     },
     {
       title: 'RNS-Car-Racing',
@@ -98,7 +122,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-car-racing.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Car-Racing',
       demoUrl: '',
-      details: 'A 3D racing game built with Unity engine.'
+      details: 'A 3D racing game built with Unity engine.',
+      date: '2023-09-01',
+      featured: true,
+      category: 'Game Development'
     },
     {
       title: 'RNS-Voice-Assistant',
@@ -107,7 +134,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-voice-assistant.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Voice-Assistant',
       demoUrl: '',
-      details: 'An AI-powered assistant with voice command capabilities.'
+      details: 'An AI-powered assistant with voice command capabilities.',
+      date: '2023-10-01',
+      featured: true,
+      category: 'AI'
     },
     {
       title: 'Job-Seeker-Portal-v1',
@@ -116,7 +146,10 @@ const Projects: React.FC = () => {
       image: '/images/job-seeker-portal-v1.png',
       githubUrl: 'https://github.com/RNSsanjay/Job-Seeker-Portal-v1',
       demoUrl: '',
-      details: 'A full-stack job search platform with user authentication.'
+      details: 'A full-stack job search platform with user authentication.',
+      date: '2023-11-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'GPS-Tracker',
@@ -125,7 +158,10 @@ const Projects: React.FC = () => {
       image: '/images/gps-tracker.png',
       githubUrl: 'https://github.com/RNSsanjay/GPS-Tracker',
       demoUrl: '',
-      details: 'Real-time location tracking with interactive maps.'
+      details: 'Real-time location tracking with interactive maps.',
+      date: '2023-12-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'AI-Language-Trainer',
@@ -134,7 +170,10 @@ const Projects: React.FC = () => {
       image: '/images/ai-language-trainer.png',
       githubUrl: 'https://github.com/RNSsanjay/AI-Language-Trainer',
       demoUrl: '',
-      details: 'An AI-driven tool for language practice and improvement.'
+      details: 'An AI-driven tool for language practice and improvement.',
+      date: '2024-01-01',
+      featured: true,
+      category: 'AI'
     },
     {
       title: 'QR-Code-Generator',
@@ -143,7 +182,10 @@ const Projects: React.FC = () => {
       image: '/images/qr-code-generator.png',
       githubUrl: 'https://github.com/RNSsanjay/QR-Code-Generator',
       demoUrl: '',
-      details: 'Generates customizable QR codes for various use cases.'
+      details: 'Generates customizable QR codes for various use cases.',
+      date: '2024-02-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'TTS-Streamlit',
@@ -152,7 +194,10 @@ const Projects: React.FC = () => {
       image: '/images/tts-streamlit.png',
       githubUrl: 'https://github.com/RNSsanjay/TTS-Streamlit',
       demoUrl: '',
-      details: 'Converts text to speech with a user-friendly Streamlit interface.'
+      details: 'Converts text to speech with a user-friendly Streamlit interface.',
+      date: '2024-03-01',
+      featured: false,
+      category: 'AI'
     },
     {
       title: 'RNS-Drawing-Application',
@@ -161,7 +206,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-drawing-application.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Drawing-Application',
       demoUrl: '',
-      details: 'A creative tool for drawing and sketching in the browser.'
+      details: 'A creative tool for drawing and sketching in the browser.',
+      date: '2024-04-01',
+      featured: true,
+      category: 'Web Development'
     },
     {
       title: 'RNS-Chatbot-python',
@@ -170,7 +218,10 @@ const Projects: React.FC = () => {
       image: '/images/rns-chatbot-python.png',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Chatbot-python',
       demoUrl: '',
-      details: 'A conversational AI chatbot using NLP techniques.'
+      details: 'A conversational AI chatbot using NLP techniques.',
+      date: '2024-05-01',
+      featured: false,
+      category: 'AI'
     },
     {
       title: 'AR-Filter-Application',
@@ -179,7 +230,10 @@ const Projects: React.FC = () => {
       image: '/images/ar-filter-application.png',
       githubUrl: 'https://github.com/RNSsanjay/AR-Filter-Application',
       demoUrl: '',
-      details: 'Augmented reality filters for mobile applications.'
+      details: 'Augmented reality filters for mobile applications.',
+      date: '2024-06-01',
+      featured: true,
+      category: 'AR'
     },
     {
       title: 'E-Commerce-React',
@@ -188,7 +242,10 @@ const Projects: React.FC = () => {
       image: '/images/e-commerce-react.png',
       githubUrl: 'https://github.com/RNSsanjay/E-Commerce-React',
       demoUrl: '',
-      details: 'A fully functional e-commerce site with cart and payment features.'
+      details: 'A fully functional e-commerce site with cart and payment features.',
+      date: '2024-07-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'Django-ChatBot',
@@ -197,7 +254,10 @@ const Projects: React.FC = () => {
       image: '/images/django-chatbot.png',
       githubUrl: 'https://github.com/RNSsanjay/Django-ChatBot',
       demoUrl: '',
-      details: 'A web-based chatbot integrated with Django framework.'
+      details: 'A web-based chatbot integrated with Django framework.',
+      date: '2024-08-01',
+      featured: false,
+      category: 'AI'
     },
     {
       title: 'LandBerg-Pvt-Ltd-Web-Intern',
@@ -206,7 +266,10 @@ const Projects: React.FC = () => {
       image: '/images/landberg-pvt-ltd-web-intern.png',
       githubUrl: 'https://github.com/RNSsanjay/LandBerg-Pvt-Ltd-Web-Intern',
       demoUrl: '',
-      details: 'A collection of web projects developed during an internship.'
+      details: 'A collection of web projects developed during an internship.',
+      date: '2024-09-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'AI-Text-to-Speech',
@@ -215,7 +278,10 @@ const Projects: React.FC = () => {
       image: '/images/ai-text-to-speech.png',
       githubUrl: 'https://github.com/RNSsanjay/AI-Text-to-Speech',
       demoUrl: '',
-      details: 'Advanced text-to-speech conversion using AI models.'
+      details: 'Advanced text-to-speech conversion using AI models.',
+      date: '2024-10-01',
+      featured: true,
+      category: 'AI'
     },
     {
       title: 'Image-to-Text-Generation-AI',
@@ -224,7 +290,10 @@ const Projects: React.FC = () => {
       image: '/images/image-to-text-generation-ai.png',
       githubUrl: 'https://github.com/RNSsanjay/Image-to-Text-Generation-Ai',
       demoUrl: '',
-      details: 'Extracts text from images using optical character recognition.'
+      details: 'Extracts text from images using optical character recognition.',
+      date: '2024-11-01',
+      featured: false,
+      category: 'AI'
     },
     {
       title: 'Tracker-Intern',
@@ -233,7 +302,10 @@ const Projects: React.FC = () => {
       image: '/images/tracker-intern.png',
       githubUrl: 'https://github.com/RNSsanjay/Tracker-Intern',
       demoUrl: '',
-      details: 'A tracking tool developed during a front-end internship.'
+      details: 'A tracking tool developed during a front-end internship.',
+      date: '2024-12-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'HostMyResume',
@@ -242,7 +314,10 @@ const Projects: React.FC = () => {
       image: '/images/hostmyresume.png',
       githubUrl: 'https://github.com/RNSsanjay/HostMyResume',
       demoUrl: '',
-      details: 'A cloud-based platform for hosting and sharing resumes.'
+      details: 'A cloud-based platform for hosting and sharing resumes.',
+      date: '2025-01-01',
+      featured: true,
+      category: 'Web Development'
     },
     {
       title: 'Software-Development',
@@ -251,7 +326,10 @@ const Projects: React.FC = () => {
       image: '/images/software-development.png',
       githubUrl: 'https://github.com/RNSsanjay/Software-Development',
       demoUrl: '',
-      details: 'A collection of software projects in multiple languages.'
+      details: 'A collection of software projects in multiple languages.',
+      date: '2025-02-01',
+      featured: false,
+      category: 'Software Development'
     },
     {
       title: 'My-Resume',
@@ -260,7 +338,10 @@ const Projects: React.FC = () => {
       image: '/images/my-resume.png',
       githubUrl: 'https://github.com/RNSsanjay/My-Resume',
       demoUrl: '',
-      details: 'A static website showcasing personal resume details.'
+      details: 'A static website showcasing personal resume details.',
+      date: '2025-03-01',
+      featured: false,
+      category: 'Web Development'
     },
     {
       title: 'Web-Projects',
@@ -269,7 +350,10 @@ const Projects: React.FC = () => {
       image: '/images/web-projects.png',
       githubUrl: 'https://github.com/RNSsanjay/Web-Projects',
       demoUrl: '',
-      details: 'A portfolio of various web applications.'
+      details: 'A portfolio of various web applications.',
+      date: '2025-04-01',
+      featured: true,
+      category: 'Web Development'
     },
     {
       title: 'Android-Development-Internship-CodeAlpha',
@@ -278,7 +362,10 @@ const Projects: React.FC = () => {
       image: '/images/android-development-internship-codealpha.png',
       githubUrl: 'https://github.com/RNSsanjay/Android-Development-Internship-CodeAlpha',
       demoUrl: '',
-      details: 'Mobile apps developed during an Android internship.'
+      details: 'Mobile apps developed during an Android internship.',
+      date: '2025-05-01',
+      featured: false,
+      category: 'Mobile Development'
     },
     {
       title: 'Front-End-Development-Internship-CodeAlpha',
@@ -287,7 +374,10 @@ const Projects: React.FC = () => {
       image: '/images/front-end-development-internship-codealpha.png',
       githubUrl: 'https://github.com/RNSsanjay/Front-End-Development-Internship-CodeAlpha',
       demoUrl: '',
-      details: 'Front-end projects showcasing responsive design skills.'
+      details: 'Front-end projects showcasing responsive design skills.',
+      date: '2025-06-01',
+      featured: false,
+      category: 'Web Development'
     },
   ];
 
