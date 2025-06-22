@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiSearch, FiX, FiExternalLink, FiCode, FiInfo, FiFilter, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { Brain, Star } from 'lucide-react';
 
 // Define types for our project data
 interface Project {
@@ -17,6 +18,27 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
+  // State declarations
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTech, setSelectedTech] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showFilter, setShowFilter] = useState(false);
+  const [showDetails, setShowDetails] = useState<Project | null>(null);
+  const [visibleProjects, setVisibleProjects] = useState(6);
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
+  const [sortBy, setSortBy] = useState<'date' | 'title'>('date');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const projectsRef = useRef<HTMLDivElement>(null);
+
+  // Loading effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Project data with additional fields
   const projectData: Project[] = [
     {
@@ -381,23 +403,49 @@ const Projects: React.FC = () => {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTech, setSelectedTech] = useState('All');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [showFilter, setShowFilter] = useState(false);
-  const [showDetails, setShowDetails] = useState<Project | null>(null);
-  const [visibleProjects, setVisibleProjects] = useState(6);
-  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
-  const [sortBy, setSortBy] = useState<'date' | 'title'>('date');
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const projectsRef = useRef<HTMLDivElement>(null);
+  // Particles animation matching Skills.tsx
+  const particleVariants = {
+    animate: (i: number) => ({
+      x: Math.random() * 100 - 50,
+      y: Math.random() * 100 - 50,
+      opacity: [0, 1, 0],
+      scale: [0, 1.5, 0],
+      transition: {
+        duration: Math.random() * 5 + 5,
+        repeat: Infinity,
+        delay: i * 0.2
+      }
+    })
+  };
+
+  // Generate particles matching Skills page style
+  const particles = Array.from({ length: 30 }, (_, i) => (
+    <motion.div
+      key={i}
+      custom={i}
+      variants={particleVariants}
+      animate="animate"
+      className="absolute w-2 h-2 rounded-full bg-green-500"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        opacity: 0
+      }}
+    />
+  ));
+
+  const FloatingParticles = () => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles}
+    </div>
+  );
 
   // Filter and sort projects
   const filteredProjects = useCallback(() => {
     return projectData
       .filter(project => {
         const matchesSearchTerm = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                project.description.toLowerCase().includes(searchTerm.toLowerCase());
+          project.description.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesTech = selectedTech === 'All' || project.technologies.includes(selectedTech);
         const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory;
         return matchesSearchTerm && matchesTech && matchesCategory;
@@ -429,7 +477,7 @@ const Projects: React.FC = () => {
       }
 
       if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 200 &&
-          visibleProjects < memoizedFilteredProjects.length) {
+        visibleProjects < memoizedFilteredProjects.length) {
         setVisibleProjects(prev => Math.min(prev + 6, memoizedFilteredProjects.length));
       }
     };
@@ -509,46 +557,72 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden min-h-screen"
-    >
-      {/* Animated Background Elements */}
+    <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+      {/* Animated Background - matching Skills page */}
       <motion.div
-        className="absolute inset-0 overflow-hidden"
-        style={{ zIndex: 0 }}
-      >
-        {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
+        className="absolute inset-0 bg-green-900 opacity-30"
+        animate={{
+          opacity: [0.2, 0.4, 0.2],
+          background: [
+            'linear-gradient(135deg, #000000, #10b981)',
+            'linear-gradient(135deg, #10b981, #3b82f6)',
+            'linear-gradient(135deg, #3b82f6, #000000)'
+          ]
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      {/* Animated Particles */}
+      <FloatingParticles />
+
+      {/* 3D Grid Lines */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+
+      {/* Loading Animation - matching Skills page */}
+      <AnimatePresence>
+        {isLoading && (
           <motion.div
-            key={i}
-            className="absolute bg-emerald-400 rounded-full opacity-20"
-            style={{
-              width: Math.random() * 100 + 50,
-              height: Math.random() * 100 + 50,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              x: [0, Math.random() > 0.5 ? 20 : -20, 0],
-              rotate: [0, Math.random() * 360],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
-      </motion.div>
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, 360],
+                filter: ["drop-shadow(0 0 8px #10b981)", "drop-shadow(0 0 16px #10b981)", "drop-shadow(0 0 8px #10b981)"]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Brain className="w-24 h-24 text-green-500" />
+            </motion.div>
+            <motion.div
+              className="absolute mt-32 text-green-400 font-mono text-lg"
+              animate={{
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              Loading Projects...
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Picture Banner */}
-      <div className="relative h-96 mb-16 overflow-hidden px-4">
+      <div className="relative h-96 mb-16 overflow-hidden px-4 z-10">
         <motion.div
           className="absolute inset-0 flex space-x-8"
           variants={bannerVariants}
@@ -558,7 +632,7 @@ const Projects: React.FC = () => {
             <motion.div
               key={`${project.title}-${index}`}
               whileHover={{ scale: 1.05, y: -10, zIndex: 10, transition: { duration: 0.3 } }}
-              className="flex-none w-80 h-full relative rounded-2xl overflow-hidden shadow-2xl bg-gray-800"
+              className="flex-none w-80 h-full relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900/80 backdrop-blur-lg border border-green-500/30"
             >
               <img
                 src={project.image}
@@ -571,12 +645,12 @@ const Projects: React.FC = () => {
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold text-emerald-300 mb-2">{project.title}</h3>
-                <p className="text-gray-200 line-clamp-2 text-sm mb-4">{project.description}</p>
+                <h3 className="text-2xl font-bold text-green-300 mb-2">{project.title}</h3>
+                <p className="text-green-200 line-clamp-2 text-sm mb-4">{project.description}</p>
                 <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: '#10b981' }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-emerald-600 text-white rounded-full text-sm font-medium"
+                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-sm font-medium shadow-lg"
                   onClick={() => handleProjectClick(project)}
                 >
                   Learn More
@@ -592,19 +666,61 @@ const Projects: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8 }}
+          className="text-center py-16"
+        >
+          <motion.h1
+            className="text-5xl md:text-6xl font-bold text-green-300 mb-4"
+            animate={{
+              textShadow: ["0 0 8px rgba(16, 185, 129, 0.3)", "0 0 16px rgba(16, 185, 129, 0.5)", "0 0 8px rgba(16, 185, 129, 0.3)"]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            My Projects
+            <motion.span
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-green-400"
+              initial={{ width: 0 }}
+              animate={{ width: "8rem" }}
+              transition={{ duration: 1, delay: 0.5 }}
+            />
+          </motion.h1>
+          <motion.p
+            className="text-xl text-green-200 max-w-2xl mx-auto px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            Explore my collection of creative and technical projects
+          </motion.p>
+          <motion.div
+            className="flex justify-center items-center gap-2 mt-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+          >
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ delay: i * 0.1, duration: 0.6, repeat: Infinity, repeatDelay: 3 }}
+              >
+                <Star className="w-5 h-5 text-yellow-500 fill-current" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-col md:flex-row justify-between items-center mb-12"
         >
-          <div className="text-center md:text-left mb-6 md:mb-0">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-emerald-300 mb-2">My Projects</h2>
-            <p className="text-gray-400 max-w-md">Explore my collection of creative and technical projects</p>
-          </div>
-
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(16, 185, 129, 0.5)' }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center px-6 py-3 bg-emerald-600 text-white rounded-full font-medium space-x-2"
+              className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-medium space-x-2 shadow-lg"
               onClick={() => setShowFilter(true)}
             >
               <FiFilter />
@@ -613,14 +729,14 @@ const Projects: React.FC = () => {
 
             <div className="relative">
               <select
-                className="px-6 py-3 bg-gray-800 text-white rounded-full font-medium appearance-none pr-10 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="px-6 py-3 bg-gray-900/70 backdrop-blur-lg border border-green-500/30 text-green-200 rounded-full font-medium appearance-none pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
                 value={sortBy}
               >
-                <option value="date">Sort by Date</option>
-                <option value="title">Sort by Title</option>
+                <option value="date" className="bg-gray-900">Sort by Date</option>
+                <option value="title" className="bg-gray-900">Sort by Title</option>
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-green-200">
                 <FiChevronDown />
               </div>
             </div>
@@ -631,23 +747,23 @@ const Projects: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-12 relative z-10"
         >
           <div className="relative max-w-2xl mx-auto">
             <input
               type="text"
               placeholder="Search projects by title or description..."
-              className="w-full px-6 py-4 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 pl-14"
+              className="w-full px-6 py-4 rounded-full bg-gray-900/70 backdrop-blur-lg border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 pl-14"
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
             />
-            <div className="absolute inset-y-0 left-0 flex items-center pl-6 text-gray-400">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-6 text-green-400">
               <FiSearch size={20} />
             </div>
             {searchTerm && (
               <button
-                className="absolute inset-y-0 right-0 flex items-center pr-6 text-gray-400"
+                className="absolute inset-y-0 right-0 flex items-center pr-6 text-green-400"
                 onClick={() => setSearchTerm('')}
               >
                 <FiX size={20} />
@@ -668,7 +784,7 @@ const Projects: React.FC = () => {
                 exit="hidden"
                 custom={index}
                 layout
-                className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl group hover:shadow-2xl transition-shadow duration-300"
+                className="bg-gray-900/80 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl border border-green-500/30 group hover:shadow-2xl transition-all duration-300"
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -689,7 +805,7 @@ const Projects: React.FC = () => {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-4 py-2 bg-emerald-600 text-white rounded-full text-sm font-medium"
+                      className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-sm font-medium shadow-lg"
                       onClick={() => handleProjectClick(project)}
                     >
                       View Details
@@ -699,22 +815,22 @@ const Projects: React.FC = () => {
 
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-semibold text-emerald-300">{project.title}</h3>
+                    <h3 className="text-xl font-semibold text-green-300">{project.title}</h3>
                     {project.category && (
-                      <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs">
+                      <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs border border-green-500/30">
                         {project.category}
                       </span>
                     )}
                   </div>
 
-                  <p className="text-gray-300 mb-4 line-clamp-3 text-sm">{project.description}</p>
+                  <p className="text-green-200 mb-4 line-clamp-3 text-sm">{project.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <motion.span
                         key={tech}
                         whileHover={{ scale: 1.1 }}
-                        className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs"
+                        className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs border border-green-500/30"
                       >
                         {tech}
                       </motion.span>
@@ -733,7 +849,7 @@ const Projects: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-teal-500/20 text-teal-400 rounded-full hover:bg-teal-500/30 transition-colors"
+                        className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors border border-green-500/30"
                         title="Live Demo"
                       >
                         <FiExternalLink size={18} />
@@ -745,7 +861,7 @@ const Projects: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-gray-700/50 text-gray-300 rounded-full hover:bg-gray-700 transition-colors"
+                        className="p-2 bg-gray-700/50 text-green-300 rounded-full hover:bg-gray-700 transition-colors border border-gray-600/30"
                         title="View Code"
                       >
                         <FiCode size={18} />
@@ -753,7 +869,7 @@ const Projects: React.FC = () => {
                     )}
                     <motion.button
                       whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-emerald-500/20 text-emerald-400 rounded-full hover:bg-emerald-500/30 transition-colors ml-auto"
+                      className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors ml-auto border border-green-500/30"
                       onClick={() => handleProjectClick(project)}
                       title="More Details"
                     >
@@ -775,9 +891,9 @@ const Projects: React.FC = () => {
             className="flex justify-center mt-16 relative z-10"
           >
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(16, 185, 129, 0.5)' }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-emerald-600 text-white rounded-full font-semibold flex items-center space-x-2"
+              className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-semibold flex items-center space-x-2 shadow-lg"
               onClick={() => setVisibleProjects(prev => Math.min(prev + 6, memoizedFilteredProjects.length))}
             >
               <span>Load More</span>
@@ -800,7 +916,7 @@ const Projects: React.FC = () => {
               exit={{ opacity: 0, y: 100 }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="fixed bottom-8 right-8 p-4 bg-emerald-600 text-white rounded-full shadow-lg z-50"
+              className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full shadow-lg z-50"
               onClick={scrollToTop}
               title="Scroll to top"
             >
@@ -818,19 +934,19 @@ const Projects: React.FC = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             onClick={(e) => e.target === e.currentTarget && setShowFilter(false)}
           >
             <motion.div
-              className="bg-gray-800 p-8 rounded-2xl w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto"
+              className="bg-gray-900/90 backdrop-blur-lg border border-green-500/30 p-8 rounded-2xl w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto"
               variants={popupVariants}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-emerald-300">Filter Projects</h3>
+                <h3 className="text-2xl font-bold text-green-300">Filter Projects</h3>
                 <button
                   onClick={() => setShowFilter(false)}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-green-400 hover:text-green-200 transition-colors"
                 >
                   <FiX size={24} />
                 </button>
@@ -838,23 +954,23 @@ const Projects: React.FC = () => {
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Search</label>
+                  <label className="block text-sm font-medium text-green-300 mb-2">Search</label>
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Search by title or description..."
-                      className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 pl-10"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 pl-10"
                       onChange={(e) => setSearchTerm(e.target.value)}
                       value={searchTerm}
                     />
-                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Technology</label>
+                  <label className="block text-sm font-medium text-green-300 mb-2">Technology</label>
                   <select
-                    className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
                     onChange={(e) => setSelectedTech(e.target.value)}
                     value={selectedTech}
                   >
@@ -867,9 +983,9 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
+                  <label className="block text-sm font-medium text-green-300 mb-2">Category</label>
                   <select
-                    className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     value={selectedCategory}
                   >
@@ -882,9 +998,9 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Sort By</label>
+                  <label className="block text-sm font-medium text-green-300 mb-2">Sort By</label>
                   <select
-                    className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
                     onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
                     value={sortBy}
                   >
@@ -897,7 +1013,7 @@ const Projects: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-4 py-3 bg-emerald-600 text-white rounded-lg mt-8 font-medium"
+                className="w-full px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg mt-8 font-medium shadow-lg"
                 onClick={() => setShowFilter(false)}
               >
                 Apply Filters
@@ -915,20 +1031,20 @@ const Projects: React.FC = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 overflow-y-auto"
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto"
             onClick={(e) => e.target === e.currentTarget && closeDetails()}
           >
             <motion.div
-              className="bg-gray-800 p-6 rounded-2xl w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
+              className="bg-gray-900/90 backdrop-blur-lg border border-green-500/30 p-6 rounded-2xl w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
               variants={popupVariants}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="sticky top-0 bg-gray-800 pt-4 pb-2 z-10">
+              <div className="sticky top-0 bg-gray-900/90 backdrop-blur-lg pt-4 pb-2 z-10">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-3xl font-bold text-emerald-300">{showDetails.title}</h3>
+                  <h3 className="text-3xl font-bold text-green-300">{showDetails.title}</h3>
                   <button
                     onClick={closeDetails}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-green-400 hover:text-green-200 transition-colors"
                   >
                     <FiX size={24} />
                   </button>
@@ -937,7 +1053,7 @@ const Projects: React.FC = () => {
                   {showDetails.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm"
+                      className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm border border-green-500/30"
                     >
                       {tech}
                     </span>
@@ -960,19 +1076,19 @@ const Projects: React.FC = () => {
 
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xl font-semibold text-white mb-2">Description</h4>
-                  <p className="text-gray-300">{showDetails.description}</p>
+                  <h4 className="text-xl font-semibold text-green-300 mb-2">Description</h4>
+                  <p className="text-green-200">{showDetails.description}</p>
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-semibold text-white mb-2">Details</h4>
-                  <p className="text-gray-300 whitespace-pre-line">{showDetails.details}</p>
+                  <h4 className="text-xl font-semibold text-green-300 mb-2">Details</h4>
+                  <p className="text-green-200 whitespace-pre-line">{showDetails.details}</p>
                 </div>
 
                 {showDetails.date && (
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-2">Date</h4>
-                    <p className="text-gray-300">
+                    <h4 className="text-xl font-semibold text-green-300 mb-2">Date</h4>
+                    <p className="text-green-200">
                       {new Date(showDetails.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
@@ -984,8 +1100,8 @@ const Projects: React.FC = () => {
 
                 {showDetails.category && (
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-2">Category</h4>
-                    <p className="text-gray-300">{showDetails.category}</p>
+                    <h4 className="text-xl font-semibold text-green-300 mb-2">Category</h4>
+                    <p className="text-green-200">{showDetails.category}</p>
                   </div>
                 )}
 
@@ -996,7 +1112,7 @@ const Projects: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
-                      className="flex-1 px-4 py-3 bg-teal-500 text-white rounded-lg flex items-center justify-center space-x-2"
+                      className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg flex items-center justify-center space-x-2 shadow-lg"
                     >
                       <FiExternalLink />
                       <span>Live Demo</span>
@@ -1008,7 +1124,7 @@ const Projects: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
-                      className="flex-1 px-4 py-3 bg-gray-700 text-white rounded-lg flex items-center justify-center space-x-2"
+                      className="flex-1 px-4 py-3 bg-gray-700/70 border border-green-500/30 text-green-200 rounded-lg flex items-center justify-center space-x-2"
                     >
                       <FiCode />
                       <span>View Code</span>
@@ -1020,7 +1136,17 @@ const Projects: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.section>
+
+      {/* Custom styles */}
+      <style jsx>{`
+        .bg-grid-pattern {
+          background-image: 
+            linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+          background-size: 50px 50px;
+        }
+      `}</style>
+    </div>
   );
 };
 
