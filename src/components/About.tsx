@@ -2,14 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
-import { Brain, ChevronRight } from 'lucide-react';
+import { Brain, ChevronRight, Download, X, Eye } from 'lucide-react';
 import Chatbot from './Chatbot';
 import Typewriter from 'typewriter-effect';
+import photo from '../assets/Cropped.jpeg'; // Ensure you have a profile image in this path
 
 const About = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [showHireModal, setShowHireModal] = useState(false);
+  const [showPDFModal, setShowPDFModal] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [globalMousePosition, setGlobalMousePosition] = useState({ x: 0, y: 0 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,15 +28,40 @@ const About = () => {
   const experienceInView = useInView(experienceRef, { once: false, amount: 0.3 });
 
   const skillsControls = useAnimation();
-  const experienceControls = useAnimation();
-
-  useEffect(() => {
+  const experienceControls = useAnimation(); useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
 
     return () => {
       clearTimeout(timer);
     };
   }, []);
+
+  // Global mouse tracking for entire page
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      setGlobalMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleGlobalMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    if (showPDFModal) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [showPDFModal]);
 
   useEffect(() => {
     if (skillsInView) {
@@ -56,7 +85,7 @@ const About = () => {
   };
 
   const particleVariants = {
-    animate: (i:number) => ({
+    animate: (i: number) => ({
       x: Math.random() * 100 - 50,
       y: Math.random() * 100 - 50,
       opacity: [0, 1, 0],
@@ -101,7 +130,6 @@ const About = () => {
     }
     return true;
   };
-
   const handleMailClick = () => {
     if (!validateForm()) return;
 
@@ -121,8 +149,174 @@ const About = () => {
     setShowHireModal(false);
   };
 
+  const handleImageClick = () => {
+    setShowPDFModal(true);
+  };
+
+  const handleDownloadPDF = () => {
+    const link = document.createElement('a');
+    link.href = 'https://drive.google.com/file/d/1-CG08ad16thv0fccsRf4MrhXAV80zzUc/view?usp=sharing';
+    link.download = 'Sanjay_N_Resume.pdf';
+    link.click();
+  };
+
+  const handleDirectDownload = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = 'https://drive.google.com/file/d/1p58rJp6QifDzD5awxii0OUyqwTJG1GO2/view?usp=sharing';
+    link.download = 'Sanjay_N_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
-    <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+    <div
+      className="min-h-screen bg-black py-20 px-4 relative overflow-hidden cursor-none"
+      style={{ cursor: 'none' }}
+    >
+      {/* Custom Cursor with Sparkle Trail */}
+      <motion.div
+        className="fixed pointer-events-none z-50"
+        style={{
+          left: globalMousePosition.x - 8,
+          top: globalMousePosition.y - 8,
+        }}
+        animate={{
+          x: globalMousePosition.x - 8,
+          y: globalMousePosition.y - 8,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 28,
+          mass: 0.5
+        }}
+      >
+        {/* Main cursor */}
+        <motion.div
+          className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 360],
+          }}
+          transition={{
+            scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 2, repeat: Infinity, ease: "linear" }
+          }}
+          style={{
+            filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.8))'
+          }}
+        />
+      </motion.div>
+
+      {/* Global Sparkle Effects */}
+      {Array.from({ length: 12 }, (_, i) => (
+        <motion.div
+          key={`global-sparkle-${i}`}
+          className="fixed pointer-events-none z-40"
+          animate={{
+            x: globalMousePosition.x + Math.sin(Date.now() * 0.003 + i * 0.7) * (40 + i * 8),
+            y: globalMousePosition.y + Math.cos(Date.now() * 0.003 + i * 0.7) * (40 + i * 8),
+            rotate: [0, 360],
+            scale: [0.3, 1, 0.3],
+            opacity: [0.1, 0.6, 0.1],
+          }}
+          transition={{
+            x: { type: "spring", stiffness: 50, damping: 20, mass: 0.1 },
+            y: { type: "spring", stiffness: 50, damping: 20, mass: 0.1 },
+            rotate: { duration: 4 + i * 0.5, repeat: Infinity, ease: "linear" },
+            scale: { duration: 2.5 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 2 + i * 0.2, repeat: Infinity, ease: "easeInOut" }
+          }}
+          style={{
+            width: '8px',
+            height: '8px',
+          }}
+        >
+          <motion.div
+            className="w-full h-full relative"
+            animate={{
+              rotate: [0, -360],
+            }}
+            transition={{
+              duration: 3 + i * 0.4,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            {/* Star shape sparkle */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(45deg, 
+                  ${i % 4 === 0 ? '#10b981' : i % 4 === 1 ? '#3b82f6' : i % 4 === 2 ? '#8b5cf6' : '#f59e0b'}, 
+                  ${i % 4 === 0 ? '#34d399' : i % 4 === 1 ? '#60a5fa' : i % 4 === 2 ? '#a78bfa' : '#fbbf24'})`,
+                clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
+                filter: `drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))`
+              }}
+            />
+          </motion.div>
+        </motion.div>
+      ))}
+
+      {/* Trailing sparkles */}
+      {Array.from({ length: 8 }, (_, i) => (
+        <motion.div
+          key={`global-trail-${i}`}
+          className="fixed w-3 h-3 pointer-events-none z-30"
+          animate={{
+            x: globalMousePosition.x - (i + 1) * 20 + Math.sin(Date.now() * 0.004 + i) * 12,
+            y: globalMousePosition.y - (i + 1) * 15 + Math.cos(Date.now() * 0.004 + i) * 12,
+            scale: [1, 0.2, 1],
+            opacity: [0.6 - i * 0.08, 0.2 - i * 0.03, 0.6 - i * 0.08],
+          }}
+          transition={{
+            x: { type: "spring", stiffness: 30 - i * 3, damping: 25, mass: 0.3 },
+            y: { type: "spring", stiffness: 30 - i * 3, damping: 25, mass: 0.3 },
+            scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 },
+            opacity: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }
+          }}
+        >
+          <div
+            className="w-full h-full rounded-full"
+            style={{
+              background: `radial-gradient(circle, 
+                ${i % 3 === 0 ? 'rgba(16, 185, 129, 0.7)' : i % 3 === 1 ? 'rgba(59, 130, 246, 0.7)' : 'rgba(139, 92, 246, 0.7)'} 0%, 
+                transparent 80%)`,
+              filter: 'blur(1px)'
+            }}
+          />
+        </motion.div>
+      ))}
+
+      {/* Gentle ambient glow */}
+      {Array.from({ length: 4 }, (_, i) => (
+        <motion.div
+          key={`global-glow-${i}`}
+          className="fixed pointer-events-none rounded-full z-20"
+          style={{
+            width: `${30 + i * 15}px`,
+            height: `${30 + i * 15}px`,
+            background: `radial-gradient(circle, 
+              ${i === 0 ? 'rgba(16, 185, 129, 0.05)' : i === 1 ? 'rgba(59, 130, 246, 0.04)' : i === 2 ? 'rgba(139, 92, 246, 0.03)' : 'rgba(245, 158, 11, 0.02)'} 0%, 
+              transparent 80%)`,
+            filter: 'blur(2px)'
+          }}
+          animate={{
+            x: globalMousePosition.x - (15 + i * 7.5),
+            y: globalMousePosition.y - (15 + i * 7.5),
+            scale: [0.6, 1.3, 0.6],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            x: { type: "spring", stiffness: 60 - i * 15, damping: 30, mass: 0.2 },
+            y: { type: "spring", stiffness: 60 - i * 15, damping: 30, mass: 0.2 },
+            scale: { duration: 4 + i * 1.5, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 3.5 + i * 1.2, repeat: Infinity, ease: "easeInOut" }
+          }}
+        />
+      ))}
+
       {/* Animated Background */}
       <motion.div
         className="absolute inset-0 bg-green-900 opacity-30"
@@ -222,7 +416,7 @@ const About = () => {
             <h2 className="text-2xl md:text-3xl text-green-200 font-light">
               <Typewriter
                 options={{
-                  strings: ['Software Developer', 'Gen AI', 'Full-Stack Developer', 'Problem Solver', 'Machine Learning Engineer', 'Software Tester', 'Design Thinker','Proompt Engineer'],
+                  strings: ['Software Developer', 'Gen AI', 'Full-Stack Developer', 'Problem Solver', 'Machine Learning Engineer', 'Software Tester', 'Design Thinker', 'Proompt Engineer'],
                   autoStart: true,
                   loop: true,
                   deleteSpeed: 30,
@@ -289,11 +483,9 @@ const About = () => {
                     left: `-${i * 15}px`
                   }}
                 />
-              ))}
-
-              {/* Main image with glow effect */}
+              ))}              {/* Main image with glow effect */}
               <motion.div
-                className="w-full h-full rounded-full overflow-hidden border-4 border-green-500 relative"
+                className="w-full h-full rounded-full overflow-hidden border-4 border-green-500 relative cursor-pointer group"
                 animate={{
                   boxShadow: [
                     "0 0 20px rgba(16, 185, 129, 0.3)",
@@ -302,12 +494,23 @@ const About = () => {
                   ]
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+                onClick={handleImageClick}
               >
                 <img
-                  src="https://media.licdn.com/dms/image/v2/D5603AQEpbf00UxcUmw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701405522937?e=2147483647&v=beta&t=IE0df32Yv3NQSJ1MFXquFcC1_vurhF-ltKqDlhpzTEc"
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
+                  src={photo}
+                  className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
+                />                {/* Download overlay */}
+                <motion.div
+                  className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                >
+                  <div className="text-center text-white">
+                    <Download className="w-8 h-8 mx-auto mb-2" />
+                    <p className="text-sm font-medium">Download Resume</p>
+                  </div>
+                </motion.div>
               </motion.div>
               <Chatbot />
             </div>
@@ -390,7 +593,370 @@ const About = () => {
                   Close
                 </motion.button>
               </div>
-            </form>
+            </form>          </motion.div>
+        </motion.div>
+      )}      {/* Download Modal */}
+      {showPDFModal && (
+        <motion.div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            setMousePosition({
+              x: e.clientX - rect.left,
+              y: e.clientY - rect.top
+            });
+          }}
+        >
+          <motion.div
+            className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-md rounded-2xl p-8 max-w-md w-full border border-green-500/30 relative overflow-hidden"
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 25,
+              duration: 0.4
+            }}
+          >            {/* Enhanced mouse-following glow effect */}
+            <motion.div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                width: '80px',
+                height: '80px',
+                background: "radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 80%)",
+                left: mousePosition.x - 40,
+                top: mousePosition.y - 40,
+                filter: 'blur(8px)'
+              }}
+              animate={{
+                x: mousePosition.x - 40,
+                y: mousePosition.y - 40,
+                scale: [0.8, 1.1, 0.8],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                x: { type: "spring", stiffness: 120, damping: 20, mass: 0.1 },
+                y: { type: "spring", stiffness: 120, damping: 20, mass: 0.1 },
+                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                opacity: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+              }}
+            />{/* Enhanced Sparkle Effects */}
+            {Array.from({ length: 8 }, (_, i) => (
+              <motion.div
+                key={`sparkle-${i}`}
+                className="absolute pointer-events-none"
+                animate={{
+                  x: mousePosition.x + Math.sin(Date.now() * 0.002 + i * 0.8) * (30 + i * 5),
+                  y: mousePosition.y + Math.cos(Date.now() * 0.002 + i * 0.8) * (30 + i * 5),
+                  rotate: [0, 360],
+                  scale: [0.5, 1.2, 0.5],
+                  opacity: [0.2, 0.8, 0.2],
+                }}
+                transition={{
+                  x: { type: "spring", stiffness: 60, damping: 15, mass: 0.1 },
+                  y: { type: "spring", stiffness: 60, damping: 15, mass: 0.1 },
+                  rotate: { duration: 3 + i * 0.5, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
+                  opacity: { duration: 1.5 + i * 0.2, repeat: Infinity, ease: "easeInOut" }
+                }}
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  left: 0,
+                  top: 0,
+                }}
+              >
+                <motion.div
+                  className="w-full h-full relative"
+                  animate={{
+                    rotate: [0, -360],
+                  }}
+                  transition={{
+                    duration: 2 + i * 0.3,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                >
+                  {/* Star shape sparkle */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(45deg, 
+                        ${i % 3 === 0 ? '#10b981' : i % 3 === 1 ? '#3b82f6' : '#8b5cf6'}, 
+                        ${i % 3 === 0 ? '#34d399' : i % 3 === 1 ? '#60a5fa' : '#a78bfa'})`,
+                      clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
+                      filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))'
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
+            ))}
+
+            {/* Trailing sparkles */}
+            {Array.from({ length: 5 }, (_, i) => (
+              <motion.div
+                key={`trail-${i}`}
+                className="absolute w-2 h-2 pointer-events-none"
+                animate={{
+                  x: mousePosition.x - (i + 1) * 15 + Math.sin(Date.now() * 0.003 + i) * 8,
+                  y: mousePosition.y - (i + 1) * 10 + Math.cos(Date.now() * 0.003 + i) * 8,
+                  scale: [1, 0.3, 1],
+                  opacity: [0.8 - i * 0.15, 0.3 - i * 0.05, 0.8 - i * 0.15],
+                }}
+                transition={{
+                  x: { type: "spring", stiffness: 40 - i * 5, damping: 20, mass: 0.2 },
+                  y: { type: "spring", stiffness: 40 - i * 5, damping: 20, mass: 0.2 },
+                  scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.1 },
+                  opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.1 }
+                }}
+              >
+                <div
+                  className="w-full h-full rounded-full"
+                  style={{
+                    background: `radial-gradient(circle, 
+                      ${i % 2 === 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(59, 130, 246, 0.8)'} 0%, 
+                      transparent 70%)`,
+                    filter: 'blur(0.5px)'
+                  }}
+                />
+              </motion.div>
+            ))}
+
+            {/* Gentle glow particles */}
+            {Array.from({ length: 3 }, (_, i) => (
+              <motion.div
+                key={`glow-${i}`}
+                className="absolute pointer-events-none rounded-full"
+                style={{
+                  width: `${20 + i * 10}px`,
+                  height: `${20 + i * 10}px`,
+                  background: `radial-gradient(circle, 
+                    ${i === 0 ? 'rgba(16, 185, 129, 0.1)' : i === 1 ? 'rgba(59, 130, 246, 0.08)' : 'rgba(139, 92, 246, 0.06)'} 0%, 
+                    transparent 70%)`,
+                  filter: 'blur(1px)'
+                }}
+                animate={{
+                  x: mousePosition.x - (10 + i * 5),
+                  y: mousePosition.y - (10 + i * 5),
+                  scale: [0.8, 1.2, 0.8],
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  x: { type: "spring", stiffness: 80 - i * 20, damping: 25, mass: 0.1 },
+                  y: { type: "spring", stiffness: 80 - i * 20, damping: 25, mass: 0.1 },
+                  scale: { duration: 3 + i, repeat: Infinity, ease: "easeInOut" },
+                  opacity: { duration: 2.5 + i, repeat: Infinity, ease: "easeInOut" }
+                }}
+              />
+            ))}
+
+            {/* Subtle Background Pattern */}
+            <motion.div
+              className="absolute inset-0 opacity-5"
+              style={{
+                backgroundImage: "radial-gradient(circle at 2px 2px, #10b981 1px, transparent 0)",
+                backgroundSize: "24px 24px",
+                transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`
+              }}
+            />
+
+            {/* Close Button */}
+            <motion.button
+              className="absolute top-4 right-4 text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-all duration-200"
+              onClick={() => setShowPDFModal(false)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              animate={{
+                rotate: mousePosition.x * 0.02,
+              }}
+              transition={{ type: "spring", stiffness: 100, damping: 10 }}
+            >
+              <X className="w-5 h-5" />
+            </motion.button>
+
+            {/* Header */}
+            <motion.div
+              className="text-center mb-8"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+            >
+              <motion.div
+                className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg"
+                initial={{ scale: 0 }}
+                animate={{
+                  scale: 1,
+                  rotateX: mousePosition.y * 0.05,
+                  rotateY: mousePosition.x * 0.05,
+                }}
+                transition={{
+                  scale: { delay: 0.2, type: "spring", stiffness: 300 },
+                  rotateX: { type: "spring", stiffness: 100, damping: 10 },
+                  rotateY: { type: "spring", stiffness: 100, damping: 10 }
+                }}
+                style={{
+                  transformStyle: "preserve-3d"
+                }}
+              >
+                <Download className="w-8 h-8 text-white" />
+              </motion.div>
+              <h3 className="text-2xl font-bold text-white mb-2">Download Resume</h3>
+              <p className="text-gray-400 text-sm">Choose your preferred format</p>
+            </motion.div>
+
+            {/* Download Options */}
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.3 }}
+            >
+              {/* Professional Resume */}
+              <motion.button
+                className="w-full p-5 bg-gradient-to-r from-green-600/20 to-green-500/20 border border-green-500/30 rounded-xl hover:border-green-400/50 transition-all duration-200 group relative"
+                onClick={handleDownloadPDF}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  rotateY: mousePosition.x * 0.02,
+                  rotateX: -mousePosition.y * 0.01,
+                }}
+                transition={{
+                  opacity: { delay: 0.4, duration: 0.3 },
+                  x: { delay: 0.4, duration: 0.3 },
+                  rotateY: { type: "spring", stiffness: 100, damping: 10 },
+                  rotateX: { type: "spring", stiffness: 100, damping: 10 }
+                }}
+                style={{
+                  transformStyle: "preserve-3d"
+                }}
+              >
+                <div className="flex items-center space-x-4">
+                  <motion.div
+                    className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center group-hover:bg-green-400 transition-colors duration-200"
+                    animate={{
+                      rotateY: mousePosition.x * 0.03,
+                      rotateX: -mousePosition.y * 0.02,
+                    }}
+                    transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                  >
+                    <Download className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <div className="flex-1 text-left">
+                    <h4 className="text-lg font-semibold text-white group-hover:text-green-200 transition-colors duration-200">
+                      Professional Resume
+                    </h4>
+                    <p className="text-gray-400 text-sm">Online PDF • Optimized for ATS</p>
+                  </div>
+                  <motion.div
+                    animate={{
+                      x: mousePosition.x * 0.01,
+                      rotate: mousePosition.x * 0.05,
+                    }}
+                    transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                  >
+                    <ChevronRight className="w-5 h-5 text-green-400 group-hover:translate-x-1 transition-transform duration-200" />
+                  </motion.div>
+                </div>
+              </motion.button>
+
+              {/* Detailed CV */}
+              <motion.button
+                className="w-full p-5 bg-gradient-to-r from-blue-600/20 to-blue-500/20 border border-blue-500/30 rounded-xl hover:border-blue-400/50 transition-all duration-200 group relative"
+                onClick={handleDirectDownload}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  rotateY: -mousePosition.x * 0.02,
+                  rotateX: mousePosition.y * 0.01,
+                }}
+                transition={{
+                  opacity: { delay: 0.5, duration: 0.3 },
+                  x: { delay: 0.5, duration: 0.3 },
+                  rotateY: { type: "spring", stiffness: 100, damping: 10 },
+                  rotateX: { type: "spring", stiffness: 100, damping: 10 }
+                }}
+                style={{
+                  transformStyle: "preserve-3d"
+                }}
+              >
+                <div className="flex items-center space-x-4">
+                  <motion.div
+                    className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center group-hover:bg-blue-400 transition-colors duration-200"
+                    animate={{
+                      rotateY: -mousePosition.x * 0.03,
+                      rotateX: mousePosition.y * 0.02,
+                    }}
+                    transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                  >
+                    <Download className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <div className="flex-1 text-left">
+                    <h4 className="text-lg font-semibold text-white group-hover:text-blue-200 transition-colors duration-200">
+                      Detailed CV
+                    </h4>
+                    <p className="text-gray-400 text-sm">Complete document • Local download</p>
+                  </div>
+                  <motion.div
+                    animate={{
+                      x: -mousePosition.x * 0.01,
+                      rotate: -mousePosition.x * 0.05,
+                    }}
+                    transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                  >
+                    <ChevronRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform duration-200" />
+                  </motion.div>
+                </div>
+              </motion.button>
+            </motion.div>
+
+            {/* Info Section */}
+            <motion.div
+              className="mt-6 p-4 bg-gray-800/40 rounded-lg border border-gray-700/30"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                x: mousePosition.x * 0.005,
+              }}
+              transition={{
+                opacity: { delay: 0.6, duration: 0.3 },
+                y: { delay: 0.6, duration: 0.3 },
+                x: { type: "spring", stiffness: 100, damping: 10 }
+              }}
+            >
+              <div className="flex items-center space-x-3">
+                <motion.div
+                  className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center"
+                  animate={{
+                    rotateZ: mousePosition.x * 0.1,
+                    scale: 1 + mousePosition.y * 0.0001,
+                  }}
+                  transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                >
+                  <Brain className="w-4 h-4 text-white" />
+                </motion.div>
+                <div>
+                  <p className="text-sm text-gray-300">
+                    <span className="text-green-400 font-medium">Last Updated:</span> July 2025
+                  </p>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    File size: ~200KB • PDF format • Compatible with all devices
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       )}
