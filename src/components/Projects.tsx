@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiSearch, FiX, FiExternalLink, FiCode, FiInfo, FiFilter, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { Brain, Star } from 'lucide-react';
+import { Brain, Star, Play, Pause, Volume2, VolumeX, CheckCircle, Clock, Calendar, Zap, ArrowRight, Award, Target, Rocket } from 'lucide-react';
+import ProjectPresentation from './bestproject';
 
 // Define types for our project data
 interface Project {
@@ -45,7 +46,7 @@ const Projects: React.FC = () => {
       title: 'PS-2',
       description: 'A project description for PS-2.',
       technologies: ['Python', 'Data Analysis'],
-      image: '/images/ps-2.png',
+      image: 'https://www.innovationtraining.org/wp-content/uploads/2022/05/Creative-Problem-Solving-Process.jpeg',
       githubUrl: 'https://github.com/RNSsanjay/PS-2',
       demoUrl: '',
       details: 'This project involves advanced data analysis techniques to derive insights from complex datasets.',
@@ -57,7 +58,7 @@ const Projects: React.FC = () => {
       title: 'Broken-Patterns-PS',
       description: 'A project description for Broken Patterns PS.',
       technologies: ['JavaScript', 'CSS'],
-      image: '/images/broken-patterns-ps.png',
+      image: 'https://img.freepik.com/premium-vector/problem-solving-planning-man-solving-problems-business-concept-vector-illustration_143808-124.jpg?w=2000',
       githubUrl: 'https://github.com/RNSsanjay/Broken-Patterns-PS',
       demoUrl: '',
       details: 'A creative web design project focusing on unique CSS patterns and animations.',
@@ -69,7 +70,7 @@ const Projects: React.FC = () => {
       title: 'Linked-List-Addition-java',
       description: 'A Java project for linked list addition.',
       technologies: ['Java'],
-      image: '/images/linked-list-addition-java.png',
+      image: 'https://www.codekru.com/wp-content/uploads/2022/06/adding-an-element-to-list-using-add-method-1.jpg',
       githubUrl: 'https://github.com/RNSsanjay/Linked-List-Addition-java',
       demoUrl: '',
       details: 'Implements efficient algorithms for linked list operations in Java.',
@@ -81,7 +82,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Voice-Notes-Taker',
       description: 'An application to take notes using voice commands.',
       technologies: ['Python', 'Speech Recognition'],
-      image: '/images/rns-voice-notes-taker.png',
+      image: 'https://wave.co/opengraph-image.png?f33cc093092c98bd',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Voice-Notes-Taker',
       demoUrl: '',
       details: 'Utilizes speech-to-text technology for seamless note-taking.',
@@ -93,7 +94,7 @@ const Projects: React.FC = () => {
       title: 'RNS_Impactfolio',
       description: 'A portfolio website with impactful design.',
       technologies: ['React', 'CSS', 'JavaScript'],
-      image: '/images/rns-impactfolio.png',
+      image: 'https://www.wiseradvisor.com/blog/wp-content/uploads/2022/02/Portfolio-manager-1.webp',
       githubUrl: 'https://github.com/RNSsanjay/RNS_Impactfolio',
       demoUrl: '',
       details: 'A visually stunning portfolio built with modern web technologies.',
@@ -105,7 +106,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Text-Pack',
       description: 'A collection of text processing utilities.',
       technologies: ['Python', 'NLP'],
-      image: '/images/rns-text-pack.png',
+      image: 'https://media.geeksforgeeks.org/wp-content/uploads/20240123110132/10-Free-Text-to-Speech-Generator-with-Realistic-AI-Voices.webp',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Text-Pack',
       demoUrl: '',
       details: 'A suite of NLP tools for text analysis and processing.',
@@ -117,7 +118,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Voice-Web',
       description: 'A web application for voice processing.',
       technologies: ['JavaScript', 'Web Audio API'],
-      image: '/images/rns-voice-web.png',
+      image: 'https://tse1.mm.bing.net/th/id/OIP.W8vf4ysgqzZ4HQjA2Jw-9AHaFb?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Voice-Web',
       demoUrl: '',
       details: 'Processes audio input in real-time using browser APIs.',
@@ -129,7 +130,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Excel-Sheets',
       description: 'A tool for managing Excel sheets.',
       technologies: ['Python', 'Pandas'],
-      image: '/images/rns-excel-sheets.png',
+      image: 'https://tse4.mm.bing.net/th/id/OIP.AkcrIyCyz-LIVFHhLc07lAHaDt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Excel-Sheets',
       demoUrl: '',
       details: 'Automates Excel data manipulation with Pandas.',
@@ -141,7 +142,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Car-Racing',
       description: 'A car racing game.',
       technologies: ['Unity', 'C#'],
-      image: '/images/rns-car-racing.png',
+      image: 'https://tse3.mm.bing.net/th/id/OIP.utU7ukxU_HQ6bFuy7aATxAHaEJ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Car-Racing',
       demoUrl: '',
       details: 'A 3D racing game built with Unity engine.',
@@ -153,7 +154,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Voice-Assistant',
       description: 'A voice-activated assistant.',
       technologies: ['Python', 'AI'],
-      image: '/images/rns-voice-assistant.png',
+      image: 'https://user-images.githubusercontent.com/92905626/155858792-9a217c3c-09dd-45ba-a952-f5799c0219d3.jpeg',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Voice-Assistant',
       demoUrl: '',
       details: 'An AI-powered assistant with voice command capabilities.',
@@ -165,7 +166,7 @@ const Projects: React.FC = () => {
       title: 'Job-Seeker-Portal-v1',
       description: 'A portal for job seekers.',
       technologies: ['React', 'Node.js'],
-      image: '/images/job-seeker-portal-v1.png',
+      image: 'https://miro.medium.com/v2/resize:fit:848/0*7i7iiORy489H2X3Y.png',
       githubUrl: 'https://github.com/RNSsanjay/Job-Seeker-Portal-v1',
       demoUrl: '',
       details: 'A full-stack job search platform with user authentication.',
@@ -177,7 +178,7 @@ const Projects: React.FC = () => {
       title: 'GPS-Tracker',
       description: 'A GPS tracking application.',
       technologies: ['JavaScript', 'Maps API'],
-      image: '/images/gps-tracker.png',
+      image: 'https://brilliantmaps.com/wp-content/uploads/81izSt8aGZL.jpg',
       githubUrl: 'https://github.com/RNSsanjay/GPS-Tracker',
       demoUrl: '',
       details: 'Real-time location tracking with interactive maps.',
@@ -189,7 +190,7 @@ const Projects: React.FC = () => {
       title: 'AI-Language-Trainer',
       description: 'An AI-based language learning tool.',
       technologies: ['Python', 'AI'],
-      image: '/images/ai-language-trainer.png',
+      image: 'https://d17ocfn2f5o4rl.cloudfront.net/wp-content/uploads/2020/08/BP-AI-for-language-learning_body-3.jpg',
       githubUrl: 'https://github.com/RNSsanjay/AI-Language-Trainer',
       demoUrl: '',
       details: 'An AI-driven tool for language practice and improvement.',
@@ -201,7 +202,7 @@ const Projects: React.FC = () => {
       title: 'QR-Code-Generator',
       description: 'A tool to generate QR codes.',
       technologies: ['JavaScript', 'QR Code Library'],
-      image: '/images/qr-code-generator.png',
+      image: 'https://tse4.mm.bing.net/th/id/OIP.veqrQBgEsRboP2eZKDrnQwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/QR-Code-Generator',
       demoUrl: '',
       details: 'Generates customizable QR codes for various use cases.',
@@ -213,7 +214,7 @@ const Projects: React.FC = () => {
       title: 'TTS-Streamlit',
       description: 'A text-to-speech application using Streamlit.',
       technologies: ['Python', 'Streamlit'],
-      image: '/images/tts-streamlit.png',
+      image: 'https://tse1.mm.bing.net/th/id/OIP.Fz79TE-4vvk6RP3TmDOWmwHaEU?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/TTS-Streamlit',
       demoUrl: '',
       details: 'Converts text to speech with a user-friendly Streamlit interface.',
@@ -225,7 +226,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Drawing-Application',
       description: 'A web-based drawing application.',
       technologies: ['JavaScript', 'HTML Canvas'],
-      image: '/images/rns-drawing-application.png',
+      image: 'https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/02/Best-drawing-apps-for-Android-1.jpg',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Drawing-Application',
       demoUrl: '',
       details: 'A creative tool for drawing and sketching in the browser.',
@@ -237,7 +238,7 @@ const Projects: React.FC = () => {
       title: 'RNS-Chatbot-python',
       description: 'A chatbot built with Python.',
       technologies: ['Python', 'NLP'],
-      image: '/images/rns-chatbot-python.png',
+      image: 'https://th.bing.com/th?id=OIF.w%2btAnI15P%2fOwyK8KVt6QWg&r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/RNS-Chatbot-python',
       demoUrl: '',
       details: 'A conversational AI chatbot using NLP techniques.',
@@ -249,7 +250,7 @@ const Projects: React.FC = () => {
       title: 'AR-Filter-Application',
       description: 'An AR filter application.',
       technologies: ['Unity', 'ARKit'],
-      image: '/images/ar-filter-application.png',
+      image: 'https://www.cnet.com/a/img/resize/1ec1dc4fbe208285acf7f37e064bfbfebdacad22/hub/2021/07/15/20210ea1-7556-4eef-9ade-f9369805d5fe/sparkar-2-checker-nic.jpg?auto=webp&width=1200',
       githubUrl: 'https://github.com/RNSsanjay/AR-Filter-Application',
       demoUrl: '',
       details: 'Augmented reality filters for mobile applications.',
@@ -261,7 +262,7 @@ const Projects: React.FC = () => {
       title: 'E-Commerce-React',
       description: 'An e-commerce platform built with React.',
       technologies: ['React', 'Node.js'],
-      image: '/images/e-commerce-react.png',
+      image: 'https://phuongnamvina.com/img_data/images/ecommerce.jpeg',
       githubUrl: 'https://github.com/RNSsanjay/E-Commerce-React',
       demoUrl: '',
       details: 'A fully functional e-commerce site with cart and payment features.',
@@ -273,7 +274,7 @@ const Projects: React.FC = () => {
       title: 'Django-ChatBot',
       description: 'A chatbot built with Django.',
       technologies: ['Python', 'Django'],
-      image: '/images/django-chatbot.png',
+      image: 'https://oursaferschools.co.uk/wp-content/uploads/2023/03/chatGPT.png',
       githubUrl: 'https://github.com/RNSsanjay/Django-ChatBot',
       demoUrl: '',
       details: 'A web-based chatbot integrated with Django framework.',
@@ -285,7 +286,7 @@ const Projects: React.FC = () => {
       title: 'LandBerg-Pvt-Ltd-Web-Intern',
       description: 'Web development internship projects.',
       technologies: ['HTML', 'CSS', 'JavaScript'],
-      image: '/images/landberg-pvt-ltd-web-intern.png',
+      image: 'https://play-lh.googleusercontent.com/tXJYDeL7LT2LAV6SCGHzUwHKOCR8Qtk1VbfqEIl8bWDPm93NJrsAHHmoLhtTX_al5bA',
       githubUrl: 'https://github.com/RNSsanjay/LandBerg-Pvt-Ltd-Web-Intern',
       demoUrl: '',
       details: 'A collection of web projects developed during an internship.',
@@ -297,7 +298,7 @@ const Projects: React.FC = () => {
       title: 'AI-Text-to-Speech',
       description: 'An AI-based text-to-speech tool.',
       technologies: ['Python', 'AI'],
-      image: '/images/ai-text-to-speech.png',
+      image: 'https://www.comparebiztech.com/wp-content/uploads/2023/07/AI-Text-To-Speech-Tools.jpg',
       githubUrl: 'https://github.com/RNSsanjay/AI-Text-to-Speech',
       demoUrl: '',
       details: 'Advanced text-to-speech conversion using AI models.',
@@ -309,7 +310,7 @@ const Projects: React.FC = () => {
       title: 'Image-to-Text-Generation-AI',
       description: 'An AI tool to convert images to text.',
       technologies: ['Python', 'OCR'],
-      image: '/images/image-to-text-generation-ai.png',
+      image: 'https://tse2.mm.bing.net/th/id/OIP.0Zf6L1dqv59Rc0YJMmjGtgHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/Image-to-Text-Generation-Ai',
       demoUrl: '',
       details: 'Extracts text from images using optical character recognition.',
@@ -321,7 +322,7 @@ const Projects: React.FC = () => {
       title: 'Tracker-Intern',
       description: 'An internship project for tracking applications.',
       technologies: ['JavaScript', 'React'],
-      image: '/images/tracker-intern.png',
+      image: 'https://v3smarttech.com/wp-content/uploads/2022/11/How-AI-in-GPS-tracking-systems-improves-fleet-efficiency.png',
       githubUrl: 'https://github.com/RNSsanjay/Tracker-Intern',
       demoUrl: '',
       details: 'A tracking tool developed during a front-end internship.',
@@ -333,7 +334,7 @@ const Projects: React.FC = () => {
       title: 'HostMyResume',
       description: 'A platform to host resumes.',
       technologies: ['React', 'Firebase'],
-      image: '/images/hostmyresume.png',
+      image: 'https://tse1.mm.bing.net/th/id/OIP.R1lY2p2PRbd5Ih9GO1IxiAHaKI?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/HostMyResume',
       demoUrl: '',
       details: 'A cloud-based platform for hosting and sharing resumes.',
@@ -345,7 +346,7 @@ const Projects: React.FC = () => {
       title: 'Software-Development',
       description: 'Various software development projects.',
       technologies: ['Java', 'C++'],
-      image: '/images/software-development.png',
+      image: 'https://tse4.mm.bing.net/th/id/OIP.3Z3JXdYIU9sys8HL1eXc6QAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       githubUrl: 'https://github.com/RNSsanjay/Software-Development',
       demoUrl: '',
       details: 'A collection of software projects in multiple languages.',
@@ -357,7 +358,7 @@ const Projects: React.FC = () => {
       title: 'My-Resume',
       description: 'My personal resume website.',
       technologies: ['HTML', 'CSS'],
-      image: '/images/my-resume.png',
+      image: 'https://marketplace.canva.com/EAFIydcQw8g/1/0/1131w/canva-student-resume-in-green-white-lined-style-d-cjvH0BT58.jpg',
       githubUrl: 'https://github.com/RNSsanjay/My-Resume',
       demoUrl: '',
       details: 'A static website showcasing personal resume details.',
@@ -369,7 +370,7 @@ const Projects: React.FC = () => {
       title: 'Web-Projects',
       description: 'A collection of web development projects.',
       technologies: ['JavaScript', 'React'],
-      image: '/images/web-projects.png',
+      image: 'https://media.geeksforgeeks.org/wp-content/uploads/20220325175226/WebDevelopmentProjects2.png',
       githubUrl: 'https://github.com/RNSsanjay/Web-Projects',
       demoUrl: '',
       details: 'A portfolio of various web applications.',
@@ -381,7 +382,7 @@ const Projects: React.FC = () => {
       title: 'Android-Development-Internship-CodeAlpha',
       description: 'Android development projects during an internship.',
       technologies: ['Kotlin', 'Android'],
-      image: '/images/android-development-internship-codealpha.png',
+      image: 'https://sdreatech.com/storage/images/Android-App-Development-services.jpg',
       githubUrl: 'https://github.com/RNSsanjay/Android-Development-Internship-CodeAlpha',
       demoUrl: '',
       details: 'Mobile apps developed during an Android internship.',
@@ -393,7 +394,7 @@ const Projects: React.FC = () => {
       title: 'Front-End-Development-Internship-CodeAlpha',
       description: 'Front-end development projects during an internship.',
       technologies: ['HTML', 'CSS', 'JavaScript'],
-      image: '/images/front-end-development-internship-codealpha.png',
+      image: 'https://img.freepik.com/premium-vector/frontend-development-web-banner-concept-website-interface-improvement-illustration_277904-4428.jpg?w=2000',
       githubUrl: 'https://github.com/RNSsanjay/Front-End-Development-Internship-CodeAlpha',
       demoUrl: '',
       details: 'Front-end projects showcasing responsive design skills.',
@@ -557,514 +558,90 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
-      {/* Animated Background - matching Skills page */}
-      <motion.div
-        className="absolute inset-0 bg-green-900 opacity-30"
-        animate={{
-          opacity: [0.2, 0.4, 0.2],
-          background: [
-            'linear-gradient(135deg, #000000, #10b981)',
-            'linear-gradient(135deg, #10b981, #3b82f6)',
-            'linear-gradient(135deg, #3b82f6, #000000)'
-          ]
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
+    <>
+      {/* Project Roadmap Section - from bestproject.tsx */}
+      <ProjectPresentation />
 
-      {/* Animated Particles */}
-      <FloatingParticles />
-
-      {/* 3D Grid Lines */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-
-      {/* Loading Animation - matching Skills page */}
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 360],
-                filter: ["drop-shadow(0 0 8px #10b981)", "drop-shadow(0 0 16px #10b981)", "drop-shadow(0 0 8px #10b981)"]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Brain className="w-24 h-24 text-green-500" />
-            </motion.div>
-            <motion.div
-              className="absolute mt-32 text-green-400 font-mono text-lg"
-              animate={{
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              Loading Projects...
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Picture Banner */}
-      <div className="relative h-96 mb-16 overflow-hidden px-4 z-10">
+      <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+        {/* Animated Background - matching Skills page */}
         <motion.div
-          className="absolute inset-0 flex space-x-8"
-          variants={bannerVariants}
-          animate="animate"
-        >
-          {[...featuredProjects, ...featuredProjects].map((project, index) => (
-            <motion.div
-              key={`${project.title}-${index}`}
-              whileHover={{ scale: 1.05, y: -10, zIndex: 10, transition: { duration: 0.3 } }}
-              className="flex-none w-80 h-full relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900/80 backdrop-blur-lg border border-green-500/30"
-            >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = '/images/placeholder.png';
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold text-green-300 mb-2">{project.title}</h3>
-                <p className="text-green-200 line-clamp-2 text-sm mb-4">{project.description}</p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-sm font-medium shadow-lg"
-                  onClick={() => handleProjectClick(project)}
-                >
-                  Learn More
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+          className="absolute inset-0 bg-green-900 opacity-30"
+          animate={{
+            opacity: [0.2, 0.4, 0.2],
+            background: [
+              'linear-gradient(135deg, #000000, #10b981)',
+              'linear-gradient(135deg, #10b981, #3b82f6)',
+              'linear-gradient(135deg, #3b82f6, #000000)'
+            ]
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
 
-      {/* Header and Filter Controls */}
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center py-16"
-        >
-          <motion.h1
-            className="text-5xl md:text-6xl font-bold text-green-300 mb-4"
-            animate={{
-              textShadow: ["0 0 8px rgba(16, 185, 129, 0.3)", "0 0 16px rgba(16, 185, 129, 0.5)", "0 0 8px rgba(16, 185, 129, 0.3)"]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            My Projects
-            <motion.span
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-green-400"
-              initial={{ width: 0 }}
-              animate={{ width: "8rem" }}
-              transition={{ duration: 1, delay: 0.5 }}
-            />
-          </motion.h1>
-          <motion.p
-            className="text-xl text-green-200 max-w-2xl mx-auto px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            Explore my collection of creative and technical projects
-          </motion.p>
-          <motion.div
-            className="flex justify-center items-center gap-2 mt-6"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ delay: i * 0.1, duration: 0.6, repeat: Infinity, repeatDelay: 3 }}
-              >
-                <Star className="w-5 h-5 text-yellow-500 fill-current" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+        {/* Animated Particles */}
+        <FloatingParticles />
 
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-col md:flex-row justify-between items-center mb-12"
-        >
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-medium space-x-2 shadow-lg"
-              onClick={() => setShowFilter(true)}
-            >
-              <FiFilter />
-              <span>Filter</span>
-            </motion.button>
+        {/* 3D Grid Lines */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
 
-            <div className="relative">
-              <select
-                className="px-6 py-3 bg-gray-900/70 backdrop-blur-lg border border-green-500/30 text-green-200 rounded-full font-medium appearance-none pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
-                onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
-                value={sortBy}
-              >
-                <option value="date" className="bg-gray-900">Sort by Date</option>
-                <option value="title" className="bg-gray-900">Sort by Title</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-green-200">
-                <FiChevronDown />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Search Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mb-12 relative z-10"
-        >
-          <div className="relative max-w-2xl mx-auto">
-            <input
-              type="text"
-              placeholder="Search projects by title or description..."
-              className="w-full px-6 py-4 rounded-full bg-gray-900/70 backdrop-blur-lg border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 pl-14"
-              onChange={(e) => setSearchTerm(e.target.value)}
-              value={searchTerm}
-            />
-            <div className="absolute inset-y-0 left-0 flex items-center pl-6 text-green-400">
-              <FiSearch size={20} />
-            </div>
-            {searchTerm && (
-              <button
-                className="absolute inset-y-0 right-0 flex items-center pr-6 text-green-400"
-                onClick={() => setSearchTerm('')}
-              >
-                <FiX size={20} />
-              </button>
-            )}
-          </div>
-        </motion.div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-          <AnimatePresence>
-            {memoizedFilteredProjects.slice(0, visibleProjects).map((project, index) => (
-              <motion.div
-                key={project.title}
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                custom={index}
-                layout
-                className="bg-gray-900/80 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl border border-green-500/30 group hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.onerror = null;
-                      target.src = '/images/placeholder.png';
-                    }}
-                  />
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4"
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-sm font-medium shadow-lg"
-                      onClick={() => handleProjectClick(project)}
-                    >
-                      View Details
-                    </motion.button>
-                  </motion.div>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-semibold text-green-300">{project.title}</h3>
-                    {project.category && (
-                      <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs border border-green-500/30">
-                        {project.category}
-                      </span>
-                    )}
-                  </div>
-
-                  <p className="text-green-200 mb-4 line-clamp-3 text-sm">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <motion.span
-                        key={tech}
-                        whileHover={{ scale: 1.1 }}
-                        className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs border border-green-500/30"
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-3 py-1 bg-gray-700/50 text-gray-400 rounded-full text-xs">
-                        +{project.technologies.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex space-x-3">
-                    {project.demoUrl && (
-                      <motion.a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors border border-green-500/30"
-                        title="Live Demo"
-                      >
-                        <FiExternalLink size={18} />
-                      </motion.a>
-                    )}
-                    {project.githubUrl && (
-                      <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-gray-700/50 text-green-300 rounded-full hover:bg-gray-700 transition-colors border border-gray-600/30"
-                        title="View Code"
-                      >
-                        <FiCode size={18} />
-                      </motion.a>
-                    )}
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors ml-auto border border-green-500/30"
-                      onClick={() => handleProjectClick(project)}
-                      title="More Details"
-                    >
-                      <FiInfo size={18} />
-                    </motion.button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* View More Button */}
-        {visibleProjects < memoizedFilteredProjects.length && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center mt-16 relative z-10"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-semibold flex items-center space-x-2 shadow-lg"
-              onClick={() => setVisibleProjects(prev => Math.min(prev + 6, memoizedFilteredProjects.length))}
-            >
-              <span>Load More</span>
-              <motion.span
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <FiChevronDown />
-              </motion.span>
-            </motion.button>
-          </motion.div>
-        )}
-
-        {/* Scroll to Top Button */}
+        {/* Loading Animation - matching Skills page */}
         <AnimatePresence>
-          {showScrollTop && (
-            <motion.button
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 100 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full shadow-lg z-50"
-              onClick={scrollToTop}
-              title="Scroll to top"
+          {isLoading && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <FiChevronUp size={24} />
-            </motion.button>
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 360],
+                  filter: ["drop-shadow(0 0 8px #10b981)", "drop-shadow(0 0 16px #10b981)", "drop-shadow(0 0 8px #10b981)"]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Brain className="w-24 h-24 text-green-500" />
+              </motion.div>
+              <motion.div
+                className="absolute mt-32 text-green-400 font-mono text-lg"
+                animate={{
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                Loading Projects...
+              </motion.div>
+            </motion.div>
           )}
         </AnimatePresence>
-      </div>
 
-      {/* Filter Pop-up */}
-      <AnimatePresence>
-        {showFilter && (
+        {/* Picture Banner */}
+        <div className="relative h-96 mb-16 overflow-hidden px-4 z-10">
           <motion.div
-            variants={popupVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            onClick={(e) => e.target === e.currentTarget && setShowFilter(false)}
+            className="absolute inset-0 flex space-x-8"
+            variants={bannerVariants}
+            animate="animate"
           >
-            <motion.div
-              className="bg-gray-900/90 backdrop-blur-lg border border-green-500/30 p-8 rounded-2xl w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto"
-              variants={popupVariants}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-green-300">Filter Projects</h3>
-                <button
-                  onClick={() => setShowFilter(false)}
-                  className="text-green-400 hover:text-green-200 transition-colors"
-                >
-                  <FiX size={24} />
-                </button>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-green-300 mb-2">Search</label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Search by title or description..."
-                      className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 pl-10"
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      value={searchTerm}
-                    />
-                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-green-300 mb-2">Technology</label>
-                  <select
-                    className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    onChange={(e) => setSelectedTech(e.target.value)}
-                    value={selectedTech}
-                  >
-                    {allTechnologies.map(tech => (
-                      <option key={tech} value={tech} className="bg-gray-800">
-                        {tech}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-green-300 mb-2">Category</label>
-                  <select
-                    className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    value={selectedCategory}
-                  >
-                    {allCategories.map(category => (
-                      <option key={category} value={category} className="bg-gray-800">
-                        {category}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-green-300 mb-2">Sort By</label>
-                  <select
-                    className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
-                    value={sortBy}
-                  >
-                    <option value="date" className="bg-gray-800">Date (Newest First)</option>
-                    <option value="title" className="bg-gray-800">Title (A-Z)</option>
-                  </select>
-                </div>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg mt-8 font-medium shadow-lg"
-                onClick={() => setShowFilter(false)}
+            {[...featuredProjects, ...featuredProjects].map((project, index) => (
+              <motion.div
+                key={`${project.title}-${index}`}
+                whileHover={{ scale: 1.05, y: -10, zIndex: 10, transition: { duration: 0.3 } }}
+                className="flex-none w-80 h-full relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900/80 backdrop-blur-lg border border-green-500/30"
               >
-                Apply Filters
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Project Details Pop-up */}
-      <AnimatePresence>
-        {showDetails && (
-          <motion.div
-            variants={popupVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto"
-            onClick={(e) => e.target === e.currentTarget && closeDetails()}
-          >
-            <motion.div
-              className="bg-gray-900/90 backdrop-blur-lg border border-green-500/30 p-6 rounded-2xl w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
-              variants={popupVariants}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="sticky top-0 bg-gray-900/90 backdrop-blur-lg pt-4 pb-2 z-10">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-3xl font-bold text-green-300">{showDetails.title}</h3>
-                  <button
-                    onClick={closeDetails}
-                    className="text-green-400 hover:text-green-200 transition-colors"
-                  >
-                    <FiX size={24} />
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {showDetails.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm border border-green-500/30"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative h-80 mb-6 rounded-xl overflow-hidden">
                 <img
-                  src={showDetails.image}
-                  alt={showDetails.title}
+                  src={project.image}
+                  alt={project.title}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -1072,73 +649,501 @@ const Projects: React.FC = () => {
                     target.src = '/images/placeholder.png';
                   }}
                 />
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xl font-semibold text-green-300 mb-2">Description</h4>
-                  <p className="text-green-200">{showDetails.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-bold text-green-300 mb-2">{project.title}</h3>
+                  <p className="text-green-200 line-clamp-2 text-sm mb-4">{project.description}</p>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-sm font-medium shadow-lg"
+                    onClick={() => handleProjectClick(project)}
+                  >
+                    Learn More
+                  </motion.button>
                 </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
-                <div>
-                  <h4 className="text-xl font-semibold text-green-300 mb-2">Details</h4>
-                  <p className="text-green-200 whitespace-pre-line">{showDetails.details}</p>
-                </div>
-
-                {showDetails.date && (
-                  <div>
-                    <h4 className="text-xl font-semibold text-green-300 mb-2">Date</h4>
-                    <p className="text-green-200">
-                      {new Date(showDetails.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </p>
-                  </div>
-                )}
-
-                {showDetails.category && (
-                  <div>
-                    <h4 className="text-xl font-semibold text-green-300 mb-2">Category</h4>
-                    <p className="text-green-200">{showDetails.category}</p>
-                  </div>
-                )}
-
-                <div className="flex space-x-4 pt-4">
-                  {showDetails.demoUrl && (
-                    <motion.a
-                      href={showDetails.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg flex items-center justify-center space-x-2 shadow-lg"
-                    >
-                      <FiExternalLink />
-                      <span>Live Demo</span>
-                    </motion.a>
-                  )}
-                  {showDetails.githubUrl && (
-                    <motion.a
-                      href={showDetails.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      className="flex-1 px-4 py-3 bg-gray-700/70 border border-green-500/30 text-green-200 rounded-lg flex items-center justify-center space-x-2"
-                    >
-                      <FiCode />
-                      <span>View Code</span>
-                    </motion.a>
-                  )}
-                </div>
-              </div>
+        {/* Header and Filter Controls */}
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center py-16"
+          >
+            <motion.h1
+              className="text-5xl md:text-6xl font-bold text-green-300 mb-4"
+              animate={{
+                textShadow: ["0 0 8px rgba(16, 185, 129, 0.3)", "0 0 16px rgba(16, 185, 129, 0.5)", "0 0 8px rgba(16, 185, 129, 0.3)"]
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              My Projects
+              <motion.span
+                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-green-400"
+                initial={{ width: 0 }}
+                animate={{ width: "8rem" }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
+            </motion.h1>
+            <motion.p
+              className="text-xl text-green-200 max-w-2xl mx-auto px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              Explore my collection of creative and technical projects
+            </motion.p>
+            <motion.div
+              className="flex justify-center items-center gap-2 mt-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ delay: i * 0.1, duration: 0.6, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <Star className="w-5 h-5 text-yellow-500 fill-current" />
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* Custom styles */}
-      <style jsx>{`
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col md:flex-row justify-between items-center mb-12"
+          >
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-medium space-x-2 shadow-lg"
+                onClick={() => setShowFilter(true)}
+              >
+                <FiFilter />
+                <span>Filter</span>
+              </motion.button>
+
+              <div className="relative">
+                <select
+                  className="px-6 py-3 bg-gray-900/70 backdrop-blur-lg border border-green-500/30 text-green-200 rounded-full font-medium appearance-none pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
+                  value={sortBy}
+                >
+                  <option value="date" className="bg-gray-900">Sort by Date</option>
+                  <option value="title" className="bg-gray-900">Sort by Title</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-green-200">
+                  <FiChevronDown />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mb-12 relative z-10"
+          >
+            <div className="relative max-w-2xl mx-auto">
+              <input
+                type="text"
+                placeholder="Search projects by title or description..."
+                className="w-full px-6 py-4 rounded-full bg-gray-900/70 backdrop-blur-lg border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 pl-14"
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
+              />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-6 text-green-400">
+                <FiSearch size={20} />
+              </div>
+              {searchTerm && (
+                <button
+                  className="absolute inset-y-0 right-0 flex items-center pr-6 text-green-400"
+                  onClick={() => setSearchTerm('')}
+                >
+                  <FiX size={20} />
+                </button>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+            <AnimatePresence>
+              {memoizedFilteredProjects.slice(0, visibleProjects).map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  custom={index}
+                  layout
+                  className="bg-gray-900/80 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl border border-green-500/30 group hover:shadow-2xl transition-all duration-300"
+                >
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = '/images/placeholder.png';
+                      }}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4"
+                    >
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-sm font-medium shadow-lg"
+                        onClick={() => handleProjectClick(project)}
+                      >
+                        View Details
+                      </motion.button>
+                    </motion.div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl font-semibold text-green-300">{project.title}</h3>
+                      {project.category && (
+                        <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs border border-green-500/30">
+                          {project.category}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-green-200 mb-4 line-clamp-3 text-sm">{project.description}</p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.slice(0, 3).map((tech) => (
+                        <motion.span
+                          key={tech}
+                          whileHover={{ scale: 1.1 }}
+                          className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs border border-green-500/30"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <span className="px-3 py-1 bg-gray-700/50 text-gray-400 rounded-full text-xs">
+                          +{project.technologies.length - 3} more
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex space-x-3">
+                      {project.demoUrl && (
+                        <motion.a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.1 }}
+                          className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors border border-green-500/30"
+                          title="Live Demo"
+                        >
+                          <FiExternalLink size={18} />
+                        </motion.a>
+                      )}
+                      {project.githubUrl && (
+                        <motion.a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.1 }}
+                          className="p-2 bg-gray-700/50 text-green-300 rounded-full hover:bg-gray-700 transition-colors border border-gray-600/30"
+                          title="View Code"
+                        >
+                          <FiCode size={18} />
+                        </motion.a>
+                      )}
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors ml-auto border border-green-500/30"
+                        onClick={() => handleProjectClick(project)}
+                        title="More Details"
+                      >
+                        <FiInfo size={18} />
+                      </motion.button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          {/* View More Button */}
+          {visibleProjects < memoizedFilteredProjects.length && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex justify-center mt-16 relative z-10"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-semibold flex items-center space-x-2 shadow-lg"
+                onClick={() => setVisibleProjects(prev => Math.min(prev + 6, memoizedFilteredProjects.length))}
+              >
+                <span>Load More</span>
+                <motion.span
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                >
+                  <FiChevronDown />
+                </motion.span>
+              </motion.button>
+            </motion.div>
+          )}
+
+          {/* Scroll to Top Button */}
+          <AnimatePresence>
+            {showScrollTop && (
+              <motion.button
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full shadow-lg z-50"
+                onClick={scrollToTop}
+                title="Scroll to top"
+              >
+                <FiChevronUp size={24} />
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Filter Pop-up */}
+        <AnimatePresence>
+          {showFilter && (
+            <motion.div
+              variants={popupVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+              onClick={(e) => e.target === e.currentTarget && setShowFilter(false)}
+            >
+              <motion.div
+                className="bg-gray-900/90 backdrop-blur-lg border border-green-500/30 p-8 rounded-2xl w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto"
+                variants={popupVariants}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl font-bold text-green-300">Filter Projects</h3>
+                  <button
+                    onClick={() => setShowFilter(false)}
+                    className="text-green-400 hover:text-green-200 transition-colors"
+                  >
+                    <FiX size={24} />
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-green-300 mb-2">Search</label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search by title or description..."
+                        className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 pl-10"
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        value={searchTerm}
+                      />
+                      <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-green-300 mb-2">Technology</label>
+                    <select
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setSelectedTech(e.target.value)}
+                      value={selectedTech}
+                    >
+                      {allTechnologies.map(tech => (
+                        <option key={tech} value={tech} className="bg-gray-800">
+                          {tech}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-green-300 mb-2">Category</label>
+                    <select
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      value={selectedCategory}
+                    >
+                      {allCategories.map(category => (
+                        <option key={category} value={category} className="bg-gray-800">
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-green-300 mb-2">Sort By</label>
+                    <select
+                      className="w-full px-4 py-3 rounded-lg bg-gray-800/70 border border-green-500/30 text-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
+                      value={sortBy}
+                    >
+                      <option value="date" className="bg-gray-800">Date (Newest First)</option>
+                      <option value="title" className="bg-gray-800">Title (A-Z)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg mt-8 font-medium shadow-lg"
+                  onClick={() => setShowFilter(false)}
+                >
+                  Apply Filters
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Project Details Pop-up */}
+        <AnimatePresence>
+          {showDetails && (
+            <motion.div
+              variants={popupVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto"
+              onClick={(e) => e.target === e.currentTarget && closeDetails()}
+            >
+              <motion.div
+                className="bg-gray-900/90 backdrop-blur-lg border border-green-500/30 p-6 rounded-2xl w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
+                variants={popupVariants}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="sticky top-0 bg-gray-900/90 backdrop-blur-lg pt-4 pb-2 z-10">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-3xl font-bold text-green-300">{showDetails.title}</h3>
+                    <button
+                      onClick={closeDetails}
+                      className="text-green-400 hover:text-green-200 transition-colors"
+                    >
+                      <FiX size={24} />
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {showDetails.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm border border-green-500/30"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="relative h-80 mb-6 rounded-xl overflow-hidden">
+                  <img
+                    src={showDetails.image}
+                    alt={showDetails.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = '/images/placeholder.png';
+                    }}
+                  />
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-xl font-semibold text-green-300 mb-2">Description</h4>
+                    <p className="text-green-200">{showDetails.description}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-semibold text-green-300 mb-2">Details</h4>
+                    <p className="text-green-200 whitespace-pre-line">{showDetails.details}</p>
+                  </div>
+
+                  {showDetails.date && (
+                    <div>
+                      <h4 className="text-xl font-semibold text-green-300 mb-2">Date</h4>
+                      <p className="text-green-200">
+                        {new Date(showDetails.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </p>
+                    </div>
+                  )}
+
+                  {showDetails.category && (
+                    <div>
+                      <h4 className="text-xl font-semibold text-green-300 mb-2">Category</h4>
+                      <p className="text-green-200">{showDetails.category}</p>
+                    </div>
+                  )}
+
+                  <div className="flex space-x-4 pt-4">
+                    {showDetails.demoUrl && (
+                      <motion.a
+                        href={showDetails.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg flex items-center justify-center space-x-2 shadow-lg"
+                      >
+                        <FiExternalLink />
+                        <span>Live Demo</span>
+                      </motion.a>
+                    )}
+                    {showDetails.githubUrl && (
+                      <motion.a
+                        href={showDetails.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        className="flex-1 px-4 py-3 bg-gray-700/70 border border-green-500/30 text-green-200 rounded-lg flex items-center justify-center space-x-2"
+                      >
+                        <FiCode />
+                        <span>View Code</span>
+                      </motion.a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Custom styles */}
+        <style>{`
         .bg-grid-pattern {
           background-image: 
             linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
@@ -1146,7 +1151,8 @@ const Projects: React.FC = () => {
           background-size: 50px 50px;
         }
       `}</style>
-    </div>
+      </div>
+    </>
   );
 };
 

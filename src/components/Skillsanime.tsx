@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
+interface Skill {
+  name: string;
+  color: string;
+  icon: string;
+  category: string;
+  level: number;
+  description: string;
+}
+
 const EnhancedSkillsAnimation = () => {
   const skills = useMemo(() => [
     { name: 'Full Stack Development', color: '#00FF7F', icon: '🌐', category: 'Development', level: 95, description: 'Proficient in both frontend and backend development.' },
@@ -37,19 +46,17 @@ const EnhancedSkillsAnimation = () => {
     { name: 'Automated Testing', color: '#00FFFF', icon: '🤖', category: 'Testing', level: 82, description: 'Skilled in automated testing frameworks.' },
     { name: 'GitHub', color: '#2E8B57', icon: '🐙', category: 'Tool', level: 90, description: 'Experience with GitHub for version control.' }
   ], []);
-
-  const [activeSkills, setActiveSkills] = useState([]);
-  const [animationPhase, setAnimationPhase] = useState('loading');
-  const [hoveredSkill, setHoveredSkill] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('name');
-  const [error, setError] = useState(null);
-  const [selectedSkill, setSelectedSkill] = useState(null);
-
+  const [activeSkills, setActiveSkills] = useState<number[]>([]);
+  const [animationPhase, setAnimationPhase] = useState<string>('loading');
+  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [sortOption, setSortOption] = useState<string>('name');
+  const [error, setError] = useState<string | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
   const categories = useMemo(() => {
     try {
-      return ['all', ...new Set(skills.map(skill => skill.category))];
+      return ['all', ...Array.from(new Set(skills.map(skill => skill.category)))];
     } catch (err) {
       console.error(err);
       return ['all'];
@@ -81,7 +88,7 @@ const EnhancedSkillsAnimation = () => {
       setActiveSkills([]);
 
       for (let i = 0; i < filteredSkills.length; i++) {
-        await new Promise(resolve => {
+        await new Promise<void>(resolve => {
           setTimeout(() => {
             setActiveSkills(prev => {
               if (prev.includes(i)) return prev;
@@ -99,7 +106,8 @@ const EnhancedSkillsAnimation = () => {
       setAnimationPhase('resetting');
       setTimeout(() => animateSkills(), 1000);
     } catch (err) {
-      setError('Animation failed: ' + err.message);
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setError('Animation failed: ' + errorMessage);
       console.error('Animation error:', err);
     }
   }, [filteredSkills]);
@@ -111,8 +119,7 @@ const EnhancedSkillsAnimation = () => {
 
     return () => clearTimeout(timeoutId);
   }, [animateSkills]);
-
-  const getBrightness = useCallback((hexColor) => {
+  const getBrightness = useCallback((hexColor: string): number => {
     try {
       const color = hexColor.replace('#', '');
       const r = parseInt(color.substr(0, 2), 16);
@@ -176,11 +183,10 @@ const EnhancedSkillsAnimation = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ${
-                  selectedCategory === category
+                className={`px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ${selectedCategory === category
                     ? 'bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg'
                     : 'bg-gray-800 hover:bg-gray-700'
-                }`}
+                  }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
@@ -200,12 +206,11 @@ const EnhancedSkillsAnimation = () => {
         </div>
 
         <div className="mb-6 flex items-center gap-2">
-          <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-            animationPhase === 'loading' ? 'bg-yellow-400 animate-pulse' :
-            animationPhase === 'showing' ? 'bg-green-400' :
-            animationPhase === 'floating' ? 'bg-emerald-400 animate-bounce' :
-            'bg-teal-400'
-          }`}></div>
+          <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${animationPhase === 'loading' ? 'bg-yellow-400 animate-pulse' :
+              animationPhase === 'showing' ? 'bg-green-400' :
+                animationPhase === 'floating' ? 'bg-emerald-400 animate-bounce' :
+                  'bg-teal-400'
+            }`}></div>
           <span className="text-sm text-gray-400 capitalize">{animationPhase}</span>
         </div>
 
@@ -214,9 +219,8 @@ const EnhancedSkillsAnimation = () => {
             {filteredSkills.map((skill, index) => (
               <div
                 key={`${skill.name}-${index}`}
-                className={`transform transition-all duration-700 ease-out cursor-pointer ${
-                  activeSkills.includes(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                } ${animationPhase === 'floating' ? 'hover:scale-110' : ''}`}
+                className={`transform transition-all duration-700 ease-out cursor-pointer ${activeSkills.includes(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                  } ${animationPhase === 'floating' ? 'hover:scale-110' : ''}`}
                 style={{
                   animationDelay: `${index * 0.1}s`,
                   transform: animationPhase === 'floating'
@@ -238,10 +242,10 @@ const EnhancedSkillsAnimation = () => {
                   }}
                 >
                   <div className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-full"
-                       style={{
-                         backgroundColor: `${skill.color}33`,
-                         color: skill.color
-                       }}>
+                    style={{
+                      backgroundColor: `${skill.color}33`,
+                      color: skill.color
+                    }}>
                     {skill.level}%
                   </div>
 
@@ -330,19 +334,17 @@ const EnhancedSkillsAnimation = () => {
                 </div>
                 <p className="text-gray-300 mb-2">{selectedSkill.description}</p>
                 <div className="text-sm font-bold px-2 py-1 rounded-full mt-2"
-                     style={{
-                       backgroundColor: `${selectedSkill.color}33`,
-                       color: selectedSkill.color
-                     }}>
+                  style={{
+                    backgroundColor: `${selectedSkill.color}33`,
+                    color: selectedSkill.color
+                  }}>
                   Level: {selectedSkill.level}%
                 </div>
               </div>
             </div>
           </div>
         )}
-      </div>
-
-      <style jsx>{`
+      </div>      <style>{`
         @keyframes enhancedFloat {
           0%, 100% {
             transform: translate(0, 0) rotate(0deg) scale(1);

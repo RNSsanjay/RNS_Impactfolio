@@ -19,6 +19,8 @@ const SkillsShowcase: React.FC = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [sparkles, setSparkles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,18 +30,45 @@ const SkillsShowcase: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Mouse tracking for sparkle effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+
+      // Add sparkles at mouse position with probability
+      if (Math.random() < 0.3) {
+        const newSparkle = {
+          id: Date.now() + Math.random(),
+          x: e.clientX,
+          y: e.clientY,
+          delay: Math.random() * 0.5
+        };
+
+        setSparkles(prev => [...prev.slice(-20), newSparkle]);
+
+        // Remove sparkle after animation
+        setTimeout(() => {
+          setSparkles(prev => prev.filter(s => s.id !== newSparkle.id));
+        }, 2000);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const skillsData: SkillCategory[] = [
     {
       title: "Soft Skills",
       icon: <Users className="w-8 h-8" />,
       color: "from-emerald-400 to-teal-500",
       skills: [
-        { name: "Leadership", level: 90 },
-        { name: "Communication", level: 95 },
+        { name: "Leadership", level: 80 },
+        { name: "Communication", level: 60 },
         { name: "Problem Solving", level: 88 },
         { name: "Team Collaboration", level: 92 },
-        { name: "Adaptability", level: 87 },
-        { name: "Critical Thinking", level: 89 }
+        { name: "Adaptability", level: 90 },
+        { name: "Critical Thinking", level: 75 }
       ]
     },
     {
@@ -47,12 +76,17 @@ const SkillsShowcase: React.FC = () => {
       icon: <Code className="w-8 h-8" />,
       color: "from-green-400 to-emerald-500",
       skills: [
+        { name: "Agentic AI [ N8N , Langchain , Langgraph , Crew AI , AutoGen , etc ..]", level: 90 },
+        { name: "Gen AI", level: 92 },
+        { name: "AI & ML", level: 88 },
         { name: "JavaScript/TypeScript", level: 94 },
         { name: "React/Next.js", level: 91 },
-        { name: "Python", level: 86 },
+        { name: "Python [ Django, Flask , Fast API , Streamlit ,etc.. ]", level: 86 },
         { name: "Node.js", level: 88 },
-        { name: "Database Management", level: 83 },
-        { name: "Cloud Computing", level: 80 }
+        { name: "Database Management [Mongo DB , MySQL , SQL , etc ..]", level: 83 },
+        { name: "Proompt Engineering", level: 95 },
+        { name: "Software Testing [ Manual Testing , Automated Testing ]", level: 85 }
+
       ]
     },
     {
@@ -106,29 +140,144 @@ const SkillsShowcase: React.FC = () => {
     </div>
   );
 
+  // Enhanced Sparkle System - matching About page
+  const SparkleEffect = () => (
+    <>
+      {/* Custom cursor */}
+      <motion.div
+        className="fixed w-4 h-4 pointer-events-none z-50 mix-blend-difference"
+        style={{
+          left: mousePosition.x - 8,
+          top: mousePosition.y - 8,
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      >
+        <Star className="w-4 h-4 text-green-400 fill-current" />
+      </motion.div>
+
+      {/* Mouse-following glow */}
+      <motion.div
+        className="fixed w-32 h-32 pointer-events-none z-40 rounded-full"
+        style={{
+          left: mousePosition.x - 64,
+          top: mousePosition.y - 64,
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%)',
+          filter: 'blur(20px)',
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      {/* Dynamic sparkles following mouse */}
+      {sparkles.map((sparkle) => (
+        <motion.div
+          key={sparkle.id}
+          className="fixed pointer-events-none z-40"
+          style={{
+            left: sparkle.x - 6,
+            top: sparkle.y - 6,
+          }}
+          initial={{
+            scale: 0,
+            opacity: 0,
+            rotate: 0
+          }}
+          animate={{
+            scale: [0, 1.5, 0],
+            opacity: [0, 1, 0],
+            rotate: [0, 180, 360],
+            y: [0, -30, -60],
+            x: [0, Math.random() * 20 - 10, Math.random() * 40 - 20]
+          }}
+          transition={{
+            duration: 2,
+            delay: sparkle.delay,
+            ease: "easeOut"
+          }}
+        >
+          <Star className="w-3 h-3 text-green-300 fill-current" />
+        </motion.div>
+      ))}
+    </>
+  );
+
   const SkillBar: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) => (
     <motion.div
-      className="mb-4 transform transition-all duration-500 hover:scale-105"
+      className="mb-4 transform transition-all duration-500 hover:scale-105 group relative"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1 }}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{
+        scale: 1.02,
+        filter: "drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3))"
+      }}
+      onHoverStart={() => {
+        // Add extra sparkles on hover
+        const rect = document.elementFromPoint(mousePosition.x, mousePosition.y)?.getBoundingClientRect();
+        if (rect) {
+          for (let i = 0; i < 3; i++) {
+            const newSparkle = {
+              id: Date.now() + Math.random() + i,
+              x: mousePosition.x + (Math.random() - 0.5) * 100,
+              y: mousePosition.y + (Math.random() - 0.5) * 100,
+              delay: i * 0.1
+            };
+
+            setSparkles(prev => [...prev.slice(-20), newSparkle]);
+            setTimeout(() => {
+              setSparkles(prev => prev.filter(s => s.id !== newSparkle.id));
+            }, 2000);
+          }
+        }
+      }}
     >
       <div className="flex justify-between items-center mb-2">
-        <span className="text-green-200 font-medium text-sm">{skill.name}</span>
-        <span className="text-green-300 font-bold text-sm">{skill.level}%</span>
+        <span className="text-green-200 font-medium text-sm group-hover:text-green-100 transition-colors">
+          {skill.name}
+        </span>
+        <span className="text-green-300 font-bold text-sm group-hover:text-green-200 transition-colors">
+          {skill.level}%
+        </span>
       </div>
-      <div className="w-full bg-gray-800/60 rounded-full h-3 overflow-hidden shadow-inner border border-green-500/20">
+      <div className="w-full bg-gray-800/60 rounded-full h-3 overflow-hidden shadow-inner border border-green-500/20 group-hover:border-green-400/40 transition-colors">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: isVisible ? `${skill.level}%` : '0%' }}
           transition={{ duration: 1, delay: index * 0.2, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full relative overflow-hidden"
+          className="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full relative overflow-hidden group-hover:from-green-300 group-hover:to-emerald-400 transition-colors"
         >
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
             animate={{ x: [-100, 100] }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+          {/* Extra glow effect on hover */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-green-300 to-emerald-300 opacity-0 group-hover:opacity-50 transition-opacity duration-300"
+            animate={{
+              opacity: [0, 0.5, 0],
+              scale: [1, 1.05, 1]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
           />
         </motion.div>
       </div>
@@ -136,7 +285,10 @@ const SkillsShowcase: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden cursor-none">
+      {/* Mouse-following sparkle system */}
+      <SparkleEffect />
+
       {/* Animated Background - matching About page */}
       <motion.div
         className="absolute inset-0 bg-green-900 opacity-30"
@@ -261,8 +413,8 @@ const SkillsShowcase: React.FC = () => {
               key={index}
               onClick={() => setActiveSection(index)}
               className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 ${activeSection === index
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transform scale-105'
-                  : 'text-green-300 hover:bg-green-500/20 hover:text-white'
+                ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transform scale-105'
+                : 'text-green-300 hover:bg-green-500/20 hover:text-white'
                 }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -376,7 +528,7 @@ const SkillsShowcase: React.FC = () => {
       </div>
 
       {/* Custom styles */}
-      <style jsx>{`
+      <style>{`
         .bg-grid-pattern {
           background-image: 
             linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
