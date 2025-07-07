@@ -12,6 +12,7 @@ import Certificate from './components/Certificates';
 import About from './components/About';
 import Chatbot from './components/Chatbot';
 import Skillanime from './components/Skillsanime';
+import Experience from './components/Experience';
 import './index.css';
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/internship" element={<Internship />} />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/skillsanime" element={<Skillanime />} />
+        <Route path="/experience" element={<Experience />} />
       </Routes>
       <Footer />
     </Router>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle, Clock, Calendar, Zap, ArrowRight } from 'lucide-react';
+import { CheckCircle, Clock, Calendar, Zap, ArrowRight, ExternalLink } from 'lucide-react';
 import project1 from '../assets/djSong.png';
 import project2 from '../assets/pm.png';
 import project3 from '../assets/syn.png';
@@ -16,6 +16,7 @@ const ProjectPresentation = () => {
       "purpose": "DJ Maker",
       "description": "A creative audio mixing platform where users can produce, remix, and manage music like a pro DJ. Designed with real-time audio controls, custom beat patterns, and live preview features.",
       "imageUrl": project1,
+      "detailsUrl": "https://github.com/RNSsanjay/DJ-Maker-Studio",
       "status": "Completed",
       "timeline": "Q1 2024",
       "progress": 100
@@ -26,9 +27,10 @@ const ProjectPresentation = () => {
       "purpose": "Product Manager Application",
       "description": "A smart dashboard for product managers to handle project lifecycles, feature tracking, team collaboration, and sprint analytics with real-time updates and visual roadmaps.",
       "imageUrl": project2,
-      "status": "In Progress",
+      "detailsUrl": "https://github.com/RNSsanjay/Product-Manager-Suite",
+      "status": "Completed",
       "timeline": "Q2 2024",
-      "progress": 90
+      "progress": 100
     },
     {
       "id": 3,
@@ -36,9 +38,10 @@ const ProjectPresentation = () => {
       "purpose": "Synthetic Data Generator",
       "description": "A synthetic data generation engine that creates realistic and privacy-safe datasets for AI/ML model training, especially for edge cases in healthcare, finance, and autonomous systems.",
       "imageUrl": project3,
-      "status": "Planning",
+      "detailsUrl": "https://github.com/RNSsanjay/SynData-Forge",
+      "status": "Completed",
       "timeline": "Q3 2024",
-      "progress": 88
+      "progress": 100
     },
     {
       "id": 4,
@@ -46,9 +49,10 @@ const ProjectPresentation = () => {
       "purpose": "Assessment Engine",
       "description": "An AI-powered assessment platform for generating, delivering, and evaluating technical tests with smart feedback, performance tracking, and question-level analytics.",
       "imageUrl": project4,
-      "status": "Future",
+      "detailsUrl": "https://github.com/RNSsanjay/AssessEngine-Pro",
+      "status": "In Progress",
       "timeline": "Q4 2024",
-      "progress": 90
+      "progress": 75
     }
   ]; useEffect(() => {
     const observer = new IntersectionObserver(
@@ -266,15 +270,22 @@ const ProjectPresentation = () => {
 
                           <p className="text-gray-300 leading-relaxed mb-6">
                             {project.description}
-                          </p>
-
-                          <div className="flex gap-4">
-                            <button className="flex-1 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-semibold hover:from-green-500 hover:to-emerald-500 transition-all duration-200 shadow-lg shadow-green-500/20 flex items-center justify-center group">
-                              <span>View Details</span>
-                              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </button>
-                            <button className="flex-1 py-3 border border-green-500/30 text-green-400 rounded-lg font-semibold hover:bg-green-900/20 hover:border-green-500/50 transition-all duration-200">
-                              Live Demo
+                          </p>                          <div className="flex gap-4">                            <a
+                            href={`mailto:sanjay.n.aiml.2022@snsct.org?subject=GitHub%20Link%20Request%20for%20${encodeURIComponent(project.name)}&body=Hi%20Sanjay%2C%0A%0AI%20am%20interested%20in%20viewing%20the%20GitHub%20repository%20for%20the%20project%20%22${encodeURIComponent(project.name)}%22%20that%20I%20found%20on%20your%20portfolio.%0A%0AProject%20Details%3A%0A-%20Name%3A%20${encodeURIComponent(project.name)}%0A-%20Purpose%3A%20${encodeURIComponent(project.purpose)}%0A-%20Status%3A%20${encodeURIComponent(project.status)}%0A-%20Timeline%3A%20${encodeURIComponent(project.timeline)}%0A%0ACould%20you%20please%20provide%20me%20with%20the%20GitHub%20link%20for%20this%20project%3F%20I%20would%20love%20to%20explore%20the%20code%20and%20learn%20more%20about%20your%20implementation.%0A%0AThank%20you%20for%20your%20time%21%0A%0ABest%20regards`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-semibold hover:from-green-500 hover:to-emerald-500 transition-all duration-200 shadow-lg shadow-green-500/20 flex items-center justify-center group text-center no-underline"
+                          >
+                            <span>Contact for GitHub</span>
+                            <ExternalLink className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform" />
+                          </a><button
+                            disabled
+                            className="flex-1 py-3 border border-gray-600/30 text-gray-500 rounded-lg font-semibold cursor-not-allowed opacity-50 transition-all duration-200 relative overflow-hidden flex items-center justify-center"
+                            title="Demo coming soon"
+                          >
+                              <span className="relative z-10">Demo</span>
+                              <div className="absolute inset-0 bg-gradient-to-r from-gray-700/10 to-gray-600/10"></div>
+                              <Clock className="w-4 h-4 ml-2 opacity-60" />
                             </button>
                           </div>
                         </div>
