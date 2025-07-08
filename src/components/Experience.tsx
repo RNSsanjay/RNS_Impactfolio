@@ -4,6 +4,7 @@ import {
     TrendingUp, ChevronRight, ExternalLink, Briefcase,
     Trophy, Target, Zap, Coffee, Heart, Globe
 } from 'lucide-react';
+import { useHref } from 'react-router-dom';
 
 const InternshipExperience = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -52,111 +53,111 @@ const InternshipExperience = () => {
     }, []);
 
     const internships = [
-        {
-            id: 1,
-            title: "Full Stack Development Intern",
-            company: "TechVision Labs",
-            duration: "6 months",
-            period: "Jan 2024 - Jun 2024",
-            location: "San Francisco, CA",
-            description: "Developed responsive web applications using modern frameworks and contributed to microservices architecture.",
-            skills: ["React", "Node.js", "MongoDB", "Docker", "AWS"],
-            achievements: [
-                "Built 5 production-ready features",
-                "Reduced API response time by 40%",
-                "Collaborated with 12-member team",
-                "Mentored 3 junior interns"
-            ],
-            projects: [
-                { name: "E-commerce Dashboard", tech: "React + Redux" },
-                { name: "Real-time Chat System", tech: "Socket.io + Node.js" },
-                { name: "Payment Integration", tech: "Stripe API" }
-            ],
-            rating: 4.9,
-            recommendation: "Outstanding performance and exceptional problem-solving skills.",
-            color: "from-emerald-500 to-green-600"
-        },
-        {
-            id: 2,
-            title: "Frontend Development Intern",
-            company: "Digital Innovations Hub",
-            duration: "4 months",
-            period: "Sep 2023 - Dec 2023",
-            location: "New York, NY",
-            description: "Specialized in creating interactive user interfaces and optimizing web performance for high-traffic applications.",
-            skills: ["Vue.js", "TypeScript", "Tailwind CSS", "Figma", "Jest"],
-            achievements: [
-                "Improved UI performance by 60%",
-                "Created 25+ reusable components",
-                "Increased user engagement by 45%",
-                "Led 2 design sprint sessions"
-            ],
-            projects: [
-                { name: "Component Library", tech: "Vue.js + Storybook" },
-                { name: "Analytics Dashboard", tech: "Chart.js + Vue" },
-                { name: "Mobile App UI", tech: "React Native" }
-            ],
-            rating: 4.8,
-            recommendation: "Exceptional design sense and technical expertise.",
-            color: "from-green-500 to-emerald-600"
-        },
-        {
-            id: 3,
-            title: "Backend Development Intern",
-            company: "CloudScale Solutions",
-            duration: "5 months",
-            period: "Mar 2023 - Jul 2023",
-            location: "Austin, TX",
-            description: "Focused on server-side development, database optimization, and API design for scalable cloud applications.",
-            skills: ["Python", "Django", "PostgreSQL", "Redis", "Kubernetes"],
-            achievements: [
-                "Optimized database queries by 70%",
-                "Built 15+ REST APIs",
-                "Reduced server costs by 30%",
-                "Automated deployment pipeline"
-            ],
-            projects: [
-                { name: "Microservices Architecture", tech: "Python + Docker" },
-                { name: "Data Pipeline", tech: "Apache Kafka" },
-                { name: "API Gateway", tech: "Kong + Nginx" }
-            ],
-            rating: 4.7,
-            recommendation: "Strong technical foundation and innovative approach.",
-            color: "from-green-600 to-emerald-700"
-        },
-        {
-            id: 4,
-            title: "DevOps Intern",
-            company: "InfraCloud Systems",
-            duration: "3 months",
-            period: "Nov 2022 - Jan 2023",
-            location: "Seattle, WA",
-            description: "Worked on CI/CD pipelines, infrastructure automation, and cloud deployment strategies.",
-            skills: ["Docker", "Jenkins", "Terraform", "AWS", "Ansible"],
-            achievements: [
-                "Automated 80% of deployment tasks",
-                "Reduced deployment time by 65%",
-                "Improved system reliability to 99.9%",
-                "Created monitoring dashboards"
-            ],
-            projects: [
-                { name: "CI/CD Pipeline", tech: "Jenkins + Docker" },
-                { name: "Infrastructure as Code", tech: "Terraform + AWS" },
-                { name: "Monitoring System", tech: "Prometheus + Grafana" }
-            ],
-            rating: 4.6,
-            recommendation: "Excellent understanding of DevOps practices.",
-            color: "from-emerald-600 to-green-700"
-        }
-    ];
-
-    const stats = [
-        { icon: <Briefcase className="w-6 h-6" />, value: "4", label: "Internships", color: "text-emerald-400" },
-        { icon: <Calendar className="w-6 h-6" />, value: "18", label: "Months", color: "text-green-400" },
-        { icon: <Code className="w-6 h-6" />, value: "25+", label: "Projects", color: "text-emerald-400" },
-        { icon: <Trophy className="w-6 h-6" />, value: "4.8", label: "Avg Rating", color: "text-green-400" },
-        { icon: <Users className="w-6 h-6" />, value: "50+", label: "Colleagues", color: "text-emerald-400" },
-        { icon: <Award className="w-6 h-6" />, value: "15+", label: "Skills", color: "text-green-400" }
+    {
+        id: 1,
+        title: "Full Stack Developer, Business Analyst & Tester Intern",
+        company: "SNS Innovation Hub",
+        duration: "10 months",
+        period: "2024 - 2025",
+        location: "Coimbatore, Tamil Nadu (Offline)",
+        description: "Worked across development, analysis, and testing for multiple in-house and client-based applications using full-stack technologies and modern testing frameworks.",
+        skills: [
+            "React", "Next.js", "Node.js", "MongoDB", "SQL",
+            "Python", "Django", "Flask", "FastAPI",
+            "Figma", "Postman", "Jira", "React Frameworks", "Styled Components", "Tailwind CSS"
+        ],
+        achievements: [
+            "Built and tested 6+ scalable modules for client projects",
+            "Led business analysis sessions and documented 50+ user stories",
+            "Created backend services with Django, FastAPI and Flask",
+            "Integrated end-to-end APIs with MongoDB and SQL",
+            "Developed dashboards and dynamic UIs with React + Next.js",
+            "Implemented test cases with Postman & Jira-based bug tracking"
+        ],
+        projects: [
+            { name: "Startup CRM Platform", tech: "React + Next.js + MongoDB" },
+            { name: "Business Workflow Manager", tech: "Python (Django + FastAPI)" },
+            { name: "QA Automation Suite", tech: "Postman + Jira Integration" }
+        ],
+        rating: 4.9,
+        recommendation: "Outstanding multidisciplinary performance — coding, analysis, and testing under tight schedules.",
+        color: "from-green-500 to-emerald-600"
+    },
+    {
+        id: 2,
+        title: "FarmDay Portfolio Application Developer",
+        company: "Landberg Private Limited",
+        duration: "1 month",
+        period: "2023 - 2024",
+        location: "Remote",
+        description: "Designed and built a product portfolio website for the FarmDay agro-based brand using modern web design tools and front-end libraries.",
+        skills: ["React", "HTML", "CSS", "JavaScript"],
+        achievements: [
+            "Completed branding website with 4 responsive sections",
+            "Delivered pixel-perfect UI from Figma to code",
+            "Used React hooks for interactivity and state control",
+            "Optimized performance and animations using React best practices"
+        ],
+        projects: [
+            { name: "FarmDay Portfolio Site", tech: "React + HTML + CSS + JS" }
+        ],
+        rating: 4.7,
+        recommendation: "Great visual design implementation and quick turnaround for production-ready delivery.",
+        color: "from-emerald-500 to-green-600"
+    },
+    {
+        id: 3,
+        title: "Android App Developer Intern",
+        company: "Fusion Frames",
+        duration: "1 month",
+        period: "2023",
+        location: "Chennai, Tamil Nadu (Offline)",
+        description: "Worked on core Android modules using Java for client application; integrated real-time database and login system.",
+        skills: ["Java", "XML", "Android Studio", "Firebase", "SQLite"],
+        achievements: [
+            "Developed dynamic screens with Firebase backend",
+            "Created smooth navigation and authentication",
+            "Worked on UI bug-fixing and form validations",
+            "Completed MVP flow with user data persistence"
+        ],
+        projects: [
+            { name: "Customer Service App", tech: "Android Studio (Java)" }
+        ],
+        rating: 4.6,
+        recommendation: "Strong understanding of mobile flow and data management within Android ecosystem.",
+        color: "from-green-600 to-emerald-700"
+    },
+    {
+        id: 4,
+        title: "Web Development Intern",
+        company: "Cognifyz Technology",
+        duration: "3 months",
+        period: "2022 - 2023",
+        location: "Remote",
+        description: "Created responsive web interfaces using basic frontend tools. Focused on fixing bugs and supporting new landing page designs.",
+        skills: ["HTML", "CSS", "Bootstrap", "JavaScript", "Git"],
+        achievements: [
+            "Fixed over 25+ UI issues with responsive design",
+            "Contributed to 3 web templates used in deployment",
+            "Coordinated using GitHub and followed agile tickets",
+            "Improved layout rendering in mobile and tablet viewports"
+        ],
+        projects: [
+            { name: "Landing Page UI", tech: "HTML + Bootstrap" },
+            { name: "Responsive Portfolio Template", tech: "HTML + CSS + JS" }
+        ],
+        rating: 4.5,
+        recommendation: "Quick at learning and applying fundamentals with good UI sense.",
+        color: "from-emerald-600 to-green-700"
+    }
+];
+ const stats = [
+        { icon: <Briefcase className="w-6 h-6" />, value: "4+", label: "Internships", color: "text-emerald-400" },
+        { icon: <Calendar className="w-6 h-6" />, value: "18+", label: "Months Experience", color: "text-green-400" },
+        { icon: <Code className="w-6 h-6" />, value: "30+", label: "Projects Built", color: "text-emerald-400" },
+        { icon: <Trophy className="w-6 h-6" />, value: "4.8/5", label: "Performance Rating", color: "text-green-400" },
+        { icon: <Users className="w-6 h-6" />, value: "60+", label: "Team Members", color: "text-emerald-400" },
+        { icon: <Award className="w-6 h-6" />, value: "20+", label: "Technologies", color: "text-green-400" }
     ];
 
     const floatingElements = Array.from({ length: 20 }, (_, i) => ({
@@ -250,21 +251,20 @@ const InternshipExperience = () => {
 
                     <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 animate-fade-in-up px-4">
                         A comprehensive roadmap of my professional growth through diverse internship experiences
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up">
-                        <button className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 w-full sm:w-auto">
+                    </p>                    <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up">
+                        <button
+                            onClick={() => {
+                                const timelineSection = document.getElementById('timeline-section');
+                                timelineSection?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 w-full sm:w-auto"
+                        >
                             <span className="flex items-center justify-center">
                                 Explore Journey
                                 <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                             </span>
                         </button>
-                        <button className="group border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-400/25 w-full sm:w-auto">
-                            <span className="flex items-center justify-center">
-                                <Globe className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                                View Portfolio
-                            </span>
-                        </button>
+                        
                     </div>
                 </div>
             </div>
@@ -290,65 +290,12 @@ const InternshipExperience = () => {
                         </div>
                     ))}
                 </div>
-            </div>
-
-            {/* Curved Road Timeline */}
-            <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+            </div>            {/* Curved Road Timeline */}
+            <div id="timeline-section" className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 sm:mb-20 bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent px-4">
                     Professional Timeline
-                </h2>
-
-                <div className="relative">
-                    {/* SVG Curved Path */}
-                    <svg
-                        className="absolute inset-0 w-full h-full pointer-events-none"
-                        style={{ height: `${internships.length * (isMobile ? 300 : isTablet ? 220 : 250) + 100}px` }}
-                    >
-                        <defs>
-                            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#10b981" stopOpacity="0.8" />
-                                <stop offset="50%" stopColor="#059669" stopOpacity="0.6" />
-                                <stop offset="100%" stopColor="#047857" stopOpacity="0.4" />
-                            </linearGradient>
-                            <filter id="glow">
-                                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
-
-                        {internships.map((_, index) => (
-                            <g key={index}>
-                                <path
-                                    d={renderCurvedPath(index, internships.length, isMobile)}
-                                    stroke="url(#pathGradient)"
-                                    strokeWidth={isMobile ? "2" : "3"}
-                                    fill="none"
-                                    filter="url(#glow)"
-                                    className="animate-draw-path"
-                                    style={{ animationDelay: `${index * 0.5}s` }}
-                                />
-
-                                {/* Animated Dots */}
-                                <circle
-                                    cx={isMobile ? 50 : (index % 2 === 0 ? 75 : 25)}
-                                    cy={20 + (index * (isMobile ? 300 : isTablet ? 220 : 250)) + (isMobile ? 200 : 180)}
-                                    r={isMobile ? "6" : "8"}
-                                    fill="#10b981"
-                                    className="animate-pulse"
-                                >
-                                    <animate
-                                        attributeName="r"
-                                        values={isMobile ? "6;10;6" : "8;12;8"}
-                                        dur="2s"
-                                        repeatCount="indefinite"
-                                    />
-                                </circle>
-                            </g>
-                        ))}
-                    </svg>
+                </h2>                <div className="relative">
+                    
 
                     {/* Internship Cards */}
                     <div className={`relative ${isMobile ? 'space-y-20' : 'space-y-32 sm:space-y-40'}`}>
@@ -496,18 +443,13 @@ const InternshipExperience = () => {
                     </div>
 
                     <div className="flex justify-center space-x-6">
-                        <button className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25">
-                            <span className="flex items-center">
-                                <TrendingUp className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                                Get In Touch
-                            </span>
-                        </button>
-                        <button className="group border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-black px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-400/25">
+                       
+                        <a href='/contact'><button className="group border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-black px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-400/25">
                             <span className="flex items-center">
                                 <Award className="w-5 h-5 mr-2 group-hover:bounce transition-transform" />
-                                Download CV
+                               Contact Me
                             </span>
-                        </button>
+                        </button></a>
                     </div>        </div>
             </footer>      {/* Custom Styles */}
             <style>{`
