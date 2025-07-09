@@ -151,32 +151,141 @@ export const profileData = {
                 "Successfully tested at 5 major intersections"
             ]
         }
-    ],
-    certificates: [
+    ], certificates: [
         {
-            title: "Deep Learning Specialization",
-            issuer: "Coursera",
-            date: "2023",
-            credential: "ABC123XYZ",
-            skills: ["Neural Networks", "CNN", "RNN", "Transformers"],
-            description: "Comprehensive specialization covering deep learning fundamentals and advanced concepts",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQIQF98vcpc2CzHFxx8ERq7uL-RJymfedNQX5FAMZgKhs_wXT-qAlZ5G3G_6pWU7R7sZU&usqp=CAU",
+            title: "Software Testing Foundation",
+            issuer: "LinkedIn Learning",
+            date: "2024",
+            credential: "STF-2024-001",
+            skills: ["Software Testing", "Quality Assurance", "Test Planning", "Bug Tracking"],
+            description: "Comprehensive foundation course covering software testing principles, methodologies, and best practices for quality assurance.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_certificate-of-completion-activity-7344258175002427392-cNq4"
         },
         {
-            title: "AWS Machine Learning",
-            issuer: "Amazon Web Services",
-            date: "2023",
-            credential: "ML900XYZ",
-            skills: ["SageMaker", "AWS Lambda", "S3", "CloudWatch"],
-            description: "Professional certification for machine learning on AWS platform"
+            title: "Postman API Student Expert",
+            issuer: "Postman",
+            date: "2024",
+            credential: "PASE-2024-001",
+            skills: ["API Testing", "Postman", "REST APIs", "API Documentation"],
+            description: "Expert certification in API testing and documentation using Postman, covering advanced API testing techniques and automation.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_postman-student-expert-certification-on-api-activity-7341501702274981888-GMl6"
         },
         {
-            title: "TensorFlow Developer Certificate",
-            issuer: "Google",
+            title: "Introduction to Internet of Things (IoT)",
+            issuer: "NPTEL",
+            date: "2024",
+            credential: "NPTEL-IOT-81",
+            skills: ["IoT", "Sensors", "Embedded Systems", "Cloud Computing"],
+            description: "Comprehensive IoT course with 81% marks covering IoT fundamentals, sensor networks, and cloud integration.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_introduction-to-internet-of-things-iot-activity-7331693920898232322-Y5vK"
+        },
+        {
+            title: "Agentforce Specialist",
+            issuer: "Salesforce",
+            date: "2024",
+            credential: "SF-AGENT-2024",
+            skills: ["Salesforce", "AI Agents", "Automation", "CRM"],
+            description: "Specialist certification in Salesforce Agentforce, focusing on AI-powered automation and customer service solutions.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_just-got-certified-as-an-agent-force-specialist-activity-7321204645337432064-tpjW"
+        },
+        {
+            title: "AI Associate",
+            issuer: "Salesforce",
+            date: "2024",
+            credential: "SF-AI-2024",
+            skills: ["Artificial Intelligence", "Salesforce AI", "Machine Learning", "Data Analytics"],
+            description: "Associate level certification in Salesforce AI, covering AI fundamentals and implementation within Salesforce ecosystem.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_salesforce-ai-associate-certification-activity-7317118340789870593-dl-l"
+        },
+        {
+            title: "Project Management Foundation",
+            issuer: "LinkedIn Learning",
+            date: "2024",
+            credential: "PMF-2024-001",
+            skills: ["Project Management", "Agile", "Scrum", "Team Leadership"],
+            description: "Foundation course in project management principles, methodologies, and best practices for successful project delivery.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_certificate-of-completion-activity-7310558010764861440-82eL"
+        },
+        {
+            title: "Advanced JMeter",
+            issuer: "LinkedIn Learning",
+            date: "2024",
+            credential: "AJM-2024-001",
+            skills: ["JMeter", "Performance Testing", "Load Testing", "Test Automation"],
+            description: "Advanced course in JMeter for performance testing, load testing, and automated testing scenarios.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_completed-advanced-jmeter-course-activity-7298532960494923776-xw9v"
+        },
+        {
+            title: "Data Engineering Basics",
+            issuer: "Databricks",
+            date: "2024",
+            credential: "DB-DE-2024",
+            skills: ["Data Engineering", "Apache Spark", "ETL", "Big Data"],
+            description: "Comprehensive course covering data engineering fundamentals using Databricks platform and Apache Spark.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_completed-data-engineering-base-course-activity-7247620244154818560-xB0o"
+        },
+        {
+            title: "Communication Skills",
+            issuer: "TCS iON",
+            date: "2024",
+            credential: "TCS-CS-2024",
+            skills: ["Communication", "Presentation", "Public Speaking", "Professional Skills"],
+            description: "Professional communication skills course focusing on effective workplace communication and presentation skills.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_completed-communication-skills-at-tcs-ion-activity-7233780328346099713-K0CA"
+        },
+        {
+            title: "SQL Advanced",
+            issuer: "HackerRank",
+            date: "2024",
+            credential: "HR-SQL-ADV-2024",
+            skills: ["SQL", "Database Management", "Query Optimization", "Data Analysis"],
+            description: "Advanced SQL certification covering complex queries, optimization techniques, and database management.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_completed-sql-advanced-at-hacker-rank-activity-7215382171069349891-kiX5"
+        },
+        {
+            title: "Web Development Internship",
+            issuer: "Cognifyz Technologies",
+            date: "2024",
+            credential: "CG-WD-2024",
+            skills: ["Web Development", "HTML", "CSS", "JavaScript", "React"],
+            description: "Comprehensive web development internship completion certificate covering full-stack development technologies.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_web-development-internship-at-cognifyz-activity-7215374038871728128-QfO1"
+        },
+        {
+            title: "Machine Learning Internship",
+            issuer: "Cognifyz Technologies",
+            date: "2024",
+            credential: "CG-ML-2024",
+            skills: ["Machine Learning", "Python", "Data Science", "AI Models"],
+            description: "Machine learning internship completion certificate with hands-on experience in ML algorithms and AI model development.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_machine-learning-internship-at-cognifyz-activity-7215373516378886144-0tcp"
+        },
+        {
+            title: "Android Development Internship",
+            issuer: "Cognifyz Technologies",
+            date: "2024",
+            credential: "CG-AD-2024",
+            skills: ["Android Development", "Java", "Kotlin", "Mobile Apps"],
+            description: "Android development internship completion certificate covering mobile app development and Android framework.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_android-development-internship-completion-activity-7215371905644576768-_Ljm"
+        },
+        {
+            title: "Full Stack Development Program",
+            issuer: "Mindful AI",
+            date: "2024",
+            credential: "MAI-FSD-2024",
+            skills: ["Full Stack Development", "MERN Stack", "DevOps", "Cloud Computing"],
+            description: "Comprehensive full-stack development program covering modern web technologies and deployment strategies.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_completing-the-full-stack-development-program-activity-7215367933399552001-OaHB"
+        },
+        {
+            title: "MBA Certification - Product Management",
+            issuer: "SNS Institutions",
             date: "2023",
-            credential: "TF123456",
-            skills: ["TensorFlow", "Keras", "ML Models", "Data Processing"],
-            description: "Professional certification validating TensorFlow development skills"
+            credential: "SNS-PM-2023",
+            skills: ["Product Management", "Business Strategy", "Market Analysis", "Leadership"],
+            description: "MBA level certification in product management covering strategic planning, market analysis, and product lifecycle management.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_snsinstitutions-snsdesignthinkers-snsdesignthinking-activity-7158023199073460224-Y5O3"
         }
     ],
     testimonials: [
