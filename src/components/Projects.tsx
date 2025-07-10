@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSearch, FiX, FiExternalLink, FiCode, FiInfo, FiFilter, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { Brain, Star, Play, Pause, Volume2, VolumeX, CheckCircle, Clock, Calendar, Zap, ArrowRight, Award, Target, Rocket } from 'lucide-react';
+import { Brain, Star, Play, Pause, Volume2, VolumeX, CheckCircle, Clock, Calendar, Zap, ArrowRight, Award, Target, Rocket, Search, X, ExternalLink, Code, Info, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 import ProjectPresentation from './bestproject';
 
 // Define types for our project data
@@ -728,7 +727,7 @@ const Projects: React.FC = () => {
                 className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full font-medium space-x-2 shadow-lg"
                 onClick={() => setShowFilter(true)}
               >
-                <FiFilter />
+                <Filter />
                 <span>Filter</span>
               </motion.button>
 
@@ -742,7 +741,7 @@ const Projects: React.FC = () => {
                   <option value="title" className="bg-gray-900">Sort by Title</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-green-200">
-                  <FiChevronDown />
+                  <ChevronDown />
                 </div>
               </div>
             </div>
@@ -764,14 +763,14 @@ const Projects: React.FC = () => {
                 value={searchTerm}
               />
               <div className="absolute inset-y-0 left-0 flex items-center pl-6 text-green-400">
-                <FiSearch size={20} />
+                <Search size={20} />
               </div>
               {searchTerm && (
                 <button
                   className="absolute inset-y-0 right-0 flex items-center pr-6 text-green-400"
                   onClick={() => setSearchTerm('')}
                 >
-                  <FiX size={20} />
+                  <X size={20} />
                 </button>
               )}
             </div>
@@ -857,7 +856,7 @@ const Projects: React.FC = () => {
                           className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 transition-colors border border-green-500/30"
                           title="Live Demo"
                         >
-                          <FiExternalLink size={18} />
+                          <ExternalLink size={18} />
                         </motion.a>
                       )}
                       {project.githubUrl && (
@@ -869,7 +868,7 @@ const Projects: React.FC = () => {
                           className="p-2 bg-gray-700/50 text-green-300 rounded-full hover:bg-gray-700 transition-colors border border-gray-600/30"
                           title="View Code"
                         >
-                          <FiCode size={18} />
+                          <Code size={18} />
                         </motion.a>
                       )}
                       <motion.button
@@ -878,7 +877,7 @@ const Projects: React.FC = () => {
                         onClick={() => handleProjectClick(project)}
                         title="More Details"
                       >
-                        <FiInfo size={18} />
+                        <Info size={18} />
                       </motion.button>
                     </div>
                   </div>
@@ -906,7 +905,7 @@ const Projects: React.FC = () => {
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 1, repeat: Infinity }}
                 >
-                  <FiChevronDown />
+                  <ChevronDown />
                 </motion.span>
               </motion.button>
             </motion.div>
@@ -925,7 +924,7 @@ const Projects: React.FC = () => {
                 onClick={scrollToTop}
                 title="Scroll to top"
               >
-                <FiChevronUp size={24} />
+                <ChevronUp size={24} />
               </motion.button>
             )}
           </AnimatePresence>
@@ -953,7 +952,7 @@ const Projects: React.FC = () => {
                     onClick={() => setShowFilter(false)}
                     className="text-green-400 hover:text-green-200 transition-colors"
                   >
-                    <FiX size={24} />
+                    <X size={24} />
                   </button>
                 </div>
 
@@ -968,7 +967,7 @@ const Projects: React.FC = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                         value={searchTerm}
                       />
-                      <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400" />
                     </div>
                   </div>
 
@@ -1051,7 +1050,7 @@ const Projects: React.FC = () => {
                       onClick={closeDetails}
                       className="text-green-400 hover:text-green-200 transition-colors"
                     >
-                      <FiX size={24} />
+                      <X size={24} />
                     </button>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -1119,7 +1118,7 @@ const Projects: React.FC = () => {
                         whileHover={{ scale: 1.05 }}
                         className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg flex items-center justify-center space-x-2 shadow-lg"
                       >
-                        <FiExternalLink />
+                        <ExternalLink />
                         <span>Live Demo</span>
                       </motion.a>
                     )}
@@ -1131,7 +1130,7 @@ const Projects: React.FC = () => {
                         whileHover={{ scale: 1.05 }}
                         className="flex-1 px-4 py-3 bg-gray-700/70 border border-green-500/30 text-green-200 rounded-lg flex items-center justify-center space-x-2"
                       >
-                        <FiCode />
+                        <Code />
                         <span>View Code</span>
                       </motion.a>
                     )}

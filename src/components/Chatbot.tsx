@@ -302,7 +302,7 @@ Feel free to ask me anything! 🚀`,
                 return {
                     response: generateSpecificProjectResponse(project),
                     category: 'specific-project',
-                    tags: ['project', 'detailed', key.split(' ')]
+                    tags: ['project', 'detailed', ...key.split(' ')]
                 };
             }
         }
@@ -453,7 +453,7 @@ ${contact.name} loves connecting with fellow developers, potential employers, an
 
 ${edu.courses ? `📚 **Core Subjects:**\n${edu.courses.map(course => `   • ${course}`).join('\n')}\n` : ''}
 ${edu.achievements ? `🏆 **Academic Achievements:**\n${edu.achievements.map(ach => `   • ${ach}`).join('\n')}\n` : ''}
-${edu.projects ? `🚀 **Academic Projects:**\n${edu.projects.map(proj => `   • ${proj}`).join('\n')}` : ''}`
+${(edu as any).projects ? `🚀 **Academic Projects:**\n${(edu as any).projects.map((proj: string) => `   • ${proj}`).join('\n')}` : ''}`
         ).join('\n\n');
 
         return `🎓 **${profileData.about.name}'s Educational Journey**
@@ -600,13 +600,13 @@ Want to dive deeper into any specific project? 🔍`;
 🏢 **Issuing Authority:** ${cert.issuer}
 📅 **Date Earned:** ${cert.date}
 ${cert.credential ? `🆔 **Credential ID:** ${cert.credential}\n` : ''}
-${cert.verificationUrl ? `🔗 **Verification:** [Verify Certificate](${cert.verificationUrl})\n` : ''}
+${(cert as any).verificationUrl ? `🔗 **Verification:** [Verify Certificate](${(cert as any).verificationUrl})\n` : ''}
 
 📝 **Description:**
 ${cert.description || 'Professional certification validating expertise in the field'}
 
 ${cert.skills ? `🎯 **Skills Validated:**\n${cert.skills.map(skill => `• ${skill}`).join('\n')}\n` : ''}
-${cert.level ? `📊 **Certification Level:** ${cert.level}\n` : ''}
+${(cert as any).level ? `📊 **Certification Level:** ${(cert as any).level}\n` : ''}
 
 ---`
         ).join('\n\n');
@@ -1182,13 +1182,13 @@ GitHub: ${profileData.about.socialLinks?.github}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className={`group max-w-[85%] p-4 rounded-2xl mb-3 relative ${message.type === 'user'
-                    ? 'ml-auto bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white shadow-lg border border-green-500/30'
-                    : message.type === 'system'
-                        ? 'mx-auto bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 text-yellow-100'
-                        : `bg-gradient-to-br ${message.isImportant
-                            ? 'from-blue-900/80 via-gray-800/80 to-gray-700/80 border-blue-500/40'
-                            : 'from-gray-800/80 via-gray-800/60 to-gray-700/80 border-gray-600/40'
-                        } backdrop-blur-sm text-gray-100 shadow-lg border`
+                ? 'ml-auto bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white shadow-lg border border-green-500/30'
+                : message.type === 'system'
+                    ? 'mx-auto bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 text-yellow-100'
+                    : `bg-gradient-to-br ${message.isImportant
+                        ? 'from-blue-900/80 via-gray-800/80 to-gray-700/80 border-blue-500/40'
+                        : 'from-gray-800/80 via-gray-800/60 to-gray-700/80 border-gray-600/40'
+                    } backdrop-blur-sm text-gray-100 shadow-lg border`
                 } ${chatSettings.compactMode ? 'p-3' : 'p-4'}`}
         >
             <div className="flex items-start space-x-3">
@@ -1265,8 +1265,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                                 <button
                                     onClick={() => provideFeedback(message.id, 'positive')}
                                     className={`p-1 rounded transition-colors ${message.feedback === 'positive'
-                                            ? 'bg-green-600/50 text-green-300'
-                                            : 'hover:bg-gray-600/50'
+                                        ? 'bg-green-600/50 text-green-300'
+                                        : 'hover:bg-gray-600/50'
                                         }`}
                                     title="Helpful response"
                                 >
@@ -1275,8 +1275,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                                 <button
                                     onClick={() => provideFeedback(message.id, 'negative')}
                                     className={`p-1 rounded transition-colors ${message.feedback === 'negative'
-                                            ? 'bg-red-600/50 text-red-300'
-                                            : 'hover:bg-gray-600/50'
+                                        ? 'bg-red-600/50 text-red-300'
+                                        : 'hover:bg-gray-600/50'
                                         }`}
                                     title="Not helpful"
                                 >
@@ -1374,8 +1374,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                             <button
                                 onClick={() => setChatSettings(prev => ({ ...prev, showTimestamps: !prev.showTimestamps }))}
                                 className={`w-4 h-4 rounded border-2 ${chatSettings.showTimestamps
-                                        ? 'bg-green-400 border-green-400'
-                                        : 'border-gray-500'
+                                    ? 'bg-green-400 border-green-400'
+                                    : 'border-gray-500'
                                     }`}
                             />
                         </div>
@@ -1385,8 +1385,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                             <button
                                 onClick={() => setChatSettings(prev => ({ ...prev, compactMode: !prev.compactMode }))}
                                 className={`w-4 h-4 rounded border-2 ${chatSettings.compactMode
-                                        ? 'bg-green-400 border-green-400'
-                                        : 'border-gray-500'
+                                    ? 'bg-green-400 border-green-400'
+                                    : 'border-gray-500'
                                     }`}
                             />
                         </div>
@@ -1396,8 +1396,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                             <button
                                 onClick={() => setChatSettings(prev => ({ ...prev, autoSuggestions: !prev.autoSuggestions }))}
                                 className={`w-4 h-4 rounded border-2 ${chatSettings.autoSuggestions
-                                        ? 'bg-green-400 border-green-400'
-                                        : 'border-gray-500'
+                                    ? 'bg-green-400 border-green-400'
+                                    : 'border-gray-500'
                                     }`}
                             />
                         </div>
@@ -1484,7 +1484,7 @@ GitHub: ${profileData.about.socialLinks?.github}
                                 >
                                     <Settings className="w-4 h-4" />
                                 </motion.button>
-                                
+
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
@@ -1727,10 +1727,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                         Ask me anything!
                     </motion.span>
                 </motion.div>
-            )}
-
-            {/* Custom Scrollbar Styles */}
-            <style jsx>{`
+            )}            {/* Custom Scrollbar Styles */}
+            <style>{`
                 .custom-scrollbar::-webkit-scrollbar {
                     width: 6px;
                 }
