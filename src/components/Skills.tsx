@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Skillanime from './Skillsanime';
-import { Code, Users, Globe, Star, Zap, Award, Brain } from 'lucide-react';
+import { Code, Users, Globe, Star, Zap, Award, ChevronRight, Brain } from 'lucide-react';
 
 interface Skill {
   name: string;
@@ -17,6 +17,11 @@ interface SkillCategory {
 
 const SkillsShowcase: React.FC = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const skillsData: SkillCategory[] = [
     {
@@ -71,25 +76,46 @@ const SkillsShowcase: React.FC = () => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      }}
     >
       <div className="flex justify-between items-center mb-3">
-        <span className="text-green-200 font-medium text-sm">
+        <span className="text-green-200 font-medium text-sm group-hover:text-green-100 transition-colors">
           {skill.name}
         </span>
         <div className="flex items-center gap-2">
-          <span className="text-green-300 font-bold text-sm">
+          <span className="text-green-300 font-bold text-sm group-hover:text-green-200 transition-colors">
             {skill.level}%
           </span>
-          {skill.level >= 90 && <Star className="w-4 h-4 text-yellow-400 fill-current" />}
+          {skill.level >= 90 && (
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: index * 0.1 + 0.5, duration: 0.5, type: "spring" }}
+            >
+              <Star className="w-4 h-4 text-yellow-400 fill-current" />
+            </motion.div>
+          )}
         </div>
       </div>
-      <div className="w-full bg-gray-800/60 rounded-full h-4 overflow-hidden shadow-inner border border-green-500/20">
+      <div className="w-full bg-gray-800/60 rounded-full h-4 overflow-hidden shadow-inner border border-green-500/20 group-hover:border-green-400/40 transition-colors">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${skill.level}%` }}
-          transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
+          animate={{ width: isVisible ? `${skill.level}%` : '0%' }}
+          transition={{
+            delay: index * 0.1,
+            duration: 1,
+            ease: "easeOut"
+          }}
           className="h-full bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 rounded-full relative overflow-hidden"
         >
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-40"
+            animate={{ x: [-100, 200] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20" />
         </motion.div>
       </div>
@@ -98,183 +124,212 @@ const SkillsShowcase: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
-      {/* Simple animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 opacity-80" />
+      {/* Animated Background */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            'linear-gradient(135deg, #000000, #065f46)',
+            'linear-gradient(135deg, #065f46, #10b981)',
+            'linear-gradient(135deg, #10b981, #000000)'
+          ]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
 
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-green-400 rounded-full opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
 
       {/* Header */}
       <motion.div
         className="relative z-10 text-center py-16"
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8 }}
       >
         <motion.h1
-          className="text-5xl md:text-6xl font-bold text-green-300 mb-6 relative"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="text-5xl md:text-6xl font-bold text-green-300 mb-4 relative"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           Professional Skills
           <motion.span
-            className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mt-2"
             initial={{ width: 0 }}
             animate={{ width: "8rem" }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 1, delay: 0.8 }}
           />
         </motion.h1>
         <motion.p
           className="text-xl text-green-200 max-w-3xl mx-auto px-4 mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
         >
           Expertise across multiple domains with continuous learning and innovation
         </motion.p>
+        <motion.div
+          className="flex justify-center items-center gap-2 mt-6"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+        >
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.2,
+                repeatDelay: 3
+              }}
+            >
+              <Star className="w-5 h-5 text-yellow-500 fill-current" />
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Skills Overview Stats */}
         <motion.div
           className="flex justify-center gap-8 mt-8 flex-wrap"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          transition={{ delay: 1, duration: 0.6 }}
         >
-          <div className="text-center">
-            <div className="text-3xl font-bold text-green-400">18+</div>
+          <motion.div
+            className="text-center"
+            whileHover={{ scale: 1.1, y: -5 }}
+          >
+            <div className="text-3xl font-bold text-green-400">22+</div>
             <div className="text-sm text-green-200">Core Skills</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-green-400">85%</div>
+          </motion.div>
+          <motion.div
+            className="text-center"
+            whileHover={{ scale: 1.1, y: -5 }}
+          >
+            <div className="text-3xl font-bold text-green-400">88%</div>
             <div className="text-sm text-green-200">Avg Proficiency</div>
-          </div>
-          <div className="text-center">
+          </motion.div>
+          <motion.div
+            className="text-center"
+            whileHover={{ scale: 1.1, y: -5 }}
+          >
             <div className="text-3xl font-bold text-green-400">3</div>
-            <div className="text-sm text-green-200">Skill Categories</div>
-          </div>
+            <div className="text-sm text-green-200">Categories</div>
+          </motion.div>
         </motion.div>
       </motion.div>
 
       {/* Skills Navigation */}
-      <motion.div
-        className="relative z-10 flex justify-center mb-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-      >
-        <div className="flex bg-gray-900/80 backdrop-blur-xl rounded-3xl p-3 shadow-2xl border border-green-500/30 flex-wrap justify-center gap-2">
+      <div className="relative z-10 flex justify-center mb-12">
+        <div className="flex bg-gray-900/70 backdrop-blur-lg rounded-2xl p-2 shadow-2xl border border-green-500/30">
           {skillsData.map((section, index) => (
-            <motion.button
+            <button
               key={index}
               onClick={() => setActiveSection(index)}
-              className={`flex items-center gap-3 px-6 py-4 rounded-2xl transition-all duration-300 ${activeSection === index
-                ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+              className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 ${activeSection === index
+                ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transform scale-105'
                 : 'text-green-300 hover:bg-green-500/20 hover:text-white'
                 }`}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1 + index * 0.1 }}
             >
               {section.icon}
-              <span className="font-semibold text-sm sm:text-base">{section.title}</span>
-            </motion.button>
+              <span className="font-semibold hidden sm:block">{section.title}</span>
+            </button>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Skills Content */}
-      <motion.div
-        className="relative z-10 max-w-7xl mx-auto px-4 pb-20"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-      >
-        <div className="bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-green-500/30 overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
+        <div className="bg-gray-900/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-green-500/30 overflow-hidden">
           <div className="p-8 md:p-12">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSection}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="flex items-center gap-6 mb-10">
-                  <div className={`p-5 rounded-2xl bg-gradient-to-r ${skillsData[activeSection].color} text-white shadow-xl`}>
-                    {skillsData[activeSection].icon}
-                  </div>
-                  <div>
-                    <h2 className="text-4xl font-bold text-green-300 mb-2">{skillsData[activeSection].title}</h2>
-                    <p className="text-green-200 text-lg">Expertise and proficiency levels</p>
-                  </div>
+            <div>
+              <div className="flex items-center gap-4 mb-8">
+                <div className={`p-4 rounded-2xl bg-gradient-to-r ${skillsData[activeSection].color} text-white shadow-lg`}>
+                  {skillsData[activeSection].icon}
                 </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-green-300">{skillsData[activeSection].title}</h2>
+                  <p className="text-green-200">Expertise and proficiency levels</p>
+                </div>
+              </div>
 
-                <div className="grid md:grid-cols-2 gap-8">
-                  {skillsData[activeSection].skills.map((skill, index) => (
-                    <SkillBar key={skill.name} skill={skill} index={index} />
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              <div className="grid md:grid-cols-2 gap-8">
+                {skillsData[activeSection].skills.map((skill, index) => (
+                  <SkillBar key={skill.name} skill={skill} index={index} />
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Bottom Stats */}
-          <motion.div
-            className="bg-gradient-to-r from-green-600/90 to-emerald-600/90 backdrop-blur-sm px-8 py-8 border-t border-green-500/30"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
-          >
-            <div className="flex justify-around items-center text-white flex-wrap gap-4">
+          <div className="bg-gradient-to-r from-green-600/80 to-emerald-600/80 backdrop-blur-sm px-8 py-6 border-t border-green-500/30">
+            <div className="flex justify-around items-center text-white">
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Award className="w-6 h-6" />
-                  <span className="text-3xl font-bold">{skillsData[activeSection].skills.length}</span>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <Award className="w-5 h-5" />
+                  <span className="text-2xl font-bold">6+</span>
                 </div>
-                <p className="text-sm opacity-90 font-medium">Core Skills</p>
+                <p className="text-sm opacity-90">Core Skills</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Zap className="w-6 h-6" />
-                  <span className="text-3xl font-bold">
-                    {Math.round(skillsData[activeSection].skills.reduce((acc, skill) => acc + skill.level, 0) / skillsData[activeSection].skills.length)}%
-                  </span>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <Zap className="w-5 h-5" />
+                  <span className="text-2xl font-bold">90%</span>
                 </div>
-                <p className="text-sm opacity-90 font-medium">Avg Proficiency</p>
+                <p className="text-sm opacity-90">Avg Proficiency</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Brain className="w-6 h-6" />
-                  <span className="text-3xl font-bold">
-                    {skillsData[activeSection].skills.filter(skill => skill.level >= 90).length}
-                  </span>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <ChevronRight className="w-5 h-5" />
+                  <span className="text-2xl font-bold">3</span>
                 </div>
-                <p className="text-sm opacity-90 font-medium">Expert Level</p>
+                <p className="text-sm opacity-90">Skill Categories</p>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Skillanime Integration */}
-      <div className="relative z-10 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.6 }}
-          className="max-w-7xl mx-auto px-4"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-green-300 mb-4">
-              Interactive Skills Visualization
-            </h2>
-            <p className="text-green-200 text-lg max-w-2xl mx-auto">
-              Explore my technical skills through an interactive and engaging visual experience
-            </p>
           </div>
+        </div>
+      </div>
+
+      {/* Gap before Skillanime */}
+      <div className="relative z-10 py-16">
+        <div className="max-w-6xl mx-auto px-4">
           <Skillanime />
-        </motion.div>
+        </div>
       </div>
 
       {/* Custom styles */}
