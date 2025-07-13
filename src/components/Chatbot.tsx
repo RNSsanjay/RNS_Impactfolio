@@ -1435,10 +1435,11 @@ GitHub: ${profileData.about.socialLinks?.github}
                         }}
                         exit={{ opacity: 0, y: 50, scale: 0.9 }}
                         transition={{ type: "spring", damping: 25, stiffness: 400 }}
-                        className="fixed bottom-20 right-10 w-[95vw] md:w-[480px] lg:w-[920px] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl z-50 flex flex-col border border-gray/50 backdrop-blur-xl overflow-hidden mr-60 mt-20"
+                        className="fixed bottom-2 sm:bottom-6 right-2 sm:right-6 w-[98vw] xs:w-[95vw] sm:w-[420px] md:w-[480px] lg:w-[700px] xl:w-[920px] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl z-50 flex flex-col border border-gray-700/50 backdrop-blur-xl overflow-hidden"
                         style={{
                             height: isMinimized ? '60px' : '80vh',
-                            maxHeight: isMinimized ? '60px' : '650px'
+                            maxHeight: isMinimized ? '60px' : '650px',
+                            minHeight: isMinimized ? '60px' : '320px'
                         }}
                     >
                         {/* Enhanced Header with more features */}
@@ -1742,6 +1743,28 @@ GitHub: ${profileData.about.socialLinks?.github}
                 }
                 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
                     background: linear-gradient(to bottom, rgba(34, 197, 94, 0.7), rgba(59, 130, 246, 0.7));
+                }
+            `}</style>
+            {/* Custom responsive styles */}
+            <style>{`
+                @media (max-width: 640px) {
+                    .rounded-3xl, .sm\:rounded-3xl { border-radius: 1.25rem; }
+                    .rounded-2xl, .sm\:rounded-2xl { border-radius: 1rem; }
+                    .p-4, .sm\:p-4 { padding: 0.75rem; }
+                    .p-3, .sm\:p-3 { padding: 0.5rem; }
+                    .text-5xl, .sm\:text-5xl { font-size: 2rem; }
+                    .max-w-\[85\%\] { max-width: 98vw; }
+                }
+                @media (max-width: 400px) {
+                    .text-3xl, .sm\:text-4xl, .md\:text-5xl { font-size: 1.25rem; }
+                    .p-4, .sm\:p-4 { padding: 0.5rem; }
+                }
+                @media (max-width: 350px) {
+                    .text-xs, .sm\:text-base { font-size: 0.7rem; }
+                    .px-3, .sm\:px-4 { padding-left: 0.5rem; padding-right: 0.5rem; }
+                }
+                @media (hover: none) and (pointer: coarse) {
+                    button:hover, a:hover { transform: none !important; }
                 }
             `}</style>
         </>

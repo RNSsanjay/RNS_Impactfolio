@@ -72,7 +72,7 @@ const SkillsShowcase: React.FC = () => {
 
   const SkillBar: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) => (
     <motion.div
-      className="mb-6 group"
+      className="mb-4 sm:mb-6 group"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -81,12 +81,12 @@ const SkillsShowcase: React.FC = () => {
         transition: { duration: 0.2 }
       }}
     >
-      <div className="flex justify-between items-center mb-3">
-        <span className="text-green-200 font-medium text-sm group-hover:text-green-100 transition-colors">
+      <div className="flex justify-between items-center mb-2 sm:mb-3">
+        <span className="text-green-200 font-medium text-xs sm:text-sm group-hover:text-green-100 transition-colors">
           {skill.name}
         </span>
-        <div className="flex items-center gap-2">
-          <span className="text-green-300 font-bold text-sm group-hover:text-green-200 transition-colors">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <span className="text-green-300 font-bold text-xs sm:text-sm group-hover:text-green-200 transition-colors">
             {skill.level}%
           </span>
           {skill.level >= 90 && (
@@ -95,12 +95,12 @@ const SkillsShowcase: React.FC = () => {
               animate={{ scale: 1, rotate: 0 }}
               transition={{ delay: index * 0.1 + 0.5, duration: 0.5, type: "spring" }}
             >
-              <Star className="w-4 h-4 text-yellow-400 fill-current" />
+              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
             </motion.div>
           )}
         </div>
       </div>
-      <div className="w-full bg-gray-800/60 rounded-full h-4 overflow-hidden shadow-inner border border-green-500/20 group-hover:border-green-400/40 transition-colors">
+      <div className="w-full bg-gray-800/60 rounded-full h-3 sm:h-4 overflow-hidden shadow-inner border border-green-500/20 group-hover:border-green-400/40 transition-colors">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: isVisible ? `${skill.level}%` : '0%' }}
@@ -123,7 +123,7 @@ const SkillsShowcase: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-black py-10 sm:py-16 lg:py-20 px-2 sm:px-4 lg:px-6 relative overflow-hidden">
       {/* Animated Background */}
       <motion.div
         className="absolute inset-0"
@@ -141,12 +141,12 @@ const SkillsShowcase: React.FC = () => {
         }}
       />
 
-      {/* Floating Particles */}
+      {/* Floating Particles - Fewer on mobile */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-green-400 rounded-full opacity-30"
+            className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-green-400 rounded-full opacity-30"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -171,27 +171,27 @@ const SkillsShowcase: React.FC = () => {
 
       {/* Header */}
       <motion.div
-        className="relative z-10 text-center py-16"
+        className="relative z-10 text-center py-8 sm:py-12 lg:py-16"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <motion.h1
-          className="text-5xl md:text-6xl font-bold text-green-300 mb-4 relative"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-green-300 mb-2 sm:mb-4 relative px-2"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           Professional Skills
           <motion.span
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mt-2"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mt-1 sm:mt-2"
             initial={{ width: 0 }}
-            animate={{ width: "8rem" }}
+            animate={{ width: "6rem" }}
             transition={{ duration: 1, delay: 0.8 }}
           />
         </motion.h1>
         <motion.p
-          className="text-xl text-green-200 max-w-3xl mx-auto px-4 mb-8"
+          className="text-sm sm:text-lg lg:text-xl text-green-200 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto px-2 sm:px-4 mb-4 sm:mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
@@ -199,7 +199,7 @@ const SkillsShowcase: React.FC = () => {
           Expertise across multiple domains with continuous learning and innovation
         </motion.p>
         <motion.div
-          className="flex justify-center items-center gap-2 mt-6"
+          className="flex justify-center items-center gap-1 sm:gap-2 mt-4 sm:mt-6"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.7, duration: 0.6 }}
@@ -218,14 +218,14 @@ const SkillsShowcase: React.FC = () => {
                 repeatDelay: 3
               }}
             >
-              <Star className="w-5 h-5 text-yellow-500 fill-current" />
+              <Star className="w-3 h-3 sm:w-5 sm:h-5 text-yellow-500 fill-current" />
             </motion.div>
           ))}
         </motion.div>
 
         {/* Skills Overview Stats */}
         <motion.div
-          className="flex justify-center gap-8 mt-8 flex-wrap"
+          className="flex justify-center gap-4 sm:gap-6 lg:gap-8 mt-6 sm:mt-8 flex-wrap px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.6 }}
@@ -234,61 +234,61 @@ const SkillsShowcase: React.FC = () => {
             className="text-center"
             whileHover={{ scale: 1.1, y: -5 }}
           >
-            <div className="text-3xl font-bold text-green-400">22+</div>
-            <div className="text-sm text-green-200">Core Skills</div>
+            <div className="text-2xl sm:text-3xl font-bold text-green-400">22+</div>
+            <div className="text-xs sm:text-sm text-green-200">Core Skills</div>
           </motion.div>
           <motion.div
             className="text-center"
             whileHover={{ scale: 1.1, y: -5 }}
           >
-            <div className="text-3xl font-bold text-green-400">88%</div>
-            <div className="text-sm text-green-200">Avg Proficiency</div>
+            <div className="text-2xl sm:text-3xl font-bold text-green-400">88%</div>
+            <div className="text-xs sm:text-sm text-green-200">Avg Proficiency</div>
           </motion.div>
           <motion.div
             className="text-center"
             whileHover={{ scale: 1.1, y: -5 }}
           >
-            <div className="text-3xl font-bold text-green-400">3</div>
-            <div className="text-sm text-green-200">Categories</div>
+            <div className="text-2xl sm:text-3xl font-bold text-green-400">3</div>
+            <div className="text-xs sm:text-sm text-green-200">Categories</div>
           </motion.div>
         </motion.div>
       </motion.div>
 
       {/* Skills Navigation */}
-      <div className="relative z-10 flex justify-center mb-12">
-        <div className="flex bg-gray-900/70 backdrop-blur-lg rounded-2xl p-2 shadow-2xl border border-green-500/30">
+      <div className="relative z-10 flex justify-center mb-6 sm:mb-8 lg:mb-12 px-2">
+        <div className="flex flex-col sm:flex-row bg-gray-900/70 backdrop-blur-lg rounded-2xl p-2 shadow-2xl border border-green-500/30 w-full max-w-md sm:max-w-none sm:w-auto">
           {skillsData.map((section, index) => (
             <button
               key={index}
               onClick={() => setActiveSection(index)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 ${activeSection === index
+              className={`flex items-center justify-center sm:justify-start gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-xl transition-all duration-300 mb-1 sm:mb-0 text-sm sm:text-base ${activeSection === index
                 ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transform scale-105'
                 : 'text-green-300 hover:bg-green-500/20 hover:text-white'
                 }`}
             >
-              {section.icon}
-              <span className="font-semibold hidden sm:block">{section.title}</span>
+              <span className="flex-shrink-0">{section.icon}</span>
+              <span className="font-semibold">{section.title}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Skills Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
-        <div className="bg-gray-900/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-green-500/30 overflow-hidden">
-          <div className="p-8 md:p-12">
+      <div className="relative z-10 max-w-sm sm:max-w-4xl lg:max-w-6xl mx-auto px-2 sm:px-4 pb-10 sm:pb-16 lg:pb-20">
+        <div className="bg-gray-900/80 backdrop-blur-lg rounded-2xl sm:rounded-3xl shadow-2xl border border-green-500/30 overflow-hidden">
+          <div className="p-4 sm:p-6 md:p-8 lg:p-12">
             <div>
-              <div className="flex items-center gap-4 mb-8">
-                <div className={`p-4 rounded-2xl bg-gradient-to-r ${skillsData[activeSection].color} text-white shadow-lg`}>
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r ${skillsData[activeSection].color} text-white shadow-lg flex-shrink-0`}>
                   {skillsData[activeSection].icon}
                 </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-green-300">{skillsData[activeSection].title}</h2>
-                  <p className="text-green-200">Expertise and proficiency levels</p>
+                <div className="text-center sm:text-left">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-300">{skillsData[activeSection].title}</h2>
+                  <p className="text-sm sm:text-base text-green-200">Expertise and proficiency levels</p>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                 {skillsData[activeSection].skills.map((skill, index) => (
                   <SkillBar key={skill.name} skill={skill} index={index} />
                 ))}
@@ -297,28 +297,28 @@ const SkillsShowcase: React.FC = () => {
           </div>
 
           {/* Bottom Stats */}
-          <div className="bg-gradient-to-r from-green-600/80 to-emerald-600/80 backdrop-blur-sm px-8 py-6 border-t border-green-500/30">
+          <div className="bg-gradient-to-r from-green-600/80 to-emerald-600/80 backdrop-blur-sm px-4 sm:px-6 lg:px-8 py-4 sm:py-6 border-t border-green-500/30">
             <div className="flex justify-around items-center text-white">
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <Award className="w-5 h-5" />
-                  <span className="text-2xl font-bold">6+</span>
+                <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1">
+                  <Award className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-lg sm:text-2xl font-bold">6+</span>
                 </div>
-                <p className="text-sm opacity-90">Core Skills</p>
+                <p className="text-xs sm:text-sm opacity-90">Core Skills</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <Zap className="w-5 h-5" />
-                  <span className="text-2xl font-bold">90%</span>
+                <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1">
+                  <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-lg sm:text-2xl font-bold">90%</span>
                 </div>
-                <p className="text-sm opacity-90">Avg Proficiency</p>
+                <p className="text-xs sm:text-sm opacity-90">Avg Proficiency</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <ChevronRight className="w-5 h-5" />
-                  <span className="text-2xl font-bold">3</span>
+                <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1">
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-lg sm:text-2xl font-bold">3</span>
                 </div>
-                <p className="text-sm opacity-90">Skill Categories</p>
+                <p className="text-xs sm:text-sm opacity-90">Skill Categories</p>
               </div>
             </div>
           </div>
@@ -326,8 +326,8 @@ const SkillsShowcase: React.FC = () => {
       </div>
 
       {/* Gap before Skillanime */}
-      <div className="relative z-10 py-16">
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="relative z-10 py-8 sm:py-12 lg:py-16">
+        <div className="max-w-sm sm:max-w-4xl lg:max-w-6xl mx-auto px-2 sm:px-4">
           <Skillanime />
         </div>
       </div>
@@ -338,7 +338,19 @@ const SkillsShowcase: React.FC = () => {
           background-image: 
             linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
-          background-size: 50px 50px;
+          background-size: 30px 30px;
+        }
+        
+        @media (min-width: 640px) {
+          .bg-grid-pattern {
+            background-size: 50px 50px;
+          }
+        }
+        
+        @media (max-width: 639px) {
+          .bg-grid-pattern {
+            opacity: 0.05 !important;
+          }
         }
       `}</style>
     </div>
