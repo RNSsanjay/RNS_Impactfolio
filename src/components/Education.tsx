@@ -57,21 +57,25 @@ const Education: React.FC = () => {
   const getColorClasses = (color: string) => {
     const colors = {
       emerald: {
+        bg: 'bg-emerald-500',
         text: 'text-emerald-400',
         border: 'border-emerald-400',
         glow: 'shadow-emerald-500/50'
       },
       green: {
-       text: 'text-green-400',
+        bg: 'bg-green-500',
+        text: 'text-green-400',
         border: 'border-green-400',
         glow: 'shadow-green-500/50'
       },
       teal: {
+        bg: 'bg-teal-500',
         text: 'text-teal-400',
         border: 'border-teal-400',
         glow: 'shadow-teal-500/50'
       },
       cyan: {
+        bg: 'bg-cyan-500',
         text: 'text-cyan-400',
         border: 'border-cyan-400',
         glow: 'shadow-cyan-500/50'
@@ -83,7 +87,7 @@ const Education: React.FC = () => {
   return (
     <motion.section
       id="education"
-      className="min-h-screen bg-gradient-to-br from-green-900 via-green-950 to-black relative overflow-hidden text-white py-10 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6"
+      className="min-h-screen bg-gradient-to-br from-green-900 via-green-950 to-black relative overflow-hidden text-white py-20 px-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -264,13 +268,13 @@ const Education: React.FC = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div
-          className="text-center mb-10 sm:mb-16 md:mb-20"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-3 sm:mb-4 md:mb-6 bg-gradient-to-r from-green-400 via-green-300 to-emerald-400 bg-clip-text text-transparent px-2"
+            className="text-7xl md:text-8xl font-black mb-6 bg-gradient-to-r from-green-400 via-green-300 to-emerald-400 bg-clip-text text-transparent"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -278,7 +282,7 @@ const Education: React.FC = () => {
             EDUCATION
           </motion.h1>
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-green-100 max-w-2xl mx-auto leading-relaxed px-4"
+            className="text-xl text-green-100 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 0.6 }}
@@ -286,23 +290,20 @@ const Education: React.FC = () => {
             A transformative academic journey leading to graduation in 2026
           </motion.p>
           <motion.div
-            className="w-16 sm:w-24 md:w-32 h-1 bg-gradient-to-r from-green-500 to-green-400 mx-auto mt-4 sm:mt-6 md:mt-8 rounded-full"
+            className="w-32 h-1 bg-gradient-to-r from-green-500 to-green-400 mx-auto mt-8 rounded-full"
             initial={{ width: 0 }}
-            animate={{ width: '30%', maxWidth: '128px' }}
+            animate={{ width: 128 }}
             transition={{ delay: 1, duration: 0.8 }}
           />
         </motion.div>
 
         {/* Timeline Section */}
         <div className="relative">
-          {/* Timeline Line - Hidden on mobile, visible on md screens and up */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-green-500 via-green-600 to-green-700 rounded-full shadow-lg shadow-green-500/30 hidden md:block"></div>
-
-          {/* Mobile Timeline Line - Only visible on small screens */}
-          <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-1 h-full bg-gradient-to-b from-green-500 via-green-600 to-green-700 rounded-full shadow-lg shadow-green-500/30 md:hidden"></div>
+          {/* Timeline Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-green-500 via-green-600 to-green-700 rounded-full shadow-lg shadow-green-500/30"></div>
 
           {/* Education Cards */}
-          <div className="space-y-10 sm:space-y-12 md:space-y-16">
+          <div className="space-y-16">
             {educationData.map((item, index) => {
               const colors = getColorClasses(item.color);
               const isEven = index % 2 === 0;
@@ -310,32 +311,32 @@ const Education: React.FC = () => {
               return (
                 <motion.div
                   key={item.id}
-                  className={`relative flex items-start md:items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col pl-10 sm:pl-12 md:pl-0`}
-                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                  className={`relative flex items-center ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+                  initial={{ opacity: 0, x: isEven ? -100 : 100 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.2, duration: 0.8 }}
                 >
-                  {/* Timeline Dot - Mobile Position */}
-                  <div className={`absolute left-4 sm:left-6 md:left-1/2 top-0 md:top-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6  rounded-full border-2 sm:border-3 md:border-4 border-gray-900 z-10 shadow-lg ${colors.glow}`}>
+                  {/* Timeline Dot */}
+                  <div className={`absolute left-1/2 transform -translate-x-1/2 w-6 h-6 ${colors.bg} rounded-full border-4 border-gray-900 z-10 shadow-lg ${colors.glow}`}>
                   </div>
 
                   {/* Content Card */}
-                  <div className={`w-full md:w-5/12 ${isEven ? 'md:pr-8 lg:pr-12' : 'md:pl-8 lg:pl-12'}`}>
+                  <div className={`w-5/12 ${isEven ? 'pr-12' : 'pl-12'}`}>
                     <motion.div
-                      className="bg-black/60 backdrop-blur-lg border border-green-600/30 rounded-lg sm:rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl hover:shadow-green-500/20 transition-all duration-500 group hover:border-green-500/50"
+                      className="bg-black/60 backdrop-blur-lg border border-green-600/30 rounded-2xl p-8 shadow-2xl hover:shadow-green-500/20 transition-all duration-500 group hover:border-green-500/50"
                       whileHover={{ scale: 1.02, y: -5 }}
                     >
                       {/* Card Header */}
-                      <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6">
-                        <div className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12   rounded-lg md:rounded-xl flex items-center justify-center text-white shadow-lg`}>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center text-white shadow-lg`}>
                           {item.icon}
                         </div>
                         <div className="text-right">
-                          <div className="flex items-center gap-1 sm:gap-2 text-gray-400 text-xs sm:text-sm">
-                            <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <div className="flex items-center gap-2 text-gray-400 text-sm">
+                            <Calendar className="w-4 h-4" />
                             {item.year}
                           </div>
-                          <span className={`text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full ${item.status === 'Final Year' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-gray-600/20 text-gray-400'}`}>
+                          <span className={`text-xs px-3 py-1 rounded-full ${item.status === 'Final Year' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-gray-600/20 text-gray-400'}`}>
                             {item.status}
                           </span>
                         </div>
@@ -343,44 +344,44 @@ const Education: React.FC = () => {
 
                       {/* Card Content */}
                       <div>
-                        <h3 className={`text-lg sm:text-xl md:text-2xl font-bold ${colors.text} mb-1 sm:mb-2`}>
+                        <h3 className={`text-2xl font-bold ${colors.text} mb-2`}>
                           {item.level}
                         </h3>
-                        <h4 className="text-base sm:text-lg md:text-xl font-semibold text-green-50 mb-1 sm:mb-2">
+                        <h4 className="text-xl font-semibold text-green-50 mb-2">
                           {item.institution}
                         </h4>
                         {item.organization && (
-                          <p className="text-xs sm:text-sm text-green-200 mb-2 sm:mb-3 font-medium">
+                          <p className="text-green-200 text-sm mb-3 font-medium">
                             {item.organization}
                           </p>
                         )}
                         {item.grade && (
-                          <div className="mb-2 sm:mb-3">
-                            <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-semibold ${colors.text} bg-gradient-to-r  /20 border border-current/30`}>
+                          <div className="mb-3">
+                            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${colors.text} bg-gradient-to-r ${colors.bg}/20 border border-current/30`}>
                               {item.grade}
                             </span>
                           </div>
                         )}
-                        <p className="text-xs sm:text-sm text-green-300 mb-2 sm:mb-3 md:mb-4">
+                        <p className="text-green-300 text-sm mb-4">
                           {item.description}
                         </p>
-                        <div className="flex items-center gap-1 sm:gap-2 text-green-400 text-xs sm:text-sm">
-                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                        <div className="flex items-center gap-2 text-green-400 text-sm">
+                          <MapPin className="w-4 h-4" />
                           {item.period}
                         </div>
                       </div>
 
                       {/* Hover Effect */}
                       <motion.div
-                        className={`absolute inset-0   opacity-0 group-hover:opacity-5 rounded-lg sm:rounded-xl md:rounded-2xl transition-opacity duration-300`}
+                        className={`absolute inset-0 ${colors.bg} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
                         initial={false}
                       />
                     </motion.div>
                   </div>
 
                   {/* Year Badge */}
-                  <div className={`absolute hidden md:block left-1/2 transform -translate-x-1/2 ${isEven ? '-translate-y-16' : 'translate-y-16'} z-20`}>
-                    <div className={`px-3 py-1 sm:px-4 sm:py-2 bg-black/80 border ${colors.border} rounded-full text-xs sm:text-sm font-semibold ${colors.text} shadow-lg backdrop-blur-sm`}>
+                  <div className={`absolute left-1/2 transform -translate-x-1/2 ${isEven ? '-translate-y-16' : 'translate-y-16'} z-20`}>
+                    <div className={`px-4 py-2 bg-black/80 border ${colors.border} rounded-full text-sm font-semibold ${colors.text} shadow-lg backdrop-blur-sm`}>
                       {item.year}
                     </div>
                   </div>
@@ -392,139 +393,31 @@ const Education: React.FC = () => {
 
         {/* Stats Section */}
         <motion.div
-          className="mt-16 sm:mt-24 md:mt-32 text-center"
+          className="mt-32 text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-            <div className="bg-gray-800/30 backdrop-blur-lg rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-gray-700">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-400 mb-1 sm:mb-2">8.20</div>
-              <div className="text-gray-400 text-xs sm:text-sm">Current CGPA</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
+              <div className="text-3xl font-bold text-emerald-400 mb-2">8.20</div>
+              <div className="text-gray-400 text-sm">Current CGPA</div>
             </div>
-            <div className="bg-gray-800/30 backdrop-blur-lg rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-gray-700">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-green-400 mb-1 sm:mb-2">80%</div>
-              <div className="text-gray-400 text-xs sm:text-sm">12th Grade</div>
+            <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
+              <div className="text-3xl font-bold text-green-400 mb-2">80%</div>
+              <div className="text-gray-400 text-sm">12th Grade</div>
             </div>
-            <div className="bg-gray-800/30 backdrop-blur-lg rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-gray-700">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-teal-400 mb-1 sm:mb-2">2026</div>
-              <div className="text-gray-400 text-xs sm:text-sm">Graduation Year</div>
+            <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
+              <div className="text-3xl font-bold text-teal-400 mb-2">2026</div>
+              <div className="text-gray-400 text-sm">Graduation Year</div>
             </div>
-            <div className="bg-gray-800/30 backdrop-blur-lg rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-gray-700">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-cyan-400 mb-1 sm:mb-2">Corona</div>
-              <div className="text-gray-400 text-xs sm:text-sm">10th Batch</div>
+            <div className="bg-gray-800/30 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
+              <div className="text-3xl font-bold text-cyan-400 mb-2">Corona</div>
+              <div className="text-gray-400 text-sm">10th Batch</div>
             </div>
           </div>
         </motion.div>
       </div>
-
-      {/* Custom responsive styles */}
-      <style>{`
-        @media (max-width: 640px) {
-          /* Make sure floating elements don't cause horizontal overflow */
-          .absolute {
-            max-width: 80px;
-            max-height: 80px;
-            opacity: 0.5;
-          }
-          
-          /* Reduce animation intensity on small screens */
-          @media (prefers-reduced-motion: no-preference) {
-            .animate-float {
-              animation-duration: 8s;
-            }
-          }
-        }
-        
-        /* Make sure timeline works with all screen sizes */
-        @media (max-width: 768px) {
-          /* Fixed position for timeline on smaller screens */
-          .timeline-line {
-            left: 15px;
-          }
-        }
-        
-        /* Support for very small devices */
-        @media (max-width: 350px) {
-          .text-xs {
-            font-size: 0.65rem;
-          }
-          .text-sm {
-            font-size: 0.75rem;
-          }
-          .p-3 {
-            padding: 0.5rem;
-          }
-          .gap-3 {
-            gap: 0.5rem;
-          }
-        }
-        
-        /* Improve landscape mode on mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-          .min-h-screen {
-            min-height: 130vh;
-          }
-          .py-10 {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-          }
-        }
-        
-        /* Touch device optimizations */
-        @media (hover: none) and (pointer: coarse) {
-          /* Better touch targets */
-          .group:hover {
-            transform: none !important;
-          }
-          
-          /* Increase touch area */
-          .group {
-            min-height: 44px;
-          }
-          
-          /* Disable certain hover effects on touch devices */
-          .hover\:shadow-green-500\/20,
-          .hover\:border-green-500\/50 {
-            transition: none !important;
-          }
-        }
-        
-        /* Print styles */
-        @media print {
-          .min-h-screen {
-            min-height: auto;
-          }
-          .bg-gradient-to-br {
-            background: white;
-            color: black;
-          }
-          .text-white,
-          .text-green-100,
-          .text-green-200,
-          .text-green-300,
-          .text-gray-400 {
-            color: #333 !important;
-          }
-          .bg-gradient-to-r,
-          .text-transparent {
-            color: black !important;
-            background: none !important;
-          }
-          .shadow-lg,
-          .shadow-2xl,
-          .backdrop-blur-lg {
-            box-shadow: none !important;
-            backdrop-filter: none !important;
-          }
-          .hidden {
-            display: none !important;
-          }
-          .absolute {
-            display: none !important;
-          }
-        }
-      `}</style>
     </motion.section>
   );
 };
