@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/RNS_Impactfolio/static/css/main.861f47cc.css",
-    "main.js": "/RNS_Impactfolio/static/js/main.af977377.js",
+    "main.css": "/RNS_Impactfolio/static/css/main.5f4207e6.css",
+    "main.js": "/RNS_Impactfolio/static/js/main.3fa3ff6e.js",
     "static/js/453.8ab44547.chunk.js": "/RNS_Impactfolio/static/js/453.8ab44547.chunk.js",
     "static/media/Cropped.jpeg": "/RNS_Impactfolio/static/media/Cropped.1c8ee85925513a3403cf.jpeg",
     "static/media/assesseng.png": "/RNS_Impactfolio/static/media/assesseng.1271b20cce164352b328.png",
@@ -9,12 +9,12 @@
     "static/media/syn.png": "/RNS_Impactfolio/static/media/syn.5392b0d50d8a93e3512f.png",
     "static/media/djSong.png": "/RNS_Impactfolio/static/media/djSong.b8c708e8e6ca8f480f1e.png",
     "index.html": "/RNS_Impactfolio/index.html",
-    "main.861f47cc.css.map": "/RNS_Impactfolio/static/css/main.861f47cc.css.map",
-    "main.af977377.js.map": "/RNS_Impactfolio/static/js/main.af977377.js.map",
+    "main.5f4207e6.css.map": "/RNS_Impactfolio/static/css/main.5f4207e6.css.map",
+    "main.3fa3ff6e.js.map": "/RNS_Impactfolio/static/js/main.3fa3ff6e.js.map",
     "453.8ab44547.chunk.js.map": "/RNS_Impactfolio/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.861f47cc.css",
-    "static/js/main.af977377.js"
+    "static/css/main.5f4207e6.css",
+    "static/js/main.3fa3ff6e.js"
   ]
 }
