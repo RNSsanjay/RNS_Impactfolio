@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Brain, ChevronRight, Download, X, Eye } from 'lucide-react';
-import Chatbot from './Chatbot';
 import Typewriter from 'typewriter-effect';
 import photo from '../assets/Cropped.jpeg'; // Ensure you have a profile image in this path
 
@@ -534,7 +533,6 @@ const About = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 2 }}
         >
-          <Chatbot />
         </motion.div>
       </div>      {/* Hire Modal - Enhanced for Mobile */}
       {showHireModal && (

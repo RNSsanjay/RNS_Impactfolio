@@ -4,7 +4,6 @@ import Education from './Education';
 import Projects from './Projects';
 import Skills from './Skills';
 import Certificates from './Certificates';
-import Chatbot from './Chatbot';
 import Contact from './contact';
 import Navbar from './Navbar';
 import { profileData } from '../data/profileData';
@@ -49,7 +48,6 @@ const Portfolio = () => {
         <Contact />
     
       {/* Chatbot Component */}
-      <Chatbot />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { profileData } from '../data/profileData';
-import Chatbot from './Chatbot';
 
 const Certificate = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
@@ -886,7 +885,7 @@ const Certificate = () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence><Chatbot />      {/* Custom responsive styles */}
+      </AnimatePresence>     {/* Custom responsive styles */}
       <style>{`
         /* XXS - Extra extra small devices (tiny phones) */
         @media (max-width: 340px) {

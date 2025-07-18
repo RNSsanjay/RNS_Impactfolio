@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
-import Chatbot from './Chatbot';
 import {
   Briefcase,
   Calendar,
@@ -68,7 +67,6 @@ const Internships: React.FC = () => {
         </div>
       </motion.div>
 
-      <Chatbot />
     </div>
   );
 };

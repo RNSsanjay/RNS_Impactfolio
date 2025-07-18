@@ -5,6 +5,7 @@ import {
   Home, User, Book, Briefcase,
   Award, GraduationCap, PhoneCall, Brain, Menu
 } from 'lucide-react';
+import cropped from '../assets/Cropped.jpeg'; // Adjust the path as necessary
 
 interface NavItem {
   name: string;
@@ -130,7 +131,7 @@ const Navbar: React.FC = () => {
                 >
                   <img
                     className="w-8 h-8 rounded-full object-cover"
-                    src="https://media.licdn.com/dms/image/v2/D5603AQEpbf00UxcUmw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701405522937?e=2147483647&v=beta&t=IE0df32Yv3NQSJ1MFXquFcC1_vurhF-ltKqDlhpzTEc"
+                    src={cropped}
                     alt="Profile"
                   />
                 </motion.button>

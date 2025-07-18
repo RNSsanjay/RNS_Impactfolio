@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Portfolio from './components/Portfolio';
 import Education from './components/Education';
@@ -15,12 +15,13 @@ import Skillanime from './components/Skillsanime';
 import Experience from './components/Experience';
 import './index.css';
 
-const App = () => {
+const AppContent = () => {
   const [activeSection, setActiveSection] = useState('about');
+  const location = useLocation();
 
   return (
-    <Router>
-      <Navbar/>
+    <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/RNS_Impactfolio" element={<Portfolio />} />
@@ -35,9 +36,16 @@ const App = () => {
         <Route path="/skillsanime" element={<Skillanime />} />
         <Route path="/experience" element={<Experience />} />
       </Routes>
-      <Footer />
-    </Router>
+      {/* Hide Footer on /chatbot route */}
+      {location.pathname !== '/chatbot' && <Footer />}
+    </>
   );
 };
+
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+);
 
 export default App;
