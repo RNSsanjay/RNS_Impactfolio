@@ -1435,10 +1435,10 @@ GitHub: ${profileData.about.socialLinks?.github}
                         }}
                         exit={{ opacity: 0, y: 50, scale: 0.9 }}
                         transition={{ type: "spring", damping: 25, stiffness: 400 }}
-                        className="fixed bottom-20 right-10 w-[95vw] md:w-[480px] lg:w-[920px] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl z-50 flex flex-col border border-gray/50 backdrop-blur-xl overflow-hidden mr-60 mt-20"
+                        className={`fixed bottom-4 right-2 xs:bottom-8 xs:right-6 sm:bottom-20 sm:right-10 w-[98vw] xs:w-[95vw] md:w-[480px] lg:w-[920px] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-none xs:rounded-2xl sm:rounded-3xl shadow-2xl z-50 flex flex-col border border-gray/50 backdrop-blur-xl overflow-hidden ${isMinimized ? 'h-[60px] max-h-[60px]' : 'h-[90vh] max-h-[90vh] xs:h-[80vh] xs:max-h-[650px]'} mr-0 xs:mr-0 sm:mr-60 mt-0 xs:mt-0 sm:mt-20`}
                         style={{
-                            height: isMinimized ? '60px' : '80vh',
-                            maxHeight: isMinimized ? '60px' : '650px'
+                            height: isMinimized ? '60px' : undefined,
+                            maxHeight: isMinimized ? '60px' : undefined
                         }}
                     >
                         {/* Enhanced Header with more features */}
@@ -1676,11 +1676,14 @@ GitHub: ${profileData.about.socialLinks?.github}
             </AnimatePresence>
 
             {/* Enhanced Toggle Button */}
+            {/* Static Chatbot Button (always visible, bottom right, responsive) */}
             <motion.button
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsChatOpen(!isChatOpen)}
-                className="fixed bottom-6 right-6 bg-gradient-to-r from-green-600 via-green-700 to-blue-600 text-white p-4 rounded-full shadow-2xl z-50 border-2 border-green-400/20 backdrop-blur-sm"
+                className="fixed bottom-4 right-2 xs:bottom-6 xs:right-4 sm:bottom-8 sm:right-8 md:bottom-10 md:right-10 bg-gradient-to-r from-green-600 via-green-700 to-blue-600 text-white p-3 xs:p-4 rounded-full shadow-2xl z-[100] border-2 border-green-400/20 backdrop-blur-sm transition-all duration-300"
+                style={{ boxShadow: '0 8px 32px 0 rgba(34,197,94,0.25), 0 1.5px 6px 0 rgba(59,130,246,0.10)' }}
+                aria-label={isChatOpen ? 'Close Chatbot' : 'Open Chatbot'}
             >
                 <AnimatePresence mode="wait">
                     {isChatOpen ? (
@@ -1713,12 +1716,12 @@ GitHub: ${profileData.about.socialLinks?.github}
                 </AnimatePresence>
             </motion.button>
 
-            {/* Enhanced notification indicator */}
+            {/* Notification indicator (always visible, bottom right, above button) */}
             {!isChatOpen && (
                 <motion.div
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="fixed bottom-16 right-[75px] bg-red-500 text-white text-xs px-2 py-1 rounded-full shadow-lg z-40"
+                    className="fixed bottom-20 right-4 xs:right-6 sm:right-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-lg z-[101] font-semibold tracking-wide"
                 >
                     <motion.span
                         animate={{ opacity: [0.7, 1, 0.7] }}
@@ -1727,7 +1730,8 @@ GitHub: ${profileData.about.socialLinks?.github}
                         Ask me anything!
                     </motion.span>
                 </motion.div>
-            )}            {/* Custom Scrollbar Styles */}
+            )}
+            {/* Custom Scrollbar Styles */}
             <style>{`
                 .custom-scrollbar::-webkit-scrollbar {
                     width: 6px;
