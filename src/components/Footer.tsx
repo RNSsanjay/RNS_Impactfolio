@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
   const skills = ['React', 'TypeScript', 'Node.js', 'Python', 'AI/ML', 'Web Design'];
 
   return (
-    <footer className="relative bg-gradient-to-br from-emerald-900 via-green-950 to-slate-900 text-emerald-100 overflow-hidden animate-fadeIn">
+    <footer className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-black text-emerald-100 overflow-hidden animate-fadeIn">
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none select-none">
         <div className="absolute top-1/4 left-1/4 w-48 h-48 xs:w-64 xs:h-64 sm:w-96 sm:h-96 bg-emerald-500 rounded-full blur-3xl animate-pulse" />

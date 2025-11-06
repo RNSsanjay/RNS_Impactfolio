@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Brain, ChevronRight, Download, X, Eye } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
@@ -11,7 +11,6 @@ const About = () => {
   const [showHireModal, setShowHireModal] = useState(false);
   const [showPDFModal, setShowPDFModal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [globalMousePosition, setGlobalMousePosition] = useState({ x: 0, y: 0 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,30 +19,34 @@ const About = () => {
   });
 
   // References for scroll animations
+  const containerRef = useRef(null);
   const skillsRef = useRef(null);
   const experienceRef = useRef(null);
   const skillsInView = useInView(skillsRef, { once: false, amount: 0.3 });
   const experienceInView = useInView(experienceRef, { once: false, amount: 0.3 });
 
+  // Scroll-based animations for fixed overlay effect
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const scaleTransform = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.95, 0.9]);
+  const opacityTransform = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.8, 0.6]);
+
   const skillsControls = useAnimation();
-  const experienceControls = useAnimation(); useEffect(() => {
+  const experienceControls = useAnimation();
+
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const timer = setTimeout(() => setIsLoading(false), 2000);
 
     return () => {
       clearTimeout(timer);
-    };
-  }, []);
-
-  // Global mouse tracking for entire page
-  useEffect(() => {
-    const handleGlobalMouseMove = (e: MouseEvent) => {
-      setGlobalMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleGlobalMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleGlobalMouseMove);
     };
   }, []);
 
@@ -166,177 +169,137 @@ const About = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }; return (
-    <div
-      className="min-h-screen bg-black py-12 md:py-20 px-2 sm:px-4 lg:px-6 relative overflow-hidden cursor-none"
-      style={{ cursor: 'none' }}
+  };
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-emerald-950 py-12 md:py-20 px-2 sm:px-4 lg:px-6 relative overflow-hidden sticky top-0"
+      style={{
+        opacity: opacityTransform,
+        scale: scaleTransform
+      }}
     >
-      {/* Custom Cursor with Sparkle Trail */}
-      <motion.div
-        className="fixed pointer-events-none z-50"
-        style={{
-          left: globalMousePosition.x - 8,
-          top: globalMousePosition.y - 8,
-        }}
-        animate={{
-          x: globalMousePosition.x - 8,
-          y: globalMousePosition.y - 8,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5
-        }}
-      >
-        {/* Main cursor */}
+      {/* Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg"
+          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-emerald-500/20 to-green-500/20 blur-3xl"
           animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
             scale: [1, 1.2, 1],
-            rotate: [0, 360],
           }}
-          transition={{
-            scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: 2, repeat: Infinity, ease: "linear" }
-          }}
-          style={{
-            filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.8))'
-          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{ top: '20%', left: '10%' }}
         />
-      </motion.div>
-
-      {/* Global Sparkle Effects */}
-      {Array.from({ length: 12 }, (_, i) => (
         <motion.div
-          key={`global-sparkle-${i}`}
-          className="fixed pointer-events-none z-40"
+          className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-green-400/15 to-teal-500/15 blur-2xl"
           animate={{
-            x: globalMousePosition.x + Math.sin(Date.now() * 0.003 + i * 0.7) * (40 + i * 8),
-            y: globalMousePosition.y + Math.cos(Date.now() * 0.003 + i * 0.7) * (40 + i * 8),
-            rotate: [0, 360],
-            scale: [0.3, 1, 0.3],
-            opacity: [0.1, 0.6, 0.1],
+            x: [0, -80, 0],
+            y: [0, 60, 0],
+            scale: [1, 0.8, 1],
           }}
-          transition={{
-            x: { type: "spring", stiffness: 50, damping: 20, mass: 0.1 },
-            y: { type: "spring", stiffness: 50, damping: 20, mass: 0.1 },
-            rotate: { duration: 4 + i * 0.5, repeat: Infinity, ease: "linear" },
-            scale: { duration: 2.5 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
-            opacity: { duration: 2 + i * 0.2, repeat: Infinity, ease: "easeInOut" }
-          }}
-          style={{
-            width: '8px',
-            height: '8px',
-          }}
-        >
-          <motion.div
-            className="w-full h-full relative"
-            animate={{
-              rotate: [0, -360],
-            }}
-            transition={{
-              duration: 3 + i * 0.4,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
-            {/* Star shape sparkle */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(45deg, 
-                  ${i % 4 === 0 ? '#10b981' : i % 4 === 1 ? '#3b82f6' : i % 4 === 2 ? '#8b5cf6' : '#f59e0b'}, 
-                  ${i % 4 === 0 ? '#34d399' : i % 4 === 1 ? '#60a5fa' : i % 4 === 2 ? '#a78bfa' : '#fbbf24'})`,
-                clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
-                filter: `drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))`
-              }}
-            />
-          </motion.div>
-        </motion.div>
-      ))}
-
-      {/* Trailing sparkles */}
-      {Array.from({ length: 8 }, (_, i) => (
-        <motion.div
-          key={`global-trail-${i}`}
-          className="fixed w-3 h-3 pointer-events-none z-30"
-          animate={{
-            x: globalMousePosition.x - (i + 1) * 20 + Math.sin(Date.now() * 0.004 + i) * 12,
-            y: globalMousePosition.y - (i + 1) * 15 + Math.cos(Date.now() * 0.004 + i) * 12,
-            scale: [1, 0.2, 1],
-            opacity: [0.6 - i * 0.08, 0.2 - i * 0.03, 0.6 - i * 0.08],
-          }}
-          transition={{
-            x: { type: "spring", stiffness: 30 - i * 3, damping: 25, mass: 0.3 },
-            y: { type: "spring", stiffness: 30 - i * 3, damping: 25, mass: 0.3 },
-            scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 },
-            opacity: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }
-          }}
-        >
-          <div
-            className="w-full h-full rounded-full"
-            style={{
-              background: `radial-gradient(circle, 
-                ${i % 3 === 0 ? 'rgba(16, 185, 129, 0.7)' : i % 3 === 1 ? 'rgba(59, 130, 246, 0.7)' : 'rgba(139, 92, 246, 0.7)'} 0%, 
-                transparent 80%)`,
-              filter: 'blur(1px)'
-            }}
-          />
-        </motion.div>
-      ))}
-
-      {/* Gentle ambient glow */}
-      {Array.from({ length: 4 }, (_, i) => (
-        <motion.div
-          key={`global-glow-${i}`}
-          className="fixed pointer-events-none rounded-full z-20"
-          style={{
-            width: `${30 + i * 15}px`,
-            height: `${30 + i * 15}px`,
-            background: `radial-gradient(circle, 
-              ${i === 0 ? 'rgba(16, 185, 129, 0.05)' : i === 1 ? 'rgba(59, 130, 246, 0.04)' : i === 2 ? 'rgba(139, 92, 246, 0.03)' : 'rgba(245, 158, 11, 0.02)'} 0%, 
-              transparent 80%)`,
-            filter: 'blur(2px)'
-          }}
-          animate={{
-            x: globalMousePosition.x - (15 + i * 7.5),
-            y: globalMousePosition.y - (15 + i * 7.5),
-            scale: [0.6, 1.3, 0.6],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            x: { type: "spring", stiffness: 60 - i * 15, damping: 30, mass: 0.2 },
-            y: { type: "spring", stiffness: 60 - i * 15, damping: 30, mass: 0.2 },
-            scale: { duration: 4 + i * 1.5, repeat: Infinity, ease: "easeInOut" },
-            opacity: { duration: 3.5 + i * 1.2, repeat: Infinity, ease: "easeInOut" }
-          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 5 }}
+          style={{ bottom: '20%', right: '15%' }}
         />
-      ))}
+      </div>
 
-      {/* Animated Background */}
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+      {/* Enhanced Animated Background Layers */}
       <motion.div
-        className="absolute inset-0 bg-green-900 opacity-30"
+        className="absolute inset-0"
+        style={{ y: backgroundY }}
         animate={{
-          opacity: [0.2, 0.4, 0.2],
           background: [
-            'linear-gradient(135deg, #000000, #10b981)',
-            'linear-gradient(135deg, #10b981, #3b82f6)',
-            'linear-gradient(135deg, #3b82f6, #000000)'
+            'linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(16,185,129,0.1) 50%, rgba(0,0,0,0.9) 100%)',
+            'linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(20,184,166,0.2) 50%, rgba(16,185,129,0.1) 100%)',
+            'linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(16,185,129,0.1) 50%, rgba(0,0,0,0.9) 100%)'
           ]
         }}
         transition={{
-          duration: 15,
+          duration: 8,
           repeat: Infinity,
           ease: "easeInOut"
         }}
       />
 
-      {/* Animated Particles */}
-      {particles}
+      {/* Floating Orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute w-72 h-72 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 blur-3xl"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          style={{ top: '10%', left: '5%' }}
+        />
+        <motion.div
+          className="absolute w-48 h-48 rounded-full bg-gradient-to-r from-teal-400/15 to-emerald-400/15 blur-2xl"
+          animate={{
+            x: [0, -80, 0],
+            y: [0, 60, 0],
+            scale: [1, 0.8, 1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          style={{ top: '60%', right: '10%' }}
+        />
+        <motion.div
+          className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-emerald-600/10 to-green-500/10 blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          style={{ bottom: '20%', left: '30%' }}
+        />
+      </div>
 
-      {/* 3D Grid Lines */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+      {/* Particle System */}
+      <div className="absolute inset-0">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-emerald-400/60 rounded-full"
+            animate={{
+              y: [-100, window.innerHeight + 100],
+              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 5,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "linear"
+            }}
+            style={{
+              left: Math.random() * 100 + '%',
+              top: Math.random() * 100 + '%'
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Grid Pattern with Animation */}
+      <motion.div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `linear-gradient(rgba(16,185,129,0.3) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(16,185,129,0.3) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }}
+        animate={{
+          backgroundPosition: ['0px 0px', '50px 50px', '0px 0px']
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
 
       {/* Loading Animation */}
       {isLoading && (
@@ -373,8 +336,13 @@ const About = () => {
             Loading Portfolio...
           </motion.div>
         </motion.div>
-      )}      {/* Main Content */}
-      <div className="container mx-auto px-2 sm:px-4 lg:px-6 relative z-10 flex flex-col min-h-screen">
+      )}
+
+      {/* Main Content with Parallax */}
+      <motion.div
+        className="container mx-auto px-2 sm:px-4 lg:px-6 relative z-10 flex flex-col min-h-screen"
+        style={{ y: contentY }}
+      >
 
         {/* Hero Section */}
         <motion.section
@@ -523,8 +491,8 @@ const About = () => {
         </motion.section>
 
         {/* Quick Stats Section - Mobile Optimized */}
-        
-          
+
+
 
         {/* Chatbot positioned separately for better mobile experience */}
         <motion.div
@@ -534,7 +502,9 @@ const About = () => {
           transition={{ duration: 0.5, delay: 2 }}
         >
         </motion.div>
-      </div>      {/* Hire Modal - Enhanced for Mobile */}
+      </motion.div>
+
+      {/* Hire Modal - Enhanced for Mobile */}
       {showHireModal && (
         <motion.div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -995,7 +965,7 @@ const About = () => {
           </motion.div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

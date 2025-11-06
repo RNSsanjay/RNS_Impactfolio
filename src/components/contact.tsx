@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -40,6 +40,11 @@ const Contact = () => {
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -106,12 +111,34 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-green-950 to-slate-900 relative overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-emerald-950 text-white py-12 sm:py-16 md:py-20 lg:py-32 px-3 sm:px-4 md:px-6 lg:px-8 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none select-none">
-        <div className="absolute top-1/4 left-1/4 w-48 h-48 xs:w-64 xs:h-64 sm:w-96 sm:h-96 bg-emerald-500 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 xs:w-64 xs:h-64 sm:w-96 sm:h-96 bg-green-500 rounded-full blur-3xl animate-pulse delay-1000" />
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute w-80 h-80 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 blur-3xl"
+          animate={{
+            x: [0, 120, 0],
+            y: [0, -70, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          style={{ top: '15%', left: '10%' }}
+        />
+        <motion.div
+          className="absolute w-56 h-56 rounded-full bg-gradient-to-r from-teal-400/15 to-emerald-400/15 blur-2xl"
+          animate={{
+            x: [0, -90, 0],
+            y: [0, 50, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          style={{ top: '65%', right: '8%' }}
+        />
       </div>
+
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+
       <div className="relative z-10 max-w-7xl mx-auto px-2 xs:px-3 sm:px-6 lg:px-8 py-6 xs:py-8 sm:py-12 lg:py-16">
         <motion.div
           initial="hidden"

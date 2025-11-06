@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
               <Brain className="text-green-300 w-8 h-8" />
               <Link
                 to="/"
-                className="text-xl font-bold text-green-200 hover:text-green-400 transition-colors"
+                className="text-xl font-bold text-green-200 hover:text-green-400 transition-colors cursor-pointer"
               >
                 Sanjay N
               </Link>
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
                   >
                     <Link
                       to={item.path}
-                      className={`relative flex items-center space-x-2 text-sm font-medium transition-colors
+                      className={`relative flex items-center space-x-2 text-sm font-medium transition-colors cursor-pointer
                         ${isActive ? 'text-green-200' : 'text-green-400/70 hover:text-green-200'}`}
                     >
                       <IconComponent className={`w-5 h-5 ${isActive ? 'text-green-300' : 'text-green-500/70'}`} />
@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-green-500/50 transition-all duration-300"
+                  className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-green-500/50 transition-all duration-300 cursor-pointer"
                 >
                   <img
                     className="w-8 h-8 rounded-full object-cover"
@@ -143,10 +143,10 @@ const Navbar: React.FC = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute right-0 mt-2 w-48 bg-black/50 backdrop-blur-sm rounded-lg shadow-lg py-2 z-50"
                   >
-                    <Link to="https://github.com/RNSsanjay" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">Github</Link>
-                    <Link to="https://www.linkedin.com/in/sanjay--n/" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">LinkedIn</Link>
-                    <Link to="https://rns-1.github.io/RNS-GitProject/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">Projects</Link>
-                    <Link to="https://rnssanjay.github.io/HostMyResume/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">Know More ...</Link>
+                    <Link to="https://github.com/RNSsanjay" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">Github</Link>
+                    <Link to="https://www.linkedin.com/in/sanjay--n/" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">LinkedIn</Link>
+                    <Link to="https://rns-1.github.io/RNS-GitProject/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">Projects</Link>
+                    <Link to="https://rnssanjay.github.io/HostMyResume/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">Know More ...</Link>
                   </motion.div>
                 )}
               </div>
@@ -158,7 +158,7 @@ const Navbar: React.FC = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-green-200 hover:text-green-400 focus:outline-none"
+                className="text-green-200 hover:text-green-400 focus:outline-none cursor-pointer"
               >
                 <Menu className="w-6 h-6" />
               </motion.button>
@@ -181,7 +181,7 @@ const Navbar: React.FC = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`block px-4 py-2 text-sm font-medium transition-colors
+                    className={`block px-4 py-2 text-sm font-medium transition-colors cursor-pointer
                       ${isActive ? 'text-green-200' : 'text-green-400/70 hover:text-green-200'}`}
                   >
                     <IconComponent className={`w-5 h-5 inline-block mr-2 ${isActive ? 'text-green-300' : 'text-green-500/70'}`} />
@@ -189,10 +189,10 @@ const Navbar: React.FC = () => {
                   </Link>
                 );
               })}
-              <Link to="https://github.com/RNSsanjay" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">Github</Link>
-              <Link to="https://www.linkedin.com/in/sanjay--n/" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">LinkedIn</Link>
-              <Link to="https://rns-1.github.io/RNS-GitProject/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">Projects</Link>
-              <Link to="https://rnssanjay.github.io/HostMyResume/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors">Know More ...</Link>
+              <Link to="https://github.com/RNSsanjay" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">Github</Link>
+              <Link to="https://www.linkedin.com/in/sanjay--n/" target="_blank" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">LinkedIn</Link>
+              <Link to="https://rns-1.github.io/RNS-GitProject/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">Projects</Link>
+              <Link to="https://rnssanjay.github.io/HostMyResume/" className="block px-4 py-2 text-sm text-green-200 hover:bg-green-700/50 transition-colors cursor-pointer">Know More ...</Link>
             </motion.div>
           )}
         </motion.nav>

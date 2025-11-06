@@ -162,6 +162,60 @@ export const profileData = {
             linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_certificate-of-completion-activity-7344258175002427392-cNq4"
         },
         {
+            title: "Oracle AI Foundations Associate",
+            issuer: "Oracle",
+            date: "2024",
+            credential: "ORA-AI-FOUND-2024",
+            skills: ["Artificial Intelligence", "Oracle AI", "Machine Learning", "AI Foundations", "Cloud AI"],
+            description: "Oracle certified AI Foundations Associate certification covering fundamental AI concepts, Oracle AI services, and practical implementation of AI solutions in enterprise environments.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_oracle-certified-ai-foundations-associate-activity-7380460793366024192-BSPp?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD-x4-cB_4aFh8zB2E5yZDZJdR3yveN74Gg"
+        },
+        {
+            title: "Google Cloud Agentic AI Day",
+            issuer: "Google Cloud",
+            date: "2024",
+            credential: "GC-AGENTIC-AI-2024",
+            skills: ["Agentic AI", "Google Cloud", "Artificial Intelligence", "AI Agents", "Cloud Computing"],
+            description: "Google Cloud Agentic AI Day certification covering advanced AI agent development, autonomous systems, and AI-driven automation solutions on Google Cloud platform.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_agenticai-artificialintelligence-continuouslearning-activity-7370978264930177024-GLZR?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD-x4-cB_4aFh8zB2E5yZDZJdR3yveN74Gg"
+        },
+        {
+            title: "Introduction to LangGraph",
+            issuer: "LangChain",
+            date: "2024",
+            credential: "LC-LANGGRAPH-2024",
+            skills: ["LangGraph", "LangChain", "AI Agents", "Graph-based AI", "Machine Learning"],
+            description: "LangChain certification in LangGraph fundamentals, covering graph-based AI architectures, agent workflows, and advanced AI system design patterns.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_intro-to-langgraph-certificate-activity-7362807304951353345-Frex?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD-x4-cB_4aFh8zB2E5yZDZJdR3yveN74Gg"
+        },
+        {
+            title: "AI Fluency for Students",
+            issuer: "Anthropic",
+            date: "2024",
+            credential: "ANTHROPIC-AI-FLUENCY-2024",
+            skills: ["AI Fluency", "Anthropic", "Artificial Intelligence", "AI Ethics", "Machine Learning"],
+            description: "Anthropic's AI Fluency for Students certification covering AI fundamentals, ethical AI practices, and practical understanding of AI systems and their applications.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_ai-fluency-for-students-activity-7374244186235076609-J80F?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD-x4-cB_4aFh8zB2E5yZDZJdR3yveN74Gg"
+        },
+        {
+            title: "Introduction to Generative AI - Google Cloud",
+            issuer: "Google Cloud",
+            date: "2024",
+            credential: "GC-GEN-AI-2024",
+            skills: ["Generative AI", "Google Cloud", "AI Studio", "Machine Learning", "Cloud AI"],
+            description: "Google Cloud certification in Generative AI fundamentals, covering AI Studio, prompt engineering, and building AI-powered applications on Google Cloud platform.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_introduction-to-google-ai-studio-powered-activity-7380506153933443072-YWgV?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD-x4-cB_4aFh8zB2E5yZDZJdR3yveN74Gg"
+        },
+        {
+            title: "Gemini for Google Workspace",
+            issuer: "Google",
+            date: "2024",
+            credential: "GOOGLE-GEMINI-WS-2024",
+            skills: ["Gemini AI", "Google Workspace", "AI Integration", "Productivity Tools", "Artificial Intelligence"],
+            description: "Google Gemini for Workspace certification covering AI-powered productivity tools, intelligent document processing, and AI integration within Google Workspace ecosystem.",
+            linkedinUrl: "https://www.linkedin.com/posts/sanjay--n_gemini-for-google-workspace-activity-7380506863483748352-NJ7o?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAD-x4-cB_4aFh8zB2E5yZDZJdR3yveN74Gg"
+        },
+        {
             title: "Postman API Student Expert",
             issuer: "Postman",
             date: "2024",
